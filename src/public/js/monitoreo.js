@@ -253,7 +253,9 @@ $(document).ready(function(){
 				$('#confirmar_señal').modal('show');
 			break;
 			case "btn_señal_robo":
-					console.log("xxxxxxdddddddddddddddddxxxxxxxxx")
+				console.log($('#num_cliente_robo').val())
+				console.log($('#evento_robo').val())
+				console.log($('#zona_evento_robo').val())
 				señal('/monitoreo/registrar/senal_robo',{
 					num_cliente_robo:$('#num_cliente_robo').val(),
 					evento_robo:$('#evento_robo').val(),
@@ -269,7 +271,7 @@ $(document).ready(function(){
 				$('#confirmar_señal').modal('show');
 			break;
 			case "aceptar_señal":
-				location.reload();
+				$('#confirmar_señal').modal('hide');
 			break;
 			case "btn_buscar_senal":
 				$('#tbody_monitoreo').empty();

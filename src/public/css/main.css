@@ -75,6 +75,13 @@ ul.tabs li a .tab-text{
 	margin-right: 252px;
 }
 
+input:invalid{
+	border: 3px solid red;
+}
+
+input:valid{
+	border: 3px solid green;
+}
 
 @media screen and (max-width: 700px){
 	ul.tabs li{

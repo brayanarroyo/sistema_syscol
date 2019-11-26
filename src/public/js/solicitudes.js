@@ -72,28 +72,33 @@ $(document).ready(function(){
 	$('button').click(function(){
 		switch($(this).attr('id')){
 			case "registrar_nuevo":
-				solicitudes('/solicitudes/agregar_solicitud/nuevo_cliente',{
-					solicitud:  $('#solicitud option:selected').text(),
-					nombre_fc: $('#nombre_fc').val(),
-					domicilio_fc: $('#domicilio_fc').val(),
-					telefono_fc: $('#telefono_fc').val(),
-					servicio_fc: $('#servicio_fc option:selected').text(),
-					fecha_fc: $('#fecha_fc').val(),
-					hora_fc: $('#hora_fc').val()
-				});
-				$('#confirmar_solicitud').modal('show');
+				if ($('#solicitud option:selected').text() != '' && $('#nombre_fc').val() != '' && $('#domicilio_fc').val() != '' && $('#telefono_fc').val() !='' && $('#servicio_fc option:selected').text() != '' && $('#fecha_fc').val() != '' && $('#hora_fc').val() != ''){
+					solicitudes('/solicitudes/agregar_solicitud/nuevo_cliente',{
+						solicitud:  $('#solicitud option:selected').text(),
+						nombre_fc: $('#nombre_fc').val(),
+						domicilio_fc: $('#domicilio_fc').val(),
+						telefono_fc: $('#telefono_fc').val(),
+						servicio_fc: $('#servicio_fc option:selected').text(),
+						fecha_fc: $('#fecha_fc').val(),
+						hora_fc: $('#hora_fc').val()
+					});
+					$('#confirmar_solicitud').modal('show');
+				}
 			break;
 			case "registrar_inmueble":
-				solicitudes('/solicitudes/agregar_solicitud/nuevo_inmueble',{
-					solicitud:  $('#solicitud option:selected').text(),
-					nombre_fi: $('#nombre_fi').val(),
-					domicilio_fi: $('#domicilio_fi').val(),
-					servicio_fi: $('#servicio_fi option:selected').text(),
-					fecha_fc: $('#fecha_fi').val(),
-					hora_fc: $('#hora_fi').val()
-				});
-				$('#confirmar_solicitud').modal('show');
+				if ($('#solicitud option:selected').text() != '' && $('#nombre_fi').val() != '' && $('#domicilio_fi').val() != '' && $('#servicio_fi option:selected').text() !='' && $('#fecha_fi').val() != '' && $('#hora_fi').val() != ''){
+					solicitudes('/solicitudes/agregar_solicitud/nuevo_inmueble',{
+						solicitud:  $('#solicitud option:selected').text(),
+						nombre_fi: $('#nombre_fi').val(),
+						domicilio_fi: $('#domicilio_fi').val(),
+						servicio_fi: $('#servicio_fi option:selected').text(),
+						fecha_fc: $('#fecha_fi').val(),
+						hora_fc: $('#hora_fi').val()
+					});
+					$('#confirmar_solicitud').modal('show');
+				}
 			case "registrar_servicio":
+				if ($('#solicitud option:selected').text() != '' && $('#nombre_fs').val() != '' && $('#domicilio_fs').val() != '' && $('#servicio_fs option:selected').text() !='' && $('#fecha_fs').val() != '' && $('#hora_fs').val() != ''){
 				solicitudes('/solicitudes/agregar_solicitud/nuevo_servicio',{
 					solicitud:  $('#solicitud option:selected').text(),
 					nombre_fs: $('#nombre_fs').val(),
@@ -103,12 +108,14 @@ $(document).ready(function(){
 					hora_fs: $('#hora_fs').val()
 				});
 				$('#confirmar_solicitud').modal('show');
+				}
 			break;
 			case "aceptar_solicitud":
 				$('#confirmar_solicitud').modal('hide');
 				location.reload();
 			break;
 			default:
+
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
 					$('.secciones article').hide();
 					$('.secciones article:first').show();

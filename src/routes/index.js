@@ -574,8 +574,7 @@ router.post('/pendientes/agregar/contactos', async (req, res) => {
 //*********************************************************************************************************************
 router.post('/monitoreo/registrar/senal_robo', async (req, res) => {
   try {
-    let { num_cliente_robo,zona_evento_robo,evento_robo } = req.body;
-    console.log("xxxxxxxxxxxxxxx")
+    let { num_cliente_robo,evento_robo,zona_evento_robo } = req.body;
     let tipo_evento = "robo";
     let query =`CALL sp_agregar_señal_robo(
       '${num_cliente_robo}',
