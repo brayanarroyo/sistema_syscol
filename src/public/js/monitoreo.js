@@ -209,6 +209,21 @@ $(document).ready(function(){
 		return result.error
 	}
 
+	async function señal(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		return result.error
+	}
+
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
 	$('.secciones article').hide();
@@ -230,9 +245,31 @@ $(document).ready(function(){
 	$('button').click(function(){
 		switch($(this).attr('id')){
 			case "btn_señal_rutina":
+				señal('/monitoreo/registrar/rutina',{
+					num_cliente_rutina:$('#num_cliente_rutina').val(),
+					evento_rutina:$('#evento_rutina').val(),
+					usuario_rutina:$('#usuario_rutina').val()}			
+					);
+				$('#confirmar_señal').modal('show');
+			break;
 			case "btn_señal_robo":
+					console.log("xxxxxxdddddddddddddddddxxxxxxxxx")
+				señal('/monitoreo/registrar/senal_robo',{
+					num_cliente_robo:$('#num_cliente_robo').val(),
+					evento_robo:$('#evento_robo').val(),
+					zona_evento_robo:$('#zona_evento_robo').val()}			
+					);
+				$('#confirmar_señal').modal('show');
+			break;
 			case "btn_señal_sistema":
-				
+				señal('/monitoreo/registrar/sistema',{
+					num_cliente_sistema:$('#num_cliente_sistema').val(),
+					evento_sistema:$('#evento_sistema').val()}			
+					);
+				$('#confirmar_señal').modal('show');
+			break;
+			case "aceptar_señal":
+				location.reload();
 			break;
 			case "btn_buscar_senal":
 				$('#tbody_monitoreo').empty();

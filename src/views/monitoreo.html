@@ -80,7 +80,6 @@
                         </div>
                     </article>
                     <!--Seccion del formulario para alarmas de rutinas-->
-                    <form action="/monitoreo/registrar/rutina" method="POST" name="senal_rutina">
                         <article name="evento_rutina" id="evento_rutina">
                             <div class="ui form">
                                 <label class="ui dividing header">Número de cliente</label> 
@@ -97,7 +96,7 @@
                                 <label class="ui dividing header">Evento</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_evento_rutina_select" name="dropdown_evento_rutina_select">
-                                        <input type="hidden" name="evento_rutina" autocomplete="off">
+                                        <input type="hidden" id="evento_rutina" name="evento_rutina" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Número cliente</div>
                                         <div class="menu" id="dropdown_evento_rutina" name="dropdown_evento_rutina">
@@ -108,7 +107,7 @@
                                 <label class="ui dividing header">Usuario</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_zona_select" name="dropdown_zona_select">
-                                        <input type="hidden" name="usuario_rutina" autocomplete="off">
+                                        <input type="hidden" id="usuario_rutina" name="usuario_rutina" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Zona</div>
                                         <div class="menu" id="dropdown_usuario" name="dropdown_usuario">
@@ -123,7 +122,6 @@
                         </article>
                     </form>
                     <!--Seccion del formulario para alarmas robos-->
-                    <form action="/monitoreo/registrar/senal_robo" method="POST" name="senal_robo">
                         <article name="evento_robo" id="evento_robo">
                             <div class="ui form">
                                 <label class="ui dividing header">Número de cliente</label> 
@@ -140,7 +138,7 @@
                                 <label class="ui dividing header">Evento</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_evento_robo_select" name="dropdown_evento_robo_select">
-                                        <input type="hidden" name="evento_robo" autocomplete="off">
+                                        <input type="hidden" id="evento_robo" name="evento_robo" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Número cliente</div>
                                         <div class="menu" id="dropdown_evento_robo" name="dropdown_evento_robo">
@@ -151,7 +149,7 @@
                                 <label class="ui dividing header">Zona activada</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_zona_select" name="dropdown_zona_select">
-                                        <input type="hidden" name="zona_evento_robo" autocomplete="off">
+                                        <input type="hidden" id="zona_evento_robo" name="zona_evento_robo" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Zona</div>
                                         <div class="menu" id="dropdown_zona" name="dropdown_zona">
@@ -164,15 +162,13 @@
                             <button class="ui red button ">Cancelar</button>
                             <button id="btn_señal_robo" name="btn_señal_robo" class="ui blue submit button ">Aceptar</button> 
                         </article>
-                    </form>
                     <!--Seccion del formulario alarmas del sistema-->
-                    <form action="/monitoreo/registrar/sistema" method="POST" name="senal_sistema">
                         <article name="evento_sistema" id="evento_sistema">
                             <div class="ui form">
                                 <label class="ui dividing header">Número de cliente</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_cliente_sistema_select" name="dropdown_cliente_sistema_select">
-                                        <input type="hidden" name="num_cliente_sistema" autocomplete="off">
+                                        <input type="hidden" id="num_cliente_sistema" name="num_cliente_sistema" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Número cliente</div>
                                         <div class="menu" id="dropdown_num_cliente_sistema" name="dropdown_num_cliente_sistema">
@@ -183,7 +179,7 @@
                                 <label class="ui dividing header">Evento</label> 
                                 <div class="four wide field">
                                     <div class="ui fluid search selection dropdown" id="dropdown_evento_sistema_select" name="dropdown_evento_sistema_select">
-                                        <input type="hidden" name="evento_sistema" autocomplete="off">
+                                        <input type="hidden" id="evento_sistema" name="evento_sistema" autocomplete="off">
                                         <i class="dropdown icon"></i>
                                         <div class="default text">Número cliente</div>
                                         <div class="menu" id="dropdown_evento_sistema" name="dropdown_evento_sistema">
@@ -196,7 +192,22 @@
                             <button class="ui red button ">Cancelar</button>
                             <button id="btn_señal_sistema" name="btn_señal_sistema" class="ui blue submit button ">Aceptar</button> 
                         </article>
-                    </form>
+                    <!--Modal para cuando se registra una solicitud-->
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_señal">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>Señal registrada</h4>
+                                </div>
+                                <div class="actions">
+                                    <button id="aceptar_señal" class="ui blue submit button">Aceptar</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                     <!--Modal para ver los contactos del cliente-->
                     <article>
                         <div class="formulario">

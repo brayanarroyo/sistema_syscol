@@ -575,7 +575,7 @@ router.post('/pendientes/agregar/contactos', async (req, res) => {
 router.post('/monitoreo/registrar/senal_robo', async (req, res) => {
   try {
     let { num_cliente_robo,zona_evento_robo,evento_robo } = req.body;
-
+    console.log("xxxxxxxxxxxxxxx")
     let tipo_evento = "robo";
     let query =`CALL sp_agregar_señal_robo(
       '${num_cliente_robo}',
@@ -840,7 +840,7 @@ router.post('/monitoreo/contactar/cliente', (req, res) => {
   try {
     let { id_cliente } = req.body;
     console.log(id_cliente);
-    let query = `SELECT CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m)as nombre, CONCAT(i.calle," ",i.numero_exterior,i.numero_interior," ",i.colonia) as domicilio, c.telefono, i.clave_inm FROM inmueble i inner join cliente c on i.clave_cliente = c.id_cliente WHERE i.clave_inm = '${id_cliente}'`;
+    let query = `SELECT CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m)as nombre, CONCAT(i.calle," ",i.numero_exterior," ",i.colonia) as domicilio, c.telefono, i.clave_inm FROM inmueble i inner join cliente c on i.clave_cliente = c.id_cliente WHERE i.clave_inm = '${id_cliente}'`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
