@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href="/css/login.css"/>
+</head>
+<body>
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+          <h2 class="ui image header">
+            <div class="content">
+              <img class="ui image" src="img/logo.jpg">
+            </div>
+          </h2>
+          <div class="ui large form">
+            <div class="ui stacked secondary segment">
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="user icon"></i>
+                  <input type="text" id="email" name="email" placeholder="Correo electrónico">
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="lock icon"></i>
+                  <input type="password" id="password" name="password" autocomplete="on" placeholder="Contraseña">
+                </div>
+              </div>
+              <button id="btn_sesion" class="ui fluid large blue button">Ingresar</button>
+            </div>
+      
+            <div class="ui error message"></div>
+          </div>
+        </div>
+      </div>
+    <!-- Scripts de JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="/semantic/dist/semantic.min.js"></script>
+    <!-- Es el código de JavaScript utilizado en esta página -->
+    <script src="js/login.js"></script>
+</body>
+</html>

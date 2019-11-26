@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1">
+        <% include partials/head.html %>
+        <title>Página principal</title>
+    </head>
+
+    <body>
+        <!-- Menú colocado en la parte izquierda -->
+        <div id="menu_navegacion"></div>
+        
+        <!--Menú de trabajo-->
+        <div class="centrado">
+            <br><br><br>
+            <div class="wrap">
+                <!--Secciones que se van a desplegar-->
+                <div class="secciones">
+                    <article>
+                        <div class="four wide field">
+                            <label>Tipo de solicitud</label>
+                            <select id="reporte" name="reporte">
+                                <option value="0" selected="true" disabled="disabled">Elija una opción</option>
+                                <option value="cliente">Clientes</option>
+                                <option value="inmueble">Inmuebles</option>
+                                <option value="orden_trabajo">Orden de trabajo</option>
+                            </select>
+                        </div> 
+                    </article>
+                    <article id="reporte_cliente" name="reporte_cliente">
+                        <h4 class="ui dividing header">Clientes</h4>
+                        <div class="ui celled grid">  
+                            <div class="row">
+                                <div class="column">
+                                    <table name="tbl_cliente" class="ui celled table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre completo</th>
+                                                <th>Correo electrónico</th>
+                                                <th>Teléfono</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Nombre completo</td>
+                                                <td>Correo electrónico</td>
+                                                <td>Teléfono</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>    
+                    </article>
+                    <article id="reporte_inmueble" name="reporte_inmueble">
+                        <h4 class="ui dividing header">Clientes</h4>
+                        <div class="ui celled grid">  
+                            <div class="row">
+                                <div class="column">
+                                    <table name="tbl_inmueble" class="ui celled table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre del cliente</th>
+                                                <th>Calle</th>
+                                                <th>Número</th>
+                                                <th>Colonia </th>
+                                                <th>Código postal</th>
+                                                <th>Estado</th>
+                                                <th>Municipio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Folio ejemplo</td>
+                                                <td>No. cliente ejemplo</td>
+                                                <td>Fecha ejemplo</td>
+                                                <td>Hora ejemplo</td>
+                                                <td>Sin asignar</td>
+                                                <td>No. cliente ejemplo</td>
+                                                <td>Fecha ejemplo</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>    
+                    </article>
+                    <article id="reporte_orden_trabajo" name="reporte_orden_trabajo">
+                        <h4 class="ui dividing header">Clientes</h4>
+                        <div class="ui celled grid">  
+                            <div class="row">
+                                <div class="column">
+                                    <table name="tbl_orden_trabajo" class="ui celled table">
+                                        <thead>
+                                            <tr>
+                                                <th>Folio</th>
+                                                <th>Fecha de visita</th>
+                                                <th>Hora de visita</th>
+                                                <th>Hora de visita</th>
+                                                <th>Observaciones</th>
+                                                <th>Estatus</th>
+                                                <th>Empleado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Folio ejemplo</td>
+                                                <td>No. cliente ejemplo</td>
+                                                <td>Fecha ejemplo</td>
+                                                <td>Hora ejemplo</td>
+                                                <td>Sin asignar</td>
+                                                <td>Hora ejemplo</td>
+                                                <td>Sin asignar</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>    
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts de JavaScript--> -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="/semantic/dist/semantic.min.js"></script>
+        <!-- Es el código de JavaScript utilizado en esta página -->
+        <script src="/js/reportes.js"></script>
+        <!-- Codigo para el funcionamiento del calendario-->
+        <script src="/js/calendario.js"></script>
+
+    </body>
+</html>

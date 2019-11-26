@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1">
+        <!-- Partial que contiene el código del css -->
+        <% include partials/head.html %>
+        <title>Página principal</title>
+    </head>
+
+    <body>
+        <!-- Menú colocado en la parte izquierda -->
+        <div id="menu_navegacion"></div>
+     
+        <!-- Menú de navegación con botones -->
+        <div class="centrado">
+            <br><br><br>
+            <div class="wrap">
+                <div class="secciones">
+                    <!--Menu para mostrar los pagos pendientes-->
+                    <article name="mostrar_pagos" id="mostrar_pagos"> 
+                        <div class="ui celled grid">
+                            <div class="row">
+                                <div class="twelve wide column">
+                                    <table name="tbl_pagos_pendientes" id="tbl_pagos_pendientes" class="ui selectable celled table">
+                                        <thead>
+                                            <tr>
+                                                <th>Número de cliente</th>
+                                                <th>Calle</th>
+                                                <th>Número</th>
+                                                <th>Colinia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody_cobranza">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--Botones de navegacion-->
+                                <div class="two wide column">
+                                    <div class="ui vertical labeled icon buttons">
+                                        <button class="ui button" id="cobranza_proceder" href="#form_pagos">
+                                            <i class="large angle double right icon"></i>
+                                            Proceder
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </article>
+                    <article id="form_pagos" name="form_pagos">
+                        <div class="ui form"> 
+                            <h4 class="ui dividing header">Cobranza</h4>  
+                            <h4>Cliente</h4> 
+                            <div class="six wide field">
+                                <div class="ui fluid search selection dropdown" id="dropdown_cobranza_nombre_select" name="dropdown_cobranza_nombre_select">
+                                    <input type="hidden" id="cobranza_nombre" name="cobranza_nombre">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Nombre</div>
+                                    <div class="menu" id="dropdown_cobranza_nombre" name="dropdown_cobranza_nombre">
+                                        
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="two wide field">
+                                <h4>Monto</h4> 
+                                <input id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad"></input>
+                            </div>    
+                            <div class="four wide field">
+                                <h4>Firma electrónica</h4> 
+                                <input id="cobranza_firma" name="cobranza_firma" placeholder="Código"></input>
+                            </div>                                                
+                            <br>
+                            <button id="btn_cancelar_pago" class="ui red button ">Cancelar</button> 
+                            <button id="btn_confirmar_pago" class="ui blue submit button ">Aceptar</button> 
+                        </div>
+                    </article>
+                    <!--Mostrar detalle de los inmuebles con pagos pendientes-->
+                    <article name="" id="detalle">
+                        <table name="tbl_pagos_inmuebles" class="ui definition table">
+                            <tbody>
+                                <tr>
+                                <td>Clave de solicitud</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Número de cliente</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Nombre Completo</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Domicilio</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Número de telefono</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Fecha de cobro</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                                <tr>
+                                <td>Monto</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <button class="ui red submit button ">Regresar</button>
+                        <button href="#atender" class="ui blue submit button ">Aceptar</button> 
+                    </article>
+                </div>
+            </div>
+        </div>
+
+    <!-- Scripts de JavaScript--> -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="/semantic/dist/semantic.min.js"></script>
+    <!-- Es el código de JavaScript utilizado en esta página -->
+    <script src="/js/cobranza.js"></script>
+    <!-- Codigo para el funcionamiento del calendario-->
+    <script src="/js/calendario.js"></script>
+    </body>
+</html>
