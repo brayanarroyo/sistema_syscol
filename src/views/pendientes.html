@@ -56,11 +56,27 @@
                                             <i class="large address card icon"></i>
                                             Detalles
                                         </button>
-                                        <button href="#form_eliminar" name="btn_eliminar" id="btn_eliminar" class="ui button">
-                                            <i class="large trash icon"></i>
-                                            Eliminar
-                                        </button>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!--Modal paara mostrar detalles de las solicitudes pendientes-->
+                    <article>
+                        <div class="formulario">
+                            <div class="ui modal" id="modal_mostrar_detalle_pendientes">
+                                <div class="header">
+                                    Detalles solicitud
+                                </div>
+                                <div class="content">
+                                    <table name="tbl_detalle_pendientes" class="ui definition table">
+                                        <tbody id="modal_detalle">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="actions">
+                                    <button id="close_modal_detalle" class="ui blue submit button">Aceptar</button> 
                                 </div>
                             </div>
                         </div>
@@ -78,7 +94,7 @@
                                                 <div class="six wide column">
                                                     <label>Material</label>
                                                     <div class="ui fluid search selection dropdown" id="dropdown_material_select" name="dropdown_material_select">  
-                                                        <input type="hidden" id="material" name="material">
+                                                        <input type="hidden" id="material" name="material" autocomplete="off">
                                                         <i class="dropdown icon"></i>
                                                         <div class="default text">Material</div>
                                                         <div class="menu" id="dropdown_material" name="dropdown_material">
@@ -88,7 +104,7 @@
                                                 </div> 
                                                 <div class="four wide column">
                                                     <label>Mano de obra</label>
-                                                    <input name="mano_obra_fc" id="mano_obra_fc" type="text" placeholder="$0.0">
+                                                    <input name="mano_obra_fc" id="mano_obra_fc" type="text" placeholder="$0.0" autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -208,15 +224,15 @@
                                 <div class="three column row">
                                     <div class="column">   
                                         <label>Nombre</label>
-                                        <input name="nombre_fc_ciz" id="nombre_fc_ciz" type="text" placeholder="Nombre">   
+                                        <input name="nombre_fc_ciz" id="nombre_fc_ciz" type="text" placeholder="Nombre" autocomplete="off">   
                                     </div>
                                     <div class="column">
                                         <label>Apellido paterno</label>
-                                        <input name="apellido_p_fc_ciz" id="apellido_p_fc_ciz" type="text" placeholder="Apellido">
+                                        <input name="apellido_p_fc_ciz" id="apellido_p_fc_ciz" type="text" placeholder="Apellido" autocomplete="off">
                                     </div>
                                     <div class="column">
                                         <label>Apellido materno</label>
-                                        <input name="apellido_m_fc_ciz" id="apellido_m_fc_ciz" type="text" placeholder="Apellido">
+                                        <input name="apellido_m_fc_ciz" id="apellido_m_fc_ciz" type="text" placeholder="Apellido" autocomplete="off">
                                     </div>
                                 </div>
                             </div> 
@@ -224,19 +240,19 @@
                                 <div class="four column row">
                                     <div class="four wide column">   
                                         <label>Correo electronico</label>
-                                        <input name="correo_fc_ciz" id="correo_fc_ciz" type="text" placeholder="correo@correo.com">   
+                                        <input name="correo_fc_ciz" id="correo_fc_ciz" type="text" placeholder="correo@correo.com" autocomplete="off">   
                                     </div>
                                     <div class="four wide column">
                                         <label>Teléfono</label>
-                                        <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="text" placeholder="Número">
+                                        <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                     <div class="four wide column">
                                         <label>Firma</label>
-                                        <input name="firma_fc_ciz" id="firma_fc_ciz" type="text" placeholder="Número">
+                                        <input name="firma_fc_ciz" id="firma_fc_ciz" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                     <div class="four wide column">
                                         <label>Número de cliente</label>
-                                        <input name="clave_fc_ciz" id="clave_fc_ciz" type="text" placeholder="Número">
+                                        <input name="clave_fc_ciz" id="clave_fc_ciz" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                 </div>
                             </div>      
@@ -247,15 +263,15 @@
                                 <div class="three column row">
                                     <div class="six wide column">   
                                         <label>Calle</label>
-                                        <input name="calle_fi_ciz" id="calle_fi_ciz" type="text" placeholder="Calle">   
+                                        <input name="calle_fi_ciz" id="calle_fi_ciz" type="text" placeholder="Calle" autocomplete="off">   
                                     </div>
                                     <div class="four wide column">
                                         <label>Número exterior</label>
-                                        <input name="num_ext_fi_ciz" id="num_ext_fi_ciz" type="text" placeholder="Número">
+                                        <input name="num_ext_fi_ciz" id="num_ext_fi_ciz" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                     <div class="six wide column">   
                                         <label>Colonia</label>
-                                        <input name="colonia_fi_ciz" id="colonia_fi_ciz" type="text" placeholder="Colonia">   
+                                        <input name="colonia_fi_ciz" id="colonia_fi_ciz" type="text" placeholder="Colonia" autocomplete="off">   
                                     </div>
                                 </div>
                             </div> 
@@ -263,21 +279,21 @@
                                 <div class="four column row">
                                     <div class="four wide column">
                                         <label>Código postal</label>
-                                        <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="text" placeholder="#####">
+                                        <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="text" placeholder="#####" autocomplete="off">
                                     </div>
                                     <div class="four wide column">   
                                         <label>Estado de la republica</label>
-                                        <input name="estado_fi_ciz" id="estado_fi_ciz" type="text" placeholder="Estado">   
+                                        <input name="estado_fi_ciz" id="estado_fi_ciz" type="text" placeholder="Estado" autocomplete="off">   
                                     </div>
                                     <div class="four wide column">
                                         <label>Municipio</label>
-                                        <input name="municipio_fi_ciz" id="municipio_fi_ciz" type="text" placeholder="Municipio">
+                                        <input name="municipio_fi_ciz" id="municipio_fi_ciz" type="text" placeholder="Municipio" autocomplete="off">
                                     </div>
 
                                     <div class="four wide column">
                                         <label >Tipo de inmueble</label> 
                                         <div class="ui fluid search selection dropdown" id="dropdown_tipo_inmueble_ciz_select" name="dropdown_tipo_inmueble_ciz_select">
-                                            <input type="hidden" id="tipo_inmueble_ciz" name="tipo_inmueble_ciz">
+                                            <input type="hidden" id="tipo_inmueble_ciz" name="tipo_inmueble_ciz" autocomplete="off">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">Tipo</div>
                                             <div class="menu" id="dropdown_tipo_inmueble_ciz" name="dropdown_tipo_inmueble_ciz">
@@ -311,7 +327,7 @@
                                                                 <td>
                                                                     <div class="column">
                                                                         <div class="ui fluid search selection dropdown" id="dropdown_material_zona_ciz_select" name="dropdown_material_zona_ciz_select">
-                                                                            <input type="hidden" id="material_zona_ciz" name="material_zona_ciz">
+                                                                            <input type="hidden" id="material_zona_ciz" name="material_zona_ciz" autocomplete="off">
                                                                             <i class="dropdown icon"></i>
                                                                             <div class="default text">Material</div>
                                                                             <div class="menu" id="dropdown_material_zona_ciz" name="dropdown_material_zona_ciz">
@@ -322,7 +338,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="column">   
-                                                                        <input name="zona_zona_ciz" id="zona_zona_ciz" type="text" placeholder="Zona">   
+                                                                        <input name="zona_zona_ciz" id="zona_zona_ciz" type="text" placeholder="Zona" autocomplete="off">   
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -392,19 +408,19 @@
                                 <div class="three column row">
                                     <div class="column">   
                                         <label>No. de usuario</label>
-                                        <input name="no_usu" id="no_usu" type="text" placeholder="Nombre">   
+                                        <input name="no_usu" id="no_usu" type="text" placeholder="Nombre" autocomplete="off">   
                                     </div>
                                     <div class="column">   
                                         <label>Nombre</label>
-                                        <input name="nom_usu" id="nom_usu" type="text" placeholder="Nombre">   
+                                        <input name="nom_usu" id="nom_usu" type="text" placeholder="Nombre" autocomplete="off">   
                                     </div>
                                     <div class="column">
                                         <label>Apellido paterno</label>
-                                        <input name="apellido_p_usu" id="apellido_p_usu" type="text" placeholder="Apellido">
+                                        <input name="apellido_p_usu" id="apellido_p_usu" type="text" placeholder="Apellido" autocomplete="off">
                                     </div>
                                     <div class="column">
                                         <label>Apellido materno</label>
-                                        <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido">
+                                        <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido" autocomplete="off">
                                     </div>
                                 </div>
                             </div> 
@@ -412,11 +428,11 @@
                                 <div class="two column row">
                                     <div class="four wide column">   
                                         <label>Relación</label>
-                                        <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza">   
+                                        <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza" autocomplete="off">   
                                     </div>
                                     <div class="four wide column">
                                         <label>Teléfono</label>
-                                        <input name="telefono_usu" id="telefono_usu" type="text" placeholder="Número">
+                                        <input name="telefono_usu" id="telefono_usu" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                 </div>
                             </div>      
@@ -433,21 +449,21 @@
                                 <div class="two column row">
                                     <div class="four wide column">
                                         <label>Número de contacto</label>
-                                        <input name="num_cont" id="num_cont" type="text" placeholder="Vecino/amigo">
+                                        <input name="num_cont" id="num_cont" type="text" placeholder="Número" autocomplete="off">
                                     </div>
                                     <div class="ten wide column">
                                         <label>Nombre completo</label>
-                                        <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo">
+                                        <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="two column row">
                                     <div class="four wide column">
                                         <label>Relación</label>
-                                        <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo">
+                                        <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off">
                                     </div>
                                     <div class="ten wide column">
                                         <label>Teléfono</label>
-                                        <input name="telefono_contacto" id="telefono_contacto" type="text" placeholder="Nombre completo">
+                                        <input name="telefono_contacto" id="telefono_contacto" type="text" placeholder="Teléfono" autocomplete="off">
                                     </div>
                                 </div>
                             </div>

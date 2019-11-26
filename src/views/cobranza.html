@@ -53,7 +53,7 @@
                             <h4>Cliente</h4> 
                             <div class="six wide field">
                                 <div class="ui fluid search selection dropdown" id="dropdown_cobranza_nombre_select" name="dropdown_cobranza_nombre_select">
-                                    <input type="hidden" id="cobranza_nombre" name="cobranza_nombre">
+                                    <input type="hidden" id="cobranza_nombre" name="cobranza_nombre" autocomplete="off">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Nombre</div>
                                     <div class="menu" id="dropdown_cobranza_nombre" name="dropdown_cobranza_nombre">
@@ -63,54 +63,16 @@
                             </div> 
                             <div class="two wide field">
                                 <h4>Monto</h4> 
-                                <input id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad"></input>
+                                <input id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad" autocomplete="off">
                             </div>    
                             <div class="four wide field">
                                 <h4>Firma electrónica</h4> 
-                                <input id="cobranza_firma" name="cobranza_firma" placeholder="Código"></input>
+                                <input id="cobranza_firma" name="cobranza_firma" placeholder="firma" autocomplete="off">
                             </div>                                                
                             <br>
                             <button id="btn_cancelar_pago" class="ui red button ">Cancelar</button> 
                             <button id="btn_confirmar_pago" class="ui blue submit button ">Aceptar</button> 
                         </div>
-                    </article>
-                    <!--Mostrar detalle de los inmuebles con pagos pendientes-->
-                    <article name="" id="detalle">
-                        <table name="tbl_pagos_inmuebles" class="ui definition table">
-                            <tbody>
-                                <tr>
-                                <td>Clave de solicitud</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Número de cliente</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Nombre Completo</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Domicilio</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Número de telefono</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Fecha de cobro</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                                <tr>
-                                <td>Monto</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <br>
-                        <button class="ui red submit button ">Regresar</button>
-                        <button href="#atender" class="ui blue submit button ">Aceptar</button> 
                     </article>
                 </div>
             </div>

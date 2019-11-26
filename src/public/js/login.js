@@ -41,6 +41,7 @@ $(document).ready(function(){
           $.each(result.data, (i,row) => {
             const permiso = row.valor;
             const valor = row.id_empleado;
+            console.log(permiso)
             switch(permiso){
               case 1:
                   window.open(`/inicio?permiso=1&valor=${valor}`, '_self'); 
@@ -51,6 +52,9 @@ $(document).ready(function(){
               case 3:
                   window.open(`/inicio?permiso=3&valor=${valor}`, '_self'); 
               break;
+              default:
+                alert("Los datos ingresados no coinciden con ningún registro del sistema");
+                break;
             }
           }) 
           return result.error

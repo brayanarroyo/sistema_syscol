@@ -37,11 +37,11 @@
                                 <div class="two column row">
                                     <div class="column">   
                                         <label>Nombre completo</label>
-                                        <input id="nombre_fc" name="nombre_fc" type="text" placeholder="Nombre completo">   
+                                        <input id="nombre_fc" name="nombre_fc" type="text" placeholder="Nombre completo" autocomplete="off">   
                                     </div>
                                     <div class="column">
                                         <label>Domicilio</label>
-                                        <input id="domicilio_fc" name="domicilio_fc" type="text" placeholder="Domicilio">
+                                        <input id="domicilio_fc" name="domicilio_fc" type="text" placeholder="Domicilio" autocomplete="off">
                                     </div>
                                 </div>
                             </div> 
@@ -49,7 +49,7 @@
                                 <div class="four column row">
                                     <div class="four wide column">   
                                         <label>Teléfono</label>
-                                        <input id="telefono_fc" name="telefono_fc" type="text" placeholder="Teléfono">   
+                                        <input id="telefono_fc" name="telefono_fc" type="text" placeholder="Teléfono" autocomplete="off">   
                                     </div>
                                     <div class="four wide column">
                                             <label>Servicio</label>
@@ -63,7 +63,7 @@
                                         <div class="ui calendar" id="standard_calendar">
                                             <div class="ui input left icon">
                                                 <i class="calendar icon"></i>
-                                                <input id="fecha_fc" id="fecha_fc" name="fecha_fc" type="text" placeholder="Fecha de visita">
+                                                <input id="fecha_fc" id="fecha_fc" name="fecha_fc" type="text" placeholder="Fecha de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>
@@ -73,7 +73,7 @@
                                         <div class="ui calendar time">
                                             <div class="ui input left icon">
                                             <i class="time icon"></i>
-                                            <input id="hora_fc" name="hora_fc" type="text" placeholder="Hora de visita">
+                                            <input id="hora_fc" name="hora_fc" type="text" placeholder="Hora de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>
@@ -88,13 +88,13 @@
                     <!--Formulario para solicitudes de clientes que ya estan registrados y quieren realizar una instalación en otro inmueble-->
                     <article id="Form_inmueble" name="Form_inmueble">
                         <div class="ui form"> 
-                            <h4 class="ui dividing header">Solcitud para nuevo inmueble</h4>      
+                            <h4 class="ui dividing header">Solicitud para nuevo inmueble</h4>      
                             <div class="ui vertically divided grid">
                                 <div class="two column row">
                                     <div class="column">
                                     <label>Nombre completo del cliente</label>
                                         <div class="ui fluid search selection dropdown">
-                                            <input type="hidden" id="nombre_fi" name="nombre_fi">
+                                            <input type="hidden" id="nombre_fi" name="nombre_fi" autocomplete="off">
                                             <i class="dropdown icon"></i>
                                             <div class="default text">Nombre del cliente</div>
                                             <div class="menu" id="dropdown_inmueble" name="dropdown_inmueble">
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="column">
                                         <label>Domicilio</label>
-                                        <input id="domicilio_fi" name="domicilio_fi" type="text" placeholder="Domicilio">
+                                        <input id="domicilio_fi" name="domicilio_fi" type="text" placeholder="Domicilio" autocomplete="off">
                                     </div>
                                 </div>
                             </div> 
@@ -123,7 +123,7 @@
                                         <div class="ui calendar" id="standard_calendar">
                                             <div class="ui input left icon">
                                                 <i class="calendar icon"></i>
-                                                <input id="fecha_fi" name="fecha_fi" type="text" placeholder="Fecha de visita">
+                                                <input id="fecha_fi" name="fecha_fi" type="text" placeholder="Fecha de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>
@@ -133,7 +133,7 @@
                                         <div class="ui calendar time">
                                             <div class="ui input left icon">
                                             <i class="time icon"></i>
-                                            <input id="hora_fi" name="hora_fi" type="text" placeholder="Hora de visita">
+                                            <input id="hora_fi" name="hora_fi" type="text" placeholder="Hora de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>
@@ -154,7 +154,7 @@
                                     <div class="column">   
                                             <label>Nombre completo del cliente</label>
                                             <div class="ui fluid search selection dropdown">
-                                                <input type="hidden" id="nombre_fs" name="nombre_fs">
+                                                <input type="hidden" id="nombre_fs" name="nombre_fs" autocomplete="off">
                                                 <i class="dropdown icon"></i>
                                                 <div class="default text">Nombre del cliente</div>
                                                 <div class="menu" id="dropdown_servicio">
@@ -165,7 +165,7 @@
                                     <div class="six wide column">  
                                             <label>Domicilio del cliente</label>
                                             <div class="ui fluid search selection dropdown">
-                                                <input type="hidden" id="domicilio_fs" name="domicilio_fs">
+                                                <input type="hidden" id="domicilio_fs" name="domicilio_fs" autocomplete="off">
                                                 <i class="dropdown icon"></i>
                                                 <div class="default text">Domicilio</div>
                                                 <div class="menu" id="dropdown_domicilio">
@@ -191,7 +191,7 @@
                                         <div class="ui calendar" id="standard_calendar">
                                             <div class="ui input left icon">
                                                 <i class="calendar icon"></i>
-                                                <input id="fecha_fs" name="fecha_fs" type="text" placeholder="Fecha de visita">
+                                                <input id="fecha_fs" name="fecha_fs" type="text" placeholder="Fecha de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>
@@ -201,7 +201,7 @@
                                         <div class="ui calendar time">
                                             <div class="ui input left icon">
                                             <i class="time icon"></i>
-                                            <input id="hora_fs" name="hora_fs" type="text" placeholder="Hora de visita">
+                                            <input id="hora_fs" name="hora_fs" type="text" placeholder="Hora de visita" autocomplete="off">
                                             </div>
                                         </div>
                                         <br/>

@@ -126,7 +126,7 @@ $(document).ready(function(){
             break;
             case "close_modal_detalle":
 				$('#modal_detalle_orden').modal('hide');
-				location.reload();
+				$('#modal_detalle_orden_trabajo').empty(); ;
 			break;
 			case "close_modal_orden_trabajo":
 				$('#modal_confirmar_asignar').modal('hide');

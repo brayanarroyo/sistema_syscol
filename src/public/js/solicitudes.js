@@ -158,6 +158,7 @@ $(document).ready(function(){
 	$('.ui.calendar').calendar({
 		type: 'date',
 		monthFirst: false,
+		minDate: new Date(),
 		formatter: {
 			date: function (date, settings) {
 				if (!date) return '';
@@ -168,13 +169,19 @@ $(document).ready(function(){
 			}
 		}
 	});
+	var timestamp = new Date().setHours(10, 0, 0, 0);
+	var fechaInicial = new Date(timestamp);
 
-	//Funcionalidad de los campos de fecha
+	var timestamp = new Date().setHours(19, 0, 0, 0);
+	var fechaFinal = new Date(timestamp);
+
+	//Funcionalidad de los campos de tiempo
 	$('.ui.calendar.time').calendar({
 		ampm: false,
-		type: 'time'
+		type: 'time',
+		minDate: fechaInicial,
+		maxDate: fechaFinal,
 	});
-
 	//Funcionalidad del dropdown
 	$('.ui.dropdown').dropdown();
 

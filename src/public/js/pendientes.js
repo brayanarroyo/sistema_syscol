@@ -2,6 +2,61 @@ var seleccion = "";
 var costo_material = 0.0;
 $(document).ready(function(){
 
+	function filas_detalle_pendientes(id_cliente,nombre,domicilio,telefono,fecha,hora_visita,estatus,tipo_servicio) {
+		return `<tr>
+		<td>Cliente</td>
+		<td>${id_cliente}</td>
+		</tr>
+		<tr>
+		<td>Nombre</td>
+		<td>${nombre}</td>
+		</tr>
+		<tr>
+		<td>Domicilio</td>
+		<td>${domicilio}</td>
+		</tr>
+		<tr>
+		<td>Teléfono</td>
+		<td>${telefono}</td>
+		</tr>
+		<tr>
+		<td>Fecha de visita prevista</td>
+		<td>${fecha}</td>
+		</tr>
+		<tr>
+		<td>Hora de visita prevista</td>
+		<td>${hora_visita}</td>
+		</tr>
+		<tr>
+		<td>Estatus</td>
+		<td>${estatus}</td>
+		</tr>
+		<tr>
+		<td>Servicio</td>
+		<td>${tipo_servicio}</td>
+		</tr>`
+	}
+
+async function modal_detalle_pendientes(route, body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	const result = await response.json()
+	console.log(result);
+	let tbody = $('#modal_detalle') 
+		$.each(result.data, (i,row) => {
+			$(filas_detalle_pendientes(row.id_cliente,row.nombre,row.domicilio,row.telefono,row.fecha,row.hora_visita,row.estatus,row.tipo_servicio)).appendTo(tbody)
+		}) 
+		return result.error
+	return result.data
+
+}
+
 async function proceder_elemento_seleccionado(route, body) {
 	const response = await fetch(route, {
 		method: 'POST',
@@ -71,7 +126,6 @@ async function proceder_elemento_seleccionado(route, body) {
 					$('#form_Usuarios').show();
 				break;
 				} 
-			break;
 		}
 	}) 
 	return result.data
@@ -454,6 +508,16 @@ async function llenar_material_zona(route,body) {
 			break;
 			case "btn_finalizar_monitoreo":
 				$('#confirmar_registro').modal('show');
+			break;
+			case "btn_detalles":
+				$('#modal_detalle').empty();
+				modal_detalle_pendientes('/pendientes/detalles/solicitudes',{
+					tipo_solicitud: $('#solicitud option:selected').text()
+				});
+				$('#modal_mostrar_detalle_pendientes').modal('show');
+			break;
+			case "close_modal_detalle":
+				$('#modal_mostrar_detalle_pendientes').modal('hide');
 			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
