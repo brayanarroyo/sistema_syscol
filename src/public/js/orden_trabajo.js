@@ -8,6 +8,7 @@ $(document).ready(function(){
 		console.log(result);
 		let tbody = $('#tbody_orden_trabajo') 
 		$.each(result.data, (i,row) => {
+			console.log(row.fecha_visita)
 			$(filas_tabla_orden_trabajo(row.id_orden, row.nombre, row.fecha_visita, row.hora, row.empleado)).appendTo(tbody)
 		}) 
 		return result.error

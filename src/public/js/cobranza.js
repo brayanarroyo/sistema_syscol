@@ -45,6 +45,21 @@ $(document).ready(function(){
 		return result.error
 	}
 
+	async function agregar(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		return result.error
+	}
+
 	llenar_tabla_cobranza('/cobranza/inmuebles')
 
 	//Mostrar únicamente la primera sección de la navegación de pestañas
@@ -71,8 +86,25 @@ $(document).ready(function(){
 				llenar_tabla_nombre('/cobranza/cliente',{
 					inmueble:clave_inmueble}			
 					);
+				$('#confirmar_mantenimiento_cobranza').modal('show');
+			break;
+			case "close_cancelar_registro":
+				$('#confirmar_mantenimiento_cobranza').modal('hide');
 				$('#mostrar_pagos').hide();
 				$('#form_pagos').show();
+			break;
+			case "close_aceptar_registro":
+				$('#confirmar_mantenimiento_cobranza').modal('hide');
+				$('#mostrar_pagos').hide();
+				$('#atender_mante').show();
+			break;
+			case "Btn_aceptarMante":
+				agregar('/cobranza/mantenimiento',{
+					nombre:$('#cobranza_nombre').val(),
+				monto:$('#cobranza_monto').val(),
+				firma_elecronica:$('#cobranza_firma').val(),
+				observaciones_mantenimiento:$('#observaciones_mantenimiento').val()}			
+				);
 			break;
 			case "detalle_cobranza":
 				$('#mostrar_pagos_clientes').hide();
@@ -80,7 +112,7 @@ $(document).ready(function(){
 				sigueinte = "#mostrar_pagos_clientes"
 			break;
 			case "btn_confirmar_pago":
-				añadir_pago('/cobranza/pago',{
+					agregar('/cobranza/pago',{
 					nombre:$('#cobranza_nombre').val(),
 					monto:$('#cobranza_monto').val(),
 					firma_elecronica:$('#cobranza_firma').val()}			

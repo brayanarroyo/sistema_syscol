@@ -83,62 +83,64 @@
                     </article>
 <!----------------------------------------------------------Cotizar------------------------------------------------------------->
                     <!--Menú para comenzar a cotizar las solicitudes de instalacion-->
-                    <article name="form_cotizar" id="form_cotizar">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Cotización</h4>  
-                            <div class="ui celled grid">
-                                <div class="row">    
-                                    <div class="twelve wide column">
-                                        <div class="ui vertically divided grid">
-                                            <div class="two column row">
-                                                <div class="six wide column">
-                                                    <label>Material</label>
-                                                    <div class="ui fluid search selection dropdown" id="dropdown_material_select" name="dropdown_material_select">  
-                                                        <input type="hidden" id="material" name="material" autocomplete="off">
-                                                        <i class="dropdown icon"></i>
-                                                        <div class="default text">Material</div>
-                                                        <div class="menu" id="dropdown_material" name="dropdown_material">
-                                                            
+                    <form action="javascript:void(0);">
+                        <article name="form_cotizar" id="form_cotizar">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Cotización</h4>  
+                                <div class="ui celled grid">
+                                    <div class="row">    
+                                        <div class="twelve wide column">
+                                            <div class="ui vertically divided grid">
+                                                <div class="two column row">
+                                                    <div class="six wide column">
+                                                        <label>Material</label>
+                                                        <div class="ui fluid search selection dropdown" id="dropdown_material_select" name="dropdown_material_select">  
+                                                            <input type="hidden" id="material" name="material" autocomplete="off">
+                                                            <i class="dropdown icon"></i>
+                                                            <div class="default text">Material</div>
+                                                            <div class="menu" id="dropdown_material" name="dropdown_material">
+                                                                
+                                                            </div>
                                                         </div>
+                                                    </div> 
+                                                    <div class="four wide column">
+                                                        <label>Mano de obra</label>
+                                                        <input name="mano_obra_fc" id="mano_obra_fc" type="text" placeholder="$0.0" autocomplete="off" required>
                                                     </div>
-                                                </div> 
-                                                <div class="four wide column">
-                                                    <label>Mano de obra</label>
-                                                    <input name="mano_obra_fc" id="mano_obra_fc" type="text" placeholder="$0.0" autocomplete="off">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div> 
-                                    <div class="two wide column">
-                                        <div class="ui vertical labeled icon buttons">
-                                            <button name="btn_añadir_material" id="btn_añadir_material" class="ui button">
-                                                <i class="large angle double right icon"></i>
-                                                Añadir
-                                            </button>
-                                        </div>
-                                    </div>       
-                                </div>
-                            </div>   
-                            <div class="ui celled grid">
-                                <div class="column">
-                                    <table name="tbl_cotizar_instalacion" class="ui celled table">
-                                        <thead>
-                                            <tr>
-                                                <th>Material</th>
-                                                <th>Costo</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody_material">
+                                        </div> 
+                                        <div class="two wide column">
+                                            <div class="ui vertical labeled icon buttons">
+                                                <button name="btn_añadir_material" id="btn_añadir_material" class="ui button">
+                                                    <i class="large angle double right icon"></i>
+                                                    Añadir
+                                                </button>
+                                            </div>
+                                        </div>       
+                                    </div>
+                                </div>   
+                                <div class="ui celled grid">
+                                    <div class="column">
+                                        <table name="tbl_cotizar_instalacion" class="ui celled table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Material</th>
+                                                    <th>Costo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_material">
 
-                                        </tbody>
-                                    </table>
-                                </div>       
-                            </div>                                
-                            <br>
-                            <button class="ui red submit button ">Cancelar</button> 
-                            <button name="confirmar" id="confirmar" class="ui blue button ">Aceptar</button> 
-                        </div>
-                    </article>
+                                            </tbody>
+                                        </table>
+                                    </div>       
+                                </div>                                
+                                <br>
+                                <button class="ui red button ">Cancelar</button> 
+                                <button id="confirmar" class="ui blue submit button ">Aceptar</button> 
+                            </div>
+                        </article>
+                    </form>
                     <!--Modal paara mostrar detalles de una orden de trabajo-->
                     <article>
                         <div class="formulario">
@@ -160,53 +162,18 @@
                     <!--Sección para atender una orden de mantenimiento-->
                     <article name="atender_mante" id="atender_mante">
                         <table name="tbl_atender_orden" class="ui definition table">
-                            <tbody>
-                                <tr>
-                                <td>Clave de solicitud</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table name="tbl_orden_atendida" class="ui celled table">
-                            <thead>
-                                <tr>
-                                    <th>Se Atendieron y solucionarion los siguientes problemas</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel voluptates unde, consequuntur aliquid architecto rem numquam expedita minima dolorem pariatur recusandae, eius quod quia aspernatur id impedit, tenetur! Aspernatur incidunt molestiae dolores animi ea praesentium ipsam tenetur voluptas cupiditate perspiciatis eum nihil, natus exercitationem libero earum fuga dignissimos impedit numquam, quasi, placeat officiis voluptates, ad reprehenderit fugiat? Fugiat aperiam et magni, molestiae. Molestias deserunt, iure neque animi quod! Impedit reprehenderit cumque, numquam velit quae cum eius quidem similique laudantium hic deleniti!</td>
-                                </tr>
+                            <tbody id="tbody_solicitud_mantenimiento">
                             </tbody>
                         </table>
                         <div class="ui form">
                             <div class="field">
-                                <label>Observaciones adicionales</label>
-                                <textarea rows="3"></textarea>
+                                <label>Observaciones</label>
+                                <textarea id="observaciones_mantenimiento" name="observaciones_mantenimiento" rows="3"></textarea>
                             </div>
                         </div>
                         <br>
-                        <button name="Btn_cancelarMante" id="Btn_cancelarMante" class="ui red submit button ">Cancelar</button>
-                        <button class="ui blue submit button ">Aceptar</button> 
-                    </article>
-                    <article>
-                        <div class="formulario">
-                            <div class="ui modal" name="ver_detalle" id="ver_detalle">
-                                <div class="header">
-                                    Detalles del mantenimiento
-                                </div>
-                                <div class="content">
-                                    <table name="tbl_detalle_orden_mantenimiento" class="ui definition table">
-                                        <tbody id="tbody_modal" name="tbody_modal">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="actions">
-                                    <button name="close_modalMante" id="close_modalMante" class="ui blue submit button">Aceptar</button> 
-                                </div>
-                            </div>
-                        </div>
+                        <button name="Btn_cancelarMante" id="Btn_cancelarMante" class="ui red button ">Cancelar</button>
+                        <button name="Btn_aceptarMante" id="Btn_aceptarMante" class="ui blue submit button ">Aceptar</button> 
                     </article>
                     </div>
                 </div>
@@ -217,162 +184,166 @@
             <div class="wrap" name="ciz" id="ciz">
                 <!--Secciones que se van a desplegar-->
                 <div class="secciones">
-                    <article name="form_cliente" id="form_cliente">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Datos del cliente</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="three column row">
-                                    <div class="column">   
-                                        <label>Nombre</label>
-                                        <input name="nombre_fc_ciz" id="nombre_fc_ciz" type="text" placeholder="Nombre" autocomplete="off">   
-                                    </div>
-                                    <div class="column">
-                                        <label>Apellido paterno</label>
-                                        <input name="apellido_p_fc_ciz" id="apellido_p_fc_ciz" type="text" placeholder="Apellido" autocomplete="off">
-                                    </div>
-                                    <div class="column">
-                                        <label>Apellido materno</label>
-                                        <input name="apellido_m_fc_ciz" id="apellido_m_fc_ciz" type="text" placeholder="Apellido" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="four column row">
-                                    <div class="four wide column">   
-                                        <label>Correo electronico</label>
-                                        <input name="correo_fc_ciz" id="correo_fc_ciz" type="text" placeholder="correo@correo.com" autocomplete="off">   
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Teléfono</label>
-                                        <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Firma</label>
-                                        <input name="firma_fc_ciz" id="firma_fc_ciz" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Número de cliente</label>
-                                        <input name="clave_fc_ciz" id="clave_fc_ciz" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>      
-                        </div>
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Datos del inmueble</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="three column row">
-                                    <div class="six wide column">   
-                                        <label>Calle</label>
-                                        <input name="calle_fi_ciz" id="calle_fi_ciz" type="text" placeholder="Calle" autocomplete="off">   
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Número exterior</label>
-                                        <input name="num_ext_fi_ciz" id="num_ext_fi_ciz" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                    <div class="six wide column">   
-                                        <label>Colonia</label>
-                                        <input name="colonia_fi_ciz" id="colonia_fi_ciz" type="text" placeholder="Colonia" autocomplete="off">   
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="four column row">
-                                    <div class="four wide column">
-                                        <label>Código postal</label>
-                                        <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="text" placeholder="#####" autocomplete="off">
-                                    </div>
-                                    <div class="four wide column">   
-                                        <label>Estado de la republica</label>
-                                        <input name="estado_fi_ciz" id="estado_fi_ciz" type="text" placeholder="Estado" autocomplete="off">   
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Municipio</label>
-                                        <input name="municipio_fi_ciz" id="municipio_fi_ciz" type="text" placeholder="Municipio" autocomplete="off">
-                                    </div>
-
-                                    <div class="four wide column">
-                                        <label >Tipo de inmueble</label> 
-                                        <div class="ui fluid search selection dropdown" id="dropdown_tipo_inmueble_ciz_select" name="dropdown_tipo_inmueble_ciz_select">
-                                            <input type="hidden" id="tipo_inmueble_ciz" name="tipo_inmueble_ciz" autocomplete="off">
-                                            <i class="dropdown icon"></i>
-                                            <div class="default text">Tipo</div>
-                                            <div class="menu" id="dropdown_tipo_inmueble_ciz" name="dropdown_tipo_inmueble_ciz">
-                                                
-                                            </div>
+                    <form action="javascript:void(0);">
+                        <article name="form_cliente" id="form_cliente">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Datos del cliente</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="three column row">
+                                        <div class="column">   
+                                            <label>Nombre</label>
+                                            <input name="nombre_fc_ciz" id="nombre_fc_ciz" type="text" placeholder="Nombre" autocomplete="off" required>   
                                         </div>
-                                    </div> 
-                                </div>
-                            </div>    
-                            <br>
-                            <button  name="btn_cliente_inmueble_ciz" id="btn_cliente_inmueble_ciz" class="ui blue button ">Guardar</button>    
-                        </div>
-                    </article>
-                    <article name="form_zonas" id="form_zonas">
-                        <div class="ui form">
-                            <div class="ui celled grid">
-                                <div class="row">    
-                                    <div class="twelve wide column">
-                                        <div class="ui vertically divided grid">
-                                            <div class="one column row">
-                                                <div class="column">
-                                                    <table name="tbl_tabla_material_zona" class="ui celled table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Material</th>
-                                                                <th>Zona</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="column">
-                                                                        <div class="ui fluid search selection dropdown" id="dropdown_material_zona_ciz_select" name="dropdown_material_zona_ciz_select">
-                                                                            <input type="hidden" id="material_zona_ciz" name="material_zona_ciz" autocomplete="off">
-                                                                            <i class="dropdown icon"></i>
-                                                                            <div class="default text">Material</div>
-                                                                            <div class="menu" id="dropdown_material_zona_ciz" name="dropdown_material_zona_ciz">
-                                                                                
+                                        <div class="column">
+                                            <label>Apellido paterno</label>
+                                            <input name="apellido_p_fc_ciz" id="apellido_p_fc_ciz" type="text" placeholder="Apellido" autocomplete="off" required>
+                                        </div>
+                                        <div class="column">
+                                            <label>Apellido materno</label>
+                                            <input name="apellido_m_fc_ciz" id="apellido_m_fc_ciz" type="text" placeholder="Apellido" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="four column row">
+                                        <div class="four wide column">   
+                                            <label>Correo electronico</label>
+                                            <input name="correo_fc_ciz" id="correo_fc_ciz" type="email" placeholder="correo@correo.com" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Teléfono</label>
+                                            <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Firma</label>
+                                            <input name="firma_fc_ciz" id="firma_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Número de cliente</label>
+                                            <input name="clave_fc_ciz" id="clave_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div>      
+                            </div>
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Datos del inmueble</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="three column row">
+                                        <div class="six wide column">   
+                                            <label>Calle</label>
+                                            <input name="calle_fi_ciz" id="calle_fi_ciz" type="text" placeholder="Calle" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Número exterior</label>
+                                            <input name="num_ext_fi_ciz" id="num_ext_fi_ciz" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
+                                        <div class="six wide column">   
+                                            <label>Colonia</label>
+                                            <input name="colonia_fi_ciz" id="colonia_fi_ciz" type="text" placeholder="Colonia" autocomplete="off" required>   
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="four column row">
+                                        <div class="four wide column">
+                                            <label>Código postal</label>
+                                            <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="number" placeholder="#####" autocomplete="off" required>
+                                        </div>
+                                        <div class="four wide column">   
+                                            <label>Estado de la republica</label>
+                                            <input name="estado_fi_ciz" id="estado_fi_ciz" type="text" placeholder="Estado" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Municipio</label>
+                                            <input name="municipio_fi_ciz" id="municipio_fi_ciz" type="text" placeholder="Municipio" autocomplete="off" required>
+                                        </div>
+
+                                        <div class="four wide column">
+                                            <label >Tipo de inmueble</label> 
+                                            <div class="ui fluid search selection dropdown" id="dropdown_tipo_inmueble_ciz_select" name="dropdown_tipo_inmueble_ciz_select">
+                                                <input type="hidden" id="tipo_inmueble_ciz" name="tipo_inmueble_ciz" autocomplete="off" required>
+                                                <i class="dropdown icon"></i>
+                                                <div class="default text">Tipo</div>
+                                                <div class="menu" id="dropdown_tipo_inmueble_ciz" name="dropdown_tipo_inmueble_ciz">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>    
+                                <br>
+                                <button  name="btn_cliente_inmueble_ciz" id="btn_cliente_inmueble_ciz" class="ui blue submit button ">Guardar</button>    
+                            </div>
+                        </article>
+                    </form>
+                    <form action="javascript:void(0);">
+                        <article name="form_zonas" id="form_zonas">
+                            <div class="ui form">
+                                <div class="ui celled grid">
+                                    <div class="row">    
+                                        <div class="twelve wide column">
+                                            <div class="ui vertically divided grid">
+                                                <div class="one column row">
+                                                    <div class="column">
+                                                        <table name="tbl_tabla_material_zona" class="ui celled table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Material</th>
+                                                                    <th>Zona</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="column">
+                                                                            <div class="ui fluid search selection dropdown" id="dropdown_material_zona_ciz_select" name="dropdown_material_zona_ciz_select">
+                                                                                <input type="hidden" id="material_zona_ciz" name="material_zona_ciz" autocomplete="off" required>
+                                                                                <i class="dropdown icon"></i>
+                                                                                <div class="default text">Material</div>
+                                                                                <div class="menu" id="dropdown_material_zona_ciz" name="dropdown_material_zona_ciz">
+                                                                                    
+                                                                                </div>
                                                                             </div>
+                                                                        </div>    
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="column">   
+                                                                            <input name="zona_zona_ciz" id="zona_zona_ciz" type="text" placeholder="Zona" autocomplete="off" required>   
                                                                         </div>
-                                                                    </div>    
-                                                                </td>
-                                                                <td>
-                                                                    <div class="column">   
-                                                                        <input name="zona_zona_ciz" id="zona_zona_ciz" type="text" placeholder="Zona" autocomplete="off">   
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div> 
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> 
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div> 
-                                    <div class="two wide column">
-                                        <button name="btn_añadir_material_zona" id="btn_añadir_material_zona" class="ui blue button">Registrar</button>
-                                    </div>       
-                                </div>
-                            </div> 
-                            <div class="ui celled grid">
-                                <div class="column">
-                                    <table name="tbl_cotizar_instalacion" class="ui celled table">
-                                        <thead>
-                                            <tr>
-                                                <th>Material</th>
-                                                <th>Zona</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody_material_zona">
+                                        </div> 
+                                        <div class="two wide column">
+                                            <button name="btn_añadir_material_zona" id="btn_añadir_material_zona" class="ui blue button">Registrar</button>
+                                        </div>       
+                                    </div>
+                                </div> 
+                                <div class="ui celled grid">
+                                    <div class="column">
+                                        <table name="tbl_cotizar_instalacion" class="ui celled table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Material</th>
+                                                    <th>Zona</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_material_zona">
 
-                                        </tbody>
-                                    </table>
-                                </div>       
-                            </div> 
-                            <br>
-                            <button class="ui red submit button ">Cancelar</button> 
-                            <button name="btn_finalizar_ciz" id="btn_finalizar_ciz" class="ui blue button">Finalizar</button> 
-                        </div>
-                    </article>
+                                            </tbody>
+                                        </table>
+                                    </div>       
+                                </div> 
+                                <br>
+                                <button class="ui red submit button ">Cancelar</button> 
+                                <button name="btn_finalizar_ciz" id="btn_finalizar_ciz" class="ui blue button">Finalizar</button> 
+                            </div>
+                        </article>
+                    </form>
                     <!--Modal para confirmar registro-->
                     <article>
                         <div class="formulario">

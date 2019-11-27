@@ -112,10 +112,9 @@ $(document).ready(function(){
 			break;
 			case "aceptar_solicitud":
 				$('#confirmar_solicitud').modal('hide');
-				location.reload();
+				window.open(`/solicitudes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			default:
-
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
 					$('.secciones article').hide();
 					$('.secciones article:first').show();

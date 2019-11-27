@@ -258,7 +258,7 @@ $(document).ready(function(){
 				console.log($('#zona_evento_robo').val())
 				señal('/monitoreo/registrar/senal_robo',{
 					num_cliente_robo:$('#num_cliente_robo').val(),
-					evento_robo:$('#evento_robo').val(),
+					evento_robo_s:$('#evento_robo_s').val(),
 					zona_evento_robo:$('#zona_evento_robo').val()}			
 					);
 				$('#confirmar_señal').modal('show');

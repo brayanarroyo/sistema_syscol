@@ -119,6 +119,7 @@ async function proceder_elemento_seleccionado(route, body) {
 				case "pendiente de mantenimiento":
 					$('.secciones article').hide();
 					$('#atender_mante').show();
+					mostrar_solicitud();
 				break;
 				case "pendiente de monitoreo":
 					$('.secciones article').hide();
@@ -129,6 +130,22 @@ async function proceder_elemento_seleccionado(route, body) {
 		}
 	}) 
 	return result.data
+}
+
+//Métodos para el llenado de las tablas
+function filas_tabla_solicitud_mantenimiento() {
+	return `<tr>
+		<td>Clave de solicitud</td>
+		<td>${seleccion}</td>
+	</tr>`
+}
+	
+async function mostrar_solicitud() {
+	let tbody = $('#tbody_solicitud_mantenimiento') 
+	$.each(result.data, (i,row) => {
+		$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
+	}) 
+	return result.error
 }
 
 //Métodos para el llenado de las tablas
@@ -434,57 +451,63 @@ async function llenar_material_zona(route,body) {
 					);
 			break;
 			case "confirmar":
-				$('#confirmar_cotizacion').modal('show');
-				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
-					costo:costo_material,
-					mano_obra:$('#mano_obra_fc').val(),
-					solicitud:seleccion}			
-					);
+				if ($('#mano_obra_fc').val() != ''){
+					$('#confirmar_cotizacion').modal('show');
+					generar_cotizacion('/pendientes/cobranza_material/confirmar',{
+						costo:costo_material,
+						mano_obra:$('#mano_obra_fc').val(),
+						solicitud:seleccion}			
+						);
+				}
 			break;
 			case "close_cancelar_cotizacion":
 				$('#confirmar_cotizacion').modal('hide');
 			break;
 			case "close_aceptar_cotizacion":
 				$('#confirmar_cotizacion').modal('hide');
-				location.reload();
+				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_cliente_inmueble_ciz":
-				agregar_ciz('/pendientes/ciz/cliente_inmueble',{
-					nombre_fc_ciz:$('#nombre_fc_ciz').val(),
-					apellido_p_fc_ciz:$('#apellido_p_fc_ciz').val(),
-					apellido_m_fc_ciz:$('#apellido_m_fc_ciz').val(),
-					correo_fc_ciz:$('#correo_fc_ciz').val(),
-					telefono_fc_ciz:$('#telefono_fc_ciz').val(),
-					firma_fc_ciz:$('#firma_fc_ciz').val(),
-					calle_fi_ciz:$('#calle_fi_ciz').val(),
-					num_ext_fi_ciz:$('#num_ext_fi_ciz').val(),
-					colonia_fi_ciz:$('#colonia_fi_ciz').val(),
-					codigo_fi_ciz:$('#codigo_fi_ciz').val(),
-					tipo_inmueble_ciz:$('#tipo_inmueble_ciz').val(),
-					estado_fi_ciz:$('#estado_fi_ciz').val(),
-					municipio_fi_ciz:$('#municipio_fi_ciz').val(),
-					id_solicitud:seleccion,
-					clave_fc_ciz:$('#clave_fc_ciz').val()}			
-					);
-				llenar_material_zona('/pendientes/llenado/material_zona',{
-					solicitud:seleccion}			
-					);
-				$('.secciones article').hide();
-				$('#form_zonas').show();
+				if ($('#nombre_fc_ciz').val() != '' && $('#apellido_p_fc_ciz').val() != '' && $('#apellido_m_fc_ciz').val() != '' && $('#correo_fc_ciz').val() != '' && $('#telefono_fc_ciz').val() != '' && $('#firma_fc_ciz').val() != '' && $('#calle_fi_ciz').val() != '' && $('#num_ext_fi_ciz').val() != '' && $('#colonia_fi_ciz').val() != '' && $('#codigo_fi_ciz').val() != '' && $('#tipo_inmueble_ciz').val() != '' && $('#estado_fi_ciz').val() != '' && $('#municipio_fi_ciz').val() != '' && $('#clave_fc_ciz').val() != ''){
+					agregar_ciz('/pendientes/ciz/cliente_inmueble',{
+						nombre_fc_ciz:$('#nombre_fc_ciz').val(),
+						apellido_p_fc_ciz:$('#apellido_p_fc_ciz').val(),
+						apellido_m_fc_ciz:$('#apellido_m_fc_ciz').val(),
+						correo_fc_ciz:$('#correo_fc_ciz').val(),
+						telefono_fc_ciz:$('#telefono_fc_ciz').val(),
+						firma_fc_ciz:$('#firma_fc_ciz').val(),
+						calle_fi_ciz:$('#calle_fi_ciz').val(),
+						num_ext_fi_ciz:$('#num_ext_fi_ciz').val(),
+						colonia_fi_ciz:$('#colonia_fi_ciz').val(),
+						codigo_fi_ciz:$('#codigo_fi_ciz').val(),
+						tipo_inmueble_ciz:$('#tipo_inmueble_ciz').val(),
+						estado_fi_ciz:$('#estado_fi_ciz').val(),
+						municipio_fi_ciz:$('#municipio_fi_ciz').val(),
+						id_solicitud:seleccion,
+						clave_fc_ciz:$('#clave_fc_ciz').val()}			
+						);
+					llenar_material_zona('/pendientes/llenado/material_zona',{
+						solicitud:seleccion}			
+						);
+					$('.secciones article').hide();
+					$('#form_zonas').show();
+				}
 			break;
 			case "btn_añadir_material_zona":
-				finalizar_ciz('/pendientes/ciz/confirmar',{
-					material_zona_ciz:$('#material_zona_ciz').val(),
-					zona_zona_ciz:$('#zona_zona_ciz').val(),
-					solicitud:seleccion}			
-					);
+				if ($('#material_zona_ciz').val() != '' && $('#zona_zona_ciz').val() != ''){
+					finalizar_ciz('/pendientes/ciz/confirmar',{
+						material_zona_ciz:$('#material_zona_ciz').val(),
+						zona_zona_ciz:$('#zona_zona_ciz').val(),
+						solicitud:seleccion}			
+						);
+				}
 			break;
 			case "btn_finalizar_ciz":
 				$('#confirmar_registro').modal('show');
 			break;
 			case "close_aceptar_registro":
 				$('#confirmar_registro').modal('hide');
-				location.reload();
+				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_registrar_usuario":
 				agregar_ciz('/pendientes/agregar/usuarios',{
@@ -518,6 +541,12 @@ async function llenar_material_zona(route,body) {
 			break;
 			case "close_modal_detalle":
 				$('#modal_mostrar_detalle_pendientes').modal('hide');
+			break;
+			case "Btn_aceptarMante":
+				agregar_ciz('/pendientes/agregar/mantenimiento',{
+					solicitud:seleccion,
+					observaciones_mantenimiento:$('#observaciones_mantenimiento').val()
+				});
 			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {

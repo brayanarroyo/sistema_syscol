@@ -542,9 +542,21 @@ router.post ('/pendientes/llenado/material_zona', (req, res) => {
 
 router.post('/pendientes/agregar/usuarios', async (req, res) => {
   try {
-    let { id_elemento } = req.body;
-    let query =`CALL sp_generar_cotizacion(
-      '${id_elemento}'
+    let { solicitud,
+      no_usu,
+      nom_usu,
+      apellido_p_usu,
+      apellido_m_usu,
+      relacion_usu,
+      telefono_usu } = req.body;
+    let query =`CALL sp_agregar_usuario(
+      '${solicitud}',
+      '${no_usu}',
+      '${nom_usu}',
+      '${apellido_p_usu}',
+      '${apellido_m_usu}',
+      '${relacion_usu}',
+      '${telefono_usu}'
     )`
     console.log(query);
     let resultado = await pool.query(query);
@@ -557,9 +569,17 @@ router.post('/pendientes/agregar/usuarios', async (req, res) => {
 
 router.post('/pendientes/agregar/contactos', async (req, res) => {
   try {
-    let { id_elemento } = req.body;
-    let query =`CALL sp_generar_cotizacion(
-      '${id_elemento}'
+    let { solicitud,
+      num_cont,
+      nom_contacto,
+      ralacion_cont,
+      telefono_contacto} = req.body;
+    let query =`CALL sp_agregar_contacto(
+      '${solicitud}',
+      '${num_cont}',
+      '${nom_contacto}',
+      '${ralacion_cont}',
+      '${telefono_contacto}'
     )`
     console.log(query);
     let resultado = await pool.query(query);
@@ -570,17 +590,35 @@ router.post('/pendientes/agregar/contactos', async (req, res) => {
   
 });
 //*********************************************************************************************************************
+//***************************************************Mantenimiento********************************************************
+//*********************************************************************************************************************
+router.post('/pendientes/agregar/mantenimiento', async (req, res) => {
+  try {
+    let { solicitud,observaciones_mantenimiento } = req.body;
+    let tipo_evento = "robo";
+    let query =`CALL sp_agregar_mantenimiento(
+      '${observaciones_mantenimiento}',
+      '${solicitud}'
+    )`
+    console.log(query);
+    let resultado = await pool.query(query);
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+});
+//*********************************************************************************************************************
 //***************************************************Monitoreo********************************************************
 //*********************************************************************************************************************
 router.post('/monitoreo/registrar/senal_robo', async (req, res) => {
   try {
-    let { num_cliente_robo,evento_robo,zona_evento_robo } = req.body;
+    let { num_cliente_robo,evento_robo_s,zona_evento_robo } = req.body;
     let tipo_evento = "robo";
     let query =`CALL sp_agregar_señal_robo(
       '${num_cliente_robo}',
       '${tipo_evento}',
       '${zona_evento_robo}',
-      '${evento_robo}'
+      '${evento_robo_s}'
     )`
     console.log(query);
     let resultado = await pool.query(query);
@@ -960,13 +998,15 @@ router.post('/orden_trabajo/detalle', async (req, res) => {
   try {
     let { id_solicitud } = req.body;
 
-    let query =`(SELECT s.id_solicitud,"Pendiente" as clave_inm ,sp.nombre_completo as nombre,sp.domicilio,s.fecha_visita,s.hora,ot.observaciones
+    let query =`(SELECT s.id_solicitud,"Pendiente" as clave_inm ,sp.nombre_completo as nombre,sp.domicilio,
+    date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_pendiente sp
     on sp.id_solicitud_pendiente = s.id_solicitud 
     WHERE ot.id_orden= '${id_solicitud}')
 UNION
-(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),s.fecha_visita,s.hora,ot.observaciones
+(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
+date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_cliente sc
     on sc.id_solicitud_cliente = s.id_solicitud INNER JOIN cliente c 
@@ -974,7 +1014,8 @@ UNION
 		on c.id_cliente = i.clave_cliente
     WHERE ot.id_orden = '${id_solicitud}')
 UNION
-(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),s.fecha_visita,s.hora,ot.observaciones
+(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
+date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_inmueble si
     on si.id_solicitud_inmueble = s.id_solicitud INNER JOIN cliente c 
@@ -1073,4 +1114,23 @@ router.post('/cobranza/pago', async (req, res) => {
   
 });
 
+router.post('/cobranza/mantenimiento', async (req, res) => {
+  try {
+    let { nombre, monto, firma_elecronica, observaciones_mantenimiento } = req.body;
+
+    let query =`sp_agregar_cobranza_mantenimiento(
+      '${nombre}',
+      '${monto}',
+      '${firma_elecronica}',
+      '${observaciones_mantenimiento}'
+    )`
+
+    console.log(query);
+    let resultado = await pool.query(query);
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+  
+});
 module.exports = router;

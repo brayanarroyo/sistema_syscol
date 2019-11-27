@@ -74,6 +74,41 @@
                             <button id="btn_confirmar_pago" class="ui blue submit button ">Aceptar</button> 
                         </div>
                     </article>
+                    <article name="atender_mante" id="atender_mante">
+                        <table name="tbl_atender_orden" class="ui definition table">
+                            <tbody id="tbody_solicitud_mantenimiento">
+                                <tr>
+                                <td>Clave de solicitud</td>
+                                <td>Lorem ipsum dolor sit amet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="ui form">
+                            <div class="field">
+                                <label>Observaciones</label>
+                                <textarea id="observaciones_mantenimiento" name="observaciones_mantenimiento" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <button name="Btn_cancelarMante" id="Btn_cancelarMante" class="ui red button ">Cancelar</button>
+                        <button name="Btn_aceptarMante" id="Btn_aceptarMante" class="ui blue submit button ">Aceptar</button> 
+                    </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_mantenimiento_cobranza">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>¿Se realizo un mantenimiento?</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_cancelar_registro" class="ui red button">No</button>
+                                    <button id="close_aceptar_registro" class="ui blue submit button">Sí</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>

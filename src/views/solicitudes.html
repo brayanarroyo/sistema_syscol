@@ -30,189 +30,195 @@
                         </div> 
                     </article>
                     <!--Formulario para solicitudes de clientes nuevos-->
-                    <article id="Form_cliente" name="Form_cliente">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Solicitud para nuevo cliente</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="two column row">
-                                    <div class="column">   
-                                        <label>Nombre completo</label>
-                                        <input id="nombre_fc" name="nombre_fc" type="text" placeholder="Nombre completo" autocomplete="off">   
+                    <form action="javascript:void(0);">
+                        <article id="Form_cliente" name="Form_cliente">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Solicitud para nuevo cliente</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
+                                        <div class="column">   
+                                            <label>Nombre completo</label>
+                                            <input id="nombre_fc" type="text" placeholder="Nombre completo" autocomplete="off" required>   
+                                        </div>
+                                        <div class="column">
+                                            <label>Domicilio</label>
+                                            <input id="domicilio_fc" type="text" placeholder="Domicilio" autocomplete="off" required>
+                                        </div>
                                     </div>
-                                    <div class="column">
-                                        <label>Domicilio</label>
-                                        <input id="domicilio_fc" name="domicilio_fc" type="text" placeholder="Domicilio" autocomplete="off">
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="four column row">
+                                        <div class="four wide column">   
+                                            <label>Teléfono</label>
+                                            <input id="telefono_fc" type="number" placeholder="Teléfono" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">
+                                                <label>Servicio</label>
+                                                <select type="text" class="ui fluid compact selection cliente dropdown" id="servicio_fc" required>
+                                                        <option value="">Servicio</option>
+                                                        <option value="Instalacion">Instalacion</option>
+                                                </select>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Fecha de visita</label>
+                                            <div class="ui calendar" id="standard_calendar">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id="fecha_fc" type="text" placeholder="Fecha de visita" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Hora de visita</label>
+                                            <div class="ui calendar time">
+                                                <div class="ui input left icon">
+                                                <i class="time icon"></i>
+                                                <input id="hora_fc" type="text" placeholder="Hora de visita" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                        </div> 
                                     </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="four column row">
-                                    <div class="four wide column">   
-                                        <label>Teléfono</label>
-                                        <input id="telefono_fc" name="telefono_fc" type="text" placeholder="Teléfono" autocomplete="off">   
+                                </div>      
+                                <br>
+                                <button class="ui red button ">Cancelar</button>
+                                <button id="registrar_nuevo" name="registrar_nuevo" class="ui blue submit button ">Registrar</button>    
+                            </div>
+                        </article>
+                    </form>
+                    <!--Formulario para solicitudes de clientes que ya estan registrados y quieren realizar una instalación en otro inmueble-->
+                    <form action="javascript:void(0);">
+                        <article id="Form_inmueble" name="Form_inmueble">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Solicitud para nuevo inmueble</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
+                                        <div class="column">
+                                        <label>Nombre completo del cliente</label>
+                                            <div class="ui fluid search selection dropdown">
+                                                <input type="hidden" id="nombre_fi" autocomplete="off" required>
+                                                <i class="dropdown icon"></i>
+                                                <div class="default text">Nombre del cliente</div>
+                                                <div class="menu" id="dropdown_inmueble" name="dropdown_inmueble">
+                                                    
+                                                </div>
+                                            </div>
+                                        </select>
+                                        </div>
+                                        <div class="column">
+                                            <label>Domicilio</label>
+                                            <input id="domicilio_fi" type="text" placeholder="Domicilio" autocomplete="off" required>
+                                        </div>
                                     </div>
-                                    <div class="four wide column">
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="three column row">
+                                        <div class="four wide column">
                                             <label>Servicio</label>
-                                            <select class="ui fluid compact selection cliente dropdown" id="servicio_fc" name="servicio_fc">
+                                            <select type="text" class="ui fluid compact selection cliente dropdown" id="servicio_fi" required>
                                                     <option value="">Servicio</option>
                                                     <option value="Instalacion">Instalacion</option>
                                             </select>
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Fecha de visita</label>
-                                        <div class="ui calendar" id="standard_calendar">
-                                            <div class="ui input left icon">
-                                                <i class="calendar icon"></i>
-                                                <input id="fecha_fc" id="fecha_fc" name="fecha_fc" type="text" placeholder="Fecha de visita" autocomplete="off">
-                                            </div>
                                         </div>
-                                        <br/>
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Hora de visita</label>
-                                        <div class="ui calendar time">
-                                            <div class="ui input left icon">
-                                            <i class="time icon"></i>
-                                            <input id="hora_fc" name="hora_fc" type="text" placeholder="Hora de visita" autocomplete="off">
+                                        <div class="four wide column">
+                                            <label>Fecha de visita</label>
+                                            <div class="ui calendar" id="standard_calendar">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id="fecha_fi" type="text" placeholder="Fecha de visita" autocomplete="off" required>
+                                                </div>
                                             </div>
+                                            <br/>
                                         </div>
-                                        <br/>
-                                    </div> 
-                                </div>
-                            </div>      
-                            <br>
-                            <button class="ui red submit button ">Cancelar</button>
-                            <button id="registrar_nuevo" name="registrar_nuevo" class="ui blue submit button ">Registrar</button>    
-                        </div>
-                    </article>
-                    <!--Formulario para solicitudes de clientes que ya estan registrados y quieren realizar una instalación en otro inmueble-->
-                    <article id="Form_inmueble" name="Form_inmueble">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Solicitud para nuevo inmueble</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="two column row">
-                                    <div class="column">
-                                    <label>Nombre completo del cliente</label>
-                                        <div class="ui fluid search selection dropdown">
-                                            <input type="hidden" id="nombre_fi" name="nombre_fi" autocomplete="off">
-                                            <i class="dropdown icon"></i>
-                                            <div class="default text">Nombre del cliente</div>
-                                            <div class="menu" id="dropdown_inmueble" name="dropdown_inmueble">
-                                                
+                                        <div class="four wide column">
+                                            <label>Hora de visita</label>
+                                            <div class="ui calendar time">
+                                                <div class="ui input left icon">
+                                                <i class="time icon"></i>
+                                                <input id="hora_fi" type="text" placeholder="Hora de visita" autocomplete="off" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </select>
+                                            <br/>
+                                        </div> 
                                     </div>
-                                    <div class="column">
-                                        <label>Domicilio</label>
-                                        <input id="domicilio_fi" name="domicilio_fi" type="text" placeholder="Domicilio" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="three column row">
-                                    <div class="four wide column">
-                                        <label>Servicio</label>
-                                        <select class="ui fluid compact selection cliente dropdown" id="servicio_fi" name="servicio_fi">
-                                                <option value="">Servicio</option>
-                                                <option value="Instalacion">Instalacion</option>
-                                        </select>
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Fecha de visita</label>
-                                        <div class="ui calendar" id="standard_calendar">
-                                            <div class="ui input left icon">
-                                                <i class="calendar icon"></i>
-                                                <input id="fecha_fi" name="fecha_fi" type="text" placeholder="Fecha de visita" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Hora de visita</label>
-                                        <div class="ui calendar time">
-                                            <div class="ui input left icon">
-                                            <i class="time icon"></i>
-                                            <input id="hora_fi" name="hora_fi" type="text" placeholder="Hora de visita" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <br/>
-                                    </div> 
-                                </div>
-                            </div>      
-                            <br>
-                            <button class="ui red submit button ">Cancelar</button>
-                            <button id="registrar_inmueble" name="registrar_inmueble" class="ui blue button ">Registrar</button>    
-                        </div>
-                    </article>
+                                </div>      
+                                <br>
+                                <button class="ui red button ">Cancelar</button>
+                                <button id="registrar_inmueble" name="registrar_inmueble" class="ui blue submit button ">Registrar</button>    
+                            </div>
+                        </article>
+                    </form>
                     <!--Formulario para solicitudes de clientes que ya estan registrados y quieren añadir un servicio a sus inmuebles-->
-                    <article id="Form_servicio" name="Form_servicio">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Solicitud para añadir un servicio</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="three column row">
-                                    <div class="column">   
-                                            <label>Nombre completo del cliente</label>
-                                            <div class="ui fluid search selection dropdown">
-                                                <input type="hidden" id="nombre_fs" name="nombre_fs" autocomplete="off">
-                                                <i class="dropdown icon"></i>
-                                                <div class="default text">Nombre del cliente</div>
-                                                <div class="menu" id="dropdown_servicio">
-                                                    
+                    <form action="javascript:void(0);">
+                        <article id="Form_servicio" name="Form_servicio">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Solicitud para añadir un servicio</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="three column row">
+                                        <div class="column">   
+                                                <label>Nombre completo del cliente</label>
+                                                <div class="ui fluid search selection dropdown">
+                                                    <input type="hidden" id="nombre_fs" autocomplete="off" required>
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="default text">Nombre del cliente</div>
+                                                    <div class="menu" id="dropdown_servicio">
+                                                        
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="six wide column">  
+                                                <label>Domicilio del cliente</label>
+                                                <div class="ui fluid search selection dropdown">
+                                                    <input type="hidden" id="domicilio_fs" autocomplete="off" required>
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="default text">Domicilio</div>
+                                                    <div class="menu" id="dropdown_domicilio">
+                                                        
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Servicio</label>
+                                            <select class="ui fluid compact selection cliente dropdown" id="servicio_fs" required>
+                                                    <option value="">Servicio</option>
+                                                    <option value="Instalacion">Instalacion</option>
+                                                    <option value="Monitoreo">Monitoreo</option>
+                                                    <option value="Mantenimiento">Mantenimiento</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
+                                        <div class="four wide column">
+                                            <label>Fecha de visita</label>
+                                            <div class="ui calendar" id="standard_calendar">
+                                                <div class="ui input left icon">
+                                                    <i class="calendar icon"></i>
+                                                    <input id="fecha_fs" type="text" placeholder="Fecha de visita" autocomplete="off" required>
                                                 </div>
                                             </div>
-                                    </div>
-                                    <div class="six wide column">  
-                                            <label>Domicilio del cliente</label>
-                                            <div class="ui fluid search selection dropdown">
-                                                <input type="hidden" id="domicilio_fs" name="domicilio_fs" autocomplete="off">
-                                                <i class="dropdown icon"></i>
-                                                <div class="default text">Domicilio</div>
-                                                <div class="menu" id="dropdown_domicilio">
-                                                    
+                                            <br/>
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Hora de visita</label>
+                                            <div class="ui calendar time">
+                                                <div class="ui input left icon">
+                                                <i class="time icon"></i>
+                                                <input id="hora_fs" type="text" placeholder="Hora de visita" autocomplete="off" required>
                                                 </div>
                                             </div>
+                                            <br/>
+                                        </div> 
                                     </div>
-                                    <div class="four wide column">
-                                        <label>Servicio</label>
-                                        <select class="ui fluid compact selection cliente dropdown" id="servicio_fs" name="servicio_fs">
-                                                <option value="">Servicio</option>
-                                                <option value="Instalacion">Instalacion</option>
-                                                <option value="Monitoreo">Monitoreo</option>
-                                                <option value="Mantenimiento">Mantenimiento</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="two column row">
-                                    <div class="four wide column">
-                                        <label>Fecha de visita</label>
-                                        <div class="ui calendar" id="standard_calendar">
-                                            <div class="ui input left icon">
-                                                <i class="calendar icon"></i>
-                                                <input id="fecha_fs" name="fecha_fs" type="text" placeholder="Fecha de visita" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Hora de visita</label>
-                                        <div class="ui calendar time">
-                                            <div class="ui input left icon">
-                                            <i class="time icon"></i>
-                                            <input id="hora_fs" name="hora_fs" type="text" placeholder="Hora de visita" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <br/>
-                                    </div> 
-                                </div>
-                            </div>      
-                            <br>
-                            <button class="ui red submit button ">Cancelar</button>
-                            <button id="registrar_servicio" name="registrar_servicio" class="ui blue submit button ">Registrar</button>    
-                        </div>
-                    </article>
+                                </div>      
+                                <br>
+                                <button class="ui red button ">Cancelar</button>
+                                <button id="registrar_servicio" name="registrar_servicio" class="ui blue submit button ">Registrar</button>    
+                            </div>
+                        </article>
+                    </form>
                     <!--Modal para cuando se registra una solicitud-->
                     <article>
                         <div class="formulario">
