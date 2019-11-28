@@ -335,11 +335,10 @@ async function agregar_ciz(route,body) {
 	return result.error
 }
 
-function filas_tabla_material_zona(id_material,nombre, precio) {
-	costo_material = parseFloat(costo_material + precio);
-	return `<tr id="${id_material}">
-			<td>${nombre}</td>
-			<td>${precio}</td>
+function filas_tabla_material_zona(material, zona) {
+	return `<tr>
+			<td>${material}</td>
+			<td>${zona}</td>
 	</tr>`
 }
 
@@ -355,9 +354,24 @@ async function finalizar_ciz(route,body) {
 	console.log(response);
 	const result = await response.json()
 	console.log(result);
+	return result.error
+}
+
+async function materiales_registrados(route,body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	console.log(response);
+	const result = await response.json()
+	console.log(result);
 	let tbody = $('#tbody_material_zona') 
 	$.each(result.data, (i,row) => {
-		$(filas_tabla_material_zona(row.zona,row.material)).appendTo(tbody)
+		$(filas_tabla_material_zona(row.nombre,row.zona)).appendTo(tbody)
 	}) 
 	return result.error
 }
@@ -495,6 +509,10 @@ async function llenar_material_zona(route,body) {
 					finalizar_ciz('/pendientes/ciz/confirmar',{
 						material_zona_ciz:$('#material_zona_ciz').val(),
 						zona_zona_ciz:$('#zona_zona_ciz').val(),
+						solicitud:seleccion}			
+						);
+					$('#tbody_material_zona').empty(); 
+					materiales_registrados('/pendientes/materiales/registrados',{
 						solicitud:seleccion}			
 						);
 				}

@@ -545,6 +545,39 @@ router.post ('/pendientes/llenado/material_zona', (req, res) => {
   }
 });
 
+router.post ('/pendientes/materiales/registrados', (req, res) => {
+  try {
+    let { solicitud } = req.body;
+    let query = `SELECT m.nombre, z.nombre as zona
+    FROM orden_trabajo ot INNER JOIN cotizacion c
+    on ot.id_orden = c.clave_orden INNER JOIN cotizacion_material cm
+    on c.id_cotizacion = cm.clave_cotizacion INNER JOIN material m
+    on cm.clave_material = m.codigo_dis INNER JOIN instalacion i
+		on i.clave_cotizacion = c.id_cotizacion INNER JOIN inmueble_zona iz
+		on iz.clave_instalacion = i.id_instalacion INNER JOIN zona z
+		on z.id_zona = iz.clave_zona
+    WHERE ot.clave_solicitud = '${solicitud}'`;
+    console.log(query)
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
 router.post('/pendientes/agregar/usuarios', async (req, res) => {
   try {
     let { solicitud,
