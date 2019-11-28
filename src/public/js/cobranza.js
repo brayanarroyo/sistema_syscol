@@ -1,4 +1,5 @@
 var clave_inmueble = ""
+var monitoreo = 0;
 $(document).ready(function(){
 
 	function filas_tabla_cobranza(clave_inm,calle,numero_exterior,colonia) {
@@ -60,6 +61,19 @@ $(document).ready(function(){
 		return result.error
 	}
 
+	//Métodos para el llenado de las tablas
+	function filas_tabla_solicitud_mantenimiento() {
+		return `<tr>
+			<td>Número de cliente</td>
+			<td>${clave_inmueble}</td>
+		</tr>`
+	}
+		
+	async function mostrar_solicitud() {
+		let tbody = $('#tbody_solicitud_mantenimiento') 
+		$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
+	}
+
 	llenar_tabla_cobranza('/cobranza/inmuebles')
 
 	//Mostrar únicamente la primera sección de la navegación de pestañas
@@ -96,15 +110,13 @@ $(document).ready(function(){
 			case "close_aceptar_registro":
 				$('#confirmar_mantenimiento_cobranza').modal('hide');
 				$('#mostrar_pagos').hide();
+				mostrar_solicitud();
 				$('#atender_mante').show();
 			break;
 			case "Btn_aceptarMante":
-				agregar('/cobranza/mantenimiento',{
-					nombre:$('#cobranza_nombre').val(),
-				monto:$('#cobranza_monto').val(),
-				firma_elecronica:$('#cobranza_firma').val(),
-				observaciones_mantenimiento:$('#observaciones_mantenimiento').val()}			
-				);
+				monitoreo = 1;
+				$('#atender_mante').hide();
+				$('#form_pagos').show();
 			break;
 			case "detalle_cobranza":
 				$('#mostrar_pagos_clientes').hide();
@@ -112,11 +124,33 @@ $(document).ready(function(){
 				sigueinte = "#mostrar_pagos_clientes"
 			break;
 			case "btn_confirmar_pago":
+				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_firma').val() != ''){
 					agregar('/cobranza/pago',{
-					nombre:$('#cobranza_nombre').val(),
-					monto:$('#cobranza_monto').val(),
-					firma_elecronica:$('#cobranza_firma').val()}			
-					);
+						nombre:$('#cobranza_nombre').val(),
+						monto:$('#cobranza_monto').val(),
+						firma_elecronica:$('#cobranza_firma').val()}			
+						);
+						$('#confirmar').modal('show');
+				}
+				if (monitoreo == 1){
+					if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_firma').val() != ''){
+						agregar('/cobranza/mantenimiento',{
+							nombre:$('#cobranza_nombre').val(),
+						monto:$('#cobranza_monto').val(),
+						firma_elecronica:$('#cobranza_firma').val(),
+						observaciones_mantenimiento:$('#observaciones_mantenimiento').val()}			
+						);
+						$('#confirmar').modal('show');
+					}
+				}
+				monitoreo = 0;
+			break;
+			case "close_aceptar_pago":
+				$('#confirmar').modal('hide');
+				window.open(`/cobranza?permiso=${permiso}&valor=${valor}`, '_self'); 
+			break;
+			case "close_cancelar_pago":
+				$('#confirmar').modal('hide');
 			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {

@@ -142,10 +142,7 @@ function filas_tabla_solicitud_mantenimiento() {
 	
 async function mostrar_solicitud() {
 	let tbody = $('#tbody_solicitud_mantenimiento') 
-	$.each(result.data, (i,row) => {
-		$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
-	}) 
-	return result.error
+	$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
 }
 
 //Métodos para el llenado de las tablas
@@ -504,30 +501,38 @@ async function llenar_material_zona(route,body) {
 			break;
 			case "btn_finalizar_ciz":
 				$('#confirmar_registro').modal('show');
+				
 			break;
 			case "close_aceptar_registro":
 				$('#confirmar_registro').modal('hide');
+				agregar_ciz('/pendientes/monitoreo/modificar/solicitud',{
+					solicitud:seleccion}			
+					);
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_registrar_usuario":
-				agregar_ciz('/pendientes/agregar/usuarios',{
-					solicitud:seleccion,
-					no_usu:$('#no_usu').val(),
-					nom_usu:$('#nom_usu').val(),
-					apellido_p_usu:$('#apellido_p_usu').val(),
-					apellido_m_usu:$('#apellido_m_usu').val(),
-					relacion_usu:$('#relacion_usu').val(),
-					telefono_usu:$('#telefono_usu').val()
-				});
+				if ($('#no_usu').val() != '' && $('#nom_usu').val() != '' && $('#apellido_p_usu').val() != '' && $('#apellido_m_usu').val() != '' && $('#relacion_usu').val() != '' && $('#telefono_usu').val() != ''){
+					agregar_ciz('/pendientes/agregar/usuarios',{
+						solicitud:seleccion,
+						no_usu:$('#no_usu').val(),
+						nom_usu:$('#nom_usu').val(),
+						apellido_p_usu:$('#apellido_p_usu').val(),
+						apellido_m_usu:$('#apellido_m_usu').val(),
+						relacion_usu:$('#relacion_usu').val(),
+						telefono_usu:$('#telefono_usu').val()
+					});
+				}
 			break;
 			case "btn_registrar_contacto":
-				agregar_ciz('/pendientes/agregar/contactos',{
-					solicitud:seleccion,
-					num_cont:$('#num_cont').val(),
-					nom_contacto:$('#nom_contacto').val(),
-					ralacion_cont:$('#ralacion_cont').val(),
-					telefono_contacto:$('#telefono_contacto').val()
-				});
+				if ($('#num_cont').val() != '' && $('#nom_contacto').val() != '' && $('#ralacion_cont').val() != '' && $('#telefono_contacto').val() != '' ){
+					agregar_ciz('/pendientes/agregar/contactos',{
+						solicitud:seleccion,
+						num_cont:$('#num_cont').val(),
+						nom_contacto:$('#nom_contacto').val(),
+						ralacion_cont:$('#ralacion_cont').val(),
+						telefono_contacto:$('#telefono_contacto').val()
+					});
+				}
 			break;
 			case "btn_finalizar_monitoreo":
 				$('#confirmar_registro').modal('show');
@@ -535,7 +540,8 @@ async function llenar_material_zona(route,body) {
 			case "btn_detalles":
 				$('#modal_detalle').empty();
 				modal_detalle_pendientes('/pendientes/detalles/solicitudes',{
-					tipo_solicitud: $('#solicitud option:selected').text()
+					tipo_solicitud: $('#solicitud option:selected').text(),
+					solicitud:seleccion
 				});
 				$('#modal_mostrar_detalle_pendientes').modal('show');
 			break;
@@ -547,6 +553,7 @@ async function llenar_material_zona(route,body) {
 					solicitud:seleccion,
 					observaciones_mantenimiento:$('#observaciones_mantenimiento').val()
 				});
+				$('#confirmar_registro').modal('show');
 			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {

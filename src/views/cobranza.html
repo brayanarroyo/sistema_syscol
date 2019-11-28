@@ -47,40 +47,39 @@
                             </div>
                         </div>   
                     </article>
-                    <article id="form_pagos" name="form_pagos">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Cobranza</h4>  
-                            <h4>Cliente</h4> 
-                            <div class="six wide field">
-                                <div class="ui fluid search selection dropdown" id="dropdown_cobranza_nombre_select" name="dropdown_cobranza_nombre_select">
-                                    <input type="hidden" id="cobranza_nombre" name="cobranza_nombre" autocomplete="off">
-                                    <i class="dropdown icon"></i>
-                                    <div class="default text">Nombre</div>
-                                    <div class="menu" id="dropdown_cobranza_nombre" name="dropdown_cobranza_nombre">
-                                        
+                    <form action="javascript:void(0);">
+                        <article id="form_pagos" name="form_pagos">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Cobranza</h4>  
+                                <h4>Cliente</h4> 
+                                <div class="six wide field">
+                                    <div class="ui fluid search selection dropdown" id="dropdown_cobranza_nombre_select" name="dropdown_cobranza_nombre_select">
+                                        <input type="hidden" id="cobranza_nombre" name="cobranza_nombre" autocomplete="off" required>
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Nombre</div>
+                                        <div class="menu" id="dropdown_cobranza_nombre" name="dropdown_cobranza_nombre">
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
-                            <div class="two wide field">
-                                <h4>Monto</h4> 
-                                <input id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad" autocomplete="off">
-                            </div>    
-                            <div class="four wide field">
-                                <h4>Firma electrónica</h4> 
-                                <input id="cobranza_firma" name="cobranza_firma" placeholder="firma" autocomplete="off">
-                            </div>                                                
-                            <br>
-                            <button id="btn_cancelar_pago" class="ui red button ">Cancelar</button> 
-                            <button id="btn_confirmar_pago" class="ui blue submit button ">Aceptar</button> 
-                        </div>
-                    </article>
+                                </div> 
+                                <div class="two wide field">
+                                    <h4>Monto</h4> 
+                                    <input type="number" id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad" autocomplete="off" required>
+                                </div>    
+                                <div class="four wide field">
+                                    <h4>Firma electrónica</h4> 
+                                    <input type="number" id="cobranza_firma" name="cobranza_firma" placeholder="firma" autocomplete="off" required>
+                                </div>                                                
+                                <br>
+                                <button id="btn_cancelar_pago" class="ui red button ">Cancelar</button> 
+                                <button id="btn_confirmar_pago" class="ui blue submit button ">Aceptar</button> 
+                            </div>
+                        </article>
+                    </form>
                     <article name="atender_mante" id="atender_mante">
                         <table name="tbl_atender_orden" class="ui definition table">
                             <tbody id="tbody_solicitud_mantenimiento">
-                                <tr>
-                                <td>Clave de solicitud</td>
-                                <td>Lorem ipsum dolor sit amet</td>
-                                </tr>
+
                             </tbody>
                         </table>
                         <div class="ui form">
@@ -105,6 +104,22 @@
                                 <div class="actions"> 
                                     <button id="close_cancelar_registro" class="ui red button">No</button>
                                     <button id="close_aceptar_registro" class="ui blue submit button">Sí</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>¿Confirmar pago?</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_cancelar_pago" class="ui red button">No</button>
+                                    <button id="close_aceptar_pago" class="ui blue submit button">Sí</button> 
                                 </div>
                             </div>
                         </div>

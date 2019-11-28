@@ -181,9 +181,14 @@ router.get('/solicitudes/nombre_clientes', (req, res) => {
   }
 });
 
-router.get('/solicitudes/domicilio_clientes', (req, res) => {
+router.post('/solicitudes/cliente_domicilio', (req, res) => {
   try {
-    let query = 'SELECT CONCAT(calle," ",numero_exterior," ",colonia)as domicilio FROM inmueble i';
+    let { cliente } = req.body;
+    let query = `SELECT CONCAT(calle," ",numero_exterior," ",colonia) as domicilio 
+    FROM inmueble i inner join cliente c 
+    on i.clave_cliente = c.id_cliente
+    where CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) = '${cliente}'`;
+    console.log(query)
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -203,7 +208,6 @@ router.get('/solicitudes/domicilio_clientes', (req, res) => {
     throw error;
   }
 });
-
 //*********************************************************************************************************************
 //***************************************************PENDIENTES********************************************************
 //*********************************************************************************************************************
@@ -316,13 +320,14 @@ router.post('/pendientes/elemento_seleccionado', async(req, res) => {
 router.post('/pendientes/detalles/solicitudes', async(req, res) => {
   try {
     let query = "";
-    let { tipo_solicitud } = req.body;
+    let { tipo_solicitud, solicitud } = req.body;
+    console.log(solicitud)
     if (tipo_solicitud.localeCompare("Nuevo cliente") == 0) {
-      query = `SELECT * FROM view_detalle_solicitud_cliente`;
+      query = `SELECT * FROM view_detalle_solicitud_cliente_nuevo WHERE id_solicitud = '${solicitud}'`;
     } else if (tipo_solicitud.localeCompare("Nuevo inmueble") == 0){
-      query = `SELECT * FROM view_detalle_solicitud_inmueble_nuevo`;
+      query = `SELECT * FROM view_detalle_solicitud_inmueble_nuevo WHERE id_solicitud = '${solicitud}'`;
     } else {
-      query = `SELECT * FROM view_detalle_solicitud_cliente_nuevo`;
+      query = `SELECT * FROM view_detalle_solicitud_cliente WHERE id_solicitud = '${solicitud}'`;
     }
     pool.query(query, function (err,rows) {
       if(err){
@@ -583,6 +588,22 @@ router.post('/pendientes/agregar/contactos', async (req, res) => {
     )`
     console.log(query);
     let resultado = await pool.query(query);
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+  
+});
+
+router.post('/pendientes/monitoreo/modificar/solicitud', async (req, res) => {
+  try {
+    let { solicitud } = req.body;
+    let query =`CALL sp_modificar_estado_solicitud(
+      '${solicitud}'
+    )`
+    console.log(query);
+    let resultado = await pool.query(query);
+    res.end()
     return resultado;
   } catch (error) {
     throw error;
@@ -1074,7 +1095,9 @@ router.post('/cobranza/cliente', (req, res) => {
   try {
     let { inmueble} = req.body;
     console.log(inmueble)
-    let query = `SELECT CONCAT(u.nombre," ",u.apellido_p," ",u.apellido_m) as nombre FROM usuario u WHERE u.id_mueble = '${inmueble}'`;
+    let query = `(SELECT CONCAT(u.nombre," ",u.apellido_p," ",u.apellido_m) as nombre FROM usuario u WHERE u.id_mueble = '${inmueble}')
+    UNION
+    (SELECT CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre FROM cliente c INNER JOIN inmueble i WHERE i.clave_inm = '${inmueble}')`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1118,7 +1141,7 @@ router.post('/cobranza/mantenimiento', async (req, res) => {
   try {
     let { nombre, monto, firma_elecronica, observaciones_mantenimiento } = req.body;
 
-    let query =`sp_agregar_cobranza_mantenimiento(
+    let query =`CALL sp_agregar_cobranza_mantenimiento(
       '${nombre}',
       '${monto}',
       '${firma_elecronica}',

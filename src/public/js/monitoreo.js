@@ -272,6 +272,7 @@ $(document).ready(function(){
 			break;
 			case "aceptar_señal":
 				$('#confirmar_señal').modal('hide');
+				window.open(`/monitoreo?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_buscar_senal":
 				$('#tbody_monitoreo').empty();

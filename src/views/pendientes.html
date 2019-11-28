@@ -372,78 +372,82 @@
                 </ul>
                 <!--Secciones que se van a desplegar-->
                 <div class="secciones">
-                    <article name="form_Usuarios" name="form_Usuarios" id="form_Usuarios">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Agregar un nuevo usuario</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="three column row">
-                                    <div class="column">   
-                                        <label>No. de usuario</label>
-                                        <input name="no_usu" id="no_usu" type="text" placeholder="Nombre" autocomplete="off">   
+                    <form action="javascript:void(0);">
+                        <article name="form_Usuarios" name="form_Usuarios" id="form_Usuarios">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Agregar un nuevo usuario</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="three column row">
+                                        <div class="column">   
+                                            <label>No. de usuario</label>
+                                            <input name="no_usu" id="no_usu" type="number" placeholder="Nombre" autocomplete="off" required>   
+                                        </div>
+                                        <div class="column">   
+                                            <label>Nombre</label>
+                                            <input name="nom_usu" id="nom_usu" type="text" placeholder="Nombre" autocomplete="off" required>   
+                                        </div>
+                                        <div class="column">
+                                            <label>Apellido paterno</label>
+                                            <input name="apellido_p_usu" id="apellido_p_usu" type="text" placeholder="Apellido" autocomplete="off" required>
+                                        </div>
+                                        <div class="column">
+                                            <label>Apellido materno</label>
+                                            <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido" autocomplete="off" required>
+                                        </div>
                                     </div>
-                                    <div class="column">   
-                                        <label>Nombre</label>
-                                        <input name="nom_usu" id="nom_usu" type="text" placeholder="Nombre" autocomplete="off">   
+                                </div> 
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
+                                        <div class="four wide column">   
+                                            <label>Relación</label>
+                                            <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">
+                                            <label>Teléfono</label>
+                                            <input name="telefono_usu" id="telefono_usu" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
                                     </div>
-                                    <div class="column">
-                                        <label>Apellido paterno</label>
-                                        <input name="apellido_p_usu" id="apellido_p_usu" type="text" placeholder="Apellido" autocomplete="off">
-                                    </div>
-                                    <div class="column">
-                                        <label>Apellido materno</label>
-                                        <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="ui vertically divided grid">
-                                <div class="two column row">
-                                    <div class="four wide column">   
-                                        <label>Relación</label>
-                                        <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza" autocomplete="off">   
-                                    </div>
-                                    <div class="four wide column">
-                                        <label>Teléfono</label>
-                                        <input name="telefono_usu" id="telefono_usu" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>      
-                            <br>
-                            <button class="ui red button ">Cancelar</button>
-                            <button name="btn_registrar_usuario" id="btn_registrar_usuario" class="ui blue submit button ">Registrar</button>   
-                    
-                        </div>
-                    </article>
-                    <article name="form_Contactos" id="form_Contactos">
-                        <div class="ui form"> 
-                            <h4 class="ui dividing header">Agregar un nuevo contacto</h4>      
-                            <div class="ui vertically divided grid">
-                                <div class="two column row">
-                                    <div class="four wide column">
-                                        <label>Número de contacto</label>
-                                        <input name="num_cont" id="num_cont" type="text" placeholder="Número" autocomplete="off">
-                                    </div>
-                                    <div class="ten wide column">
-                                        <label>Nombre completo</label>
-                                        <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="two column row">
-                                    <div class="four wide column">
-                                        <label>Relación</label>
-                                        <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off">
-                                    </div>
-                                    <div class="ten wide column">
-                                        <label>Teléfono</label>
-                                        <input name="telefono_contacto" id="telefono_contacto" type="text" placeholder="Teléfono" autocomplete="off">
-                                    </div>
-                                </div>
+                                </div>      
+                                <br>
+                                <button class="ui red button ">Cancelar</button>
+                                <button name="btn_registrar_usuario" id="btn_registrar_usuario" class="ui blue submit button ">Registrar</button>   
+                        
                             </div>
-                            <br>
-                            <button class="ui red button ">Cancelar</button>
-                            <button name="btn_registrar_contacto" id="btn_registrar_contacto" class="ui blue submit button ">Registrar</button> 
-                            <button name="btn_finalizar_monitoreo" id="btn_finalizar_monitoreo" class="ui right floated blue button">Finalizar</button>
-                        </div> 
-                    </article>
+                        </article>
+                    </form>
+                    <form action="javascript:void(0);">
+                        <article name="form_Contactos" id="form_Contactos">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Agregar un nuevo contacto</h4>      
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
+                                        <div class="four wide column">
+                                            <label>Número de contacto</label>
+                                            <input name="num_cont" id="num_cont" type="number" placeholder="Número" autocomplete="off" required>
+                                        </div>
+                                        <div class="ten wide column">
+                                            <label>Nombre completo</label>
+                                            <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="two column row">
+                                        <div class="four wide column">
+                                            <label>Relación</label>
+                                            <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off" required>
+                                        </div>
+                                        <div class="ten wide column">
+                                            <label>Teléfono</label>
+                                            <input name="telefono_contacto" id="telefono_contacto" type="number" placeholder="Teléfono" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="ui red button ">Cancelar</button>
+                                <button name="btn_registrar_contacto" id="btn_registrar_contacto" class="ui blue submit button ">Registrar</button> 
+                                <button name="btn_finalizar_monitoreo" id="btn_finalizar_monitoreo" class="ui right floated blue button">Finalizar</button>
+                            </div> 
+                        </article>
+                    </form>
                 </div>
             </div>
         </div>             

@@ -23,9 +23,16 @@ $(document).ready(function(){
 		function elementos_domicilio_cliente(domicilio) {
 			return `<div class="item" data-value="${domicilio}">${domicilio}</div>`
 		}
-			
-		async function llenar_domicilio_cliente(route) {
-			const response = await fetch(route)
+
+		async function llenar_domicilio_cliente(route,body) {
+			const response = await fetch(route, {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(body)
+			})
 			console.log(response);
 			const result = await response.json()
 			console.log(result);
@@ -35,7 +42,7 @@ $(document).ready(function(){
 			}) 
 			return result.error
 		}
-
+		
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
 	$('.secciones article').hide();
@@ -154,10 +161,16 @@ $(document).ready(function(){
                 $('#Form_inmueble').hide();
 				$('#Form_servicio').show();
 				llenar_nombre_cliente('/solicitudes/nombre_clientes');
-				llenar_domicilio_cliente('/solicitudes/domicilio_clientes');
             break;
 		  }
 		return false;
+	});
+
+	$('#dropdown_nombre_fs_select').change(function(){
+		$('#dropdown_domicilio').empty();
+		llenar_domicilio_cliente('/solicitudes/cliente_domicilio',{
+			cliente:$('#nombre_fs').val()}			
+			);
 	});
 
 	//Funcionalidad de los campos de fecha
