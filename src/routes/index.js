@@ -442,6 +442,33 @@ router.post('/pendientes/cobranza_material/llenar/total', async(req, res) => {
   }
 });
 
+router.post('/pendientes/cobranza/cliente/autocomplentar', async(req, res) => {
+  try {
+    let { id_elemento } = req.body;
+    query = `SELECT nombre_completo,apellido_p,apellido_m,telefono,calle,numero,colonia
+    FROM solicitud s INNER JOIN solicitud_pendiente sp
+    on s.id_solicitud = sp.id_solicitud_pendiente
+    WHERE s.id_solicitud ='${id_elemento}'`;
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
 router.post('/pendientes/cobranza_material/detalle', async (req, res) => {
   try {
     let { solicitud, nombre, cantidad } = req.body;

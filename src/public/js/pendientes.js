@@ -86,6 +86,9 @@ async function proceder_elemento_seleccionado(route, body) {
 					$('.secciones article').hide();
 					$('#ciz').show();
 					$('#form_cliente').show();
+					autocompletar_cliente('/pendientes/cobranza/cliente/autocomplentar',{
+						id_elemento: seleccion
+					})
 				break;
 				} 
 			break;
@@ -101,6 +104,9 @@ async function proceder_elemento_seleccionado(route, body) {
 				case "cotizado":
 					$('.secciones article').hide();
 					$('#ciz').show();
+					autocompletar_cliente('/pendientes/cobranza/cliente/autocomplentar',{
+						id_elemento: seleccion
+					})
 				break;
 				} 
 			break;
@@ -115,7 +121,10 @@ async function proceder_elemento_seleccionado(route, body) {
 				break;
 				case "cotizado":
 					$('.secciones article').hide();
-					$('#ciz').show(); 
+					$('#ciz').show();
+					autocompletar_cliente('/pendientes/cobranza/cliente/autocomplentar',{
+						id_elemento: seleccion
+					})
 				break;
 				case "pendiente de mantenimiento":
 					$('.secciones article').hide();
@@ -134,6 +143,30 @@ async function proceder_elemento_seleccionado(route, body) {
 }
 
 //Métodos para el llenado de las tablas
+async function autocompletar_cliente(route,body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	console.log(response);
+	const result = await response.json()
+	console.log(result);
+	$.each(result.data, (i,row) => {
+		$('#nombre_fc_ciz').val(row.nombre_completo),
+		$('#apellido_p_fc_ciz').val(row.apellido_p),
+		$('#apellido_m_fc_ciz').val(row.apellido_m),
+		$('#telefono_fc_ciz').val(row.telefono),
+		$('#calle_fi_ciz').val(row.calle),
+		$('#num_ext_fi_ciz').val(row.numero),
+		$('#colonia_fi_ciz').val(row.colonia)
+	}) 
+	return result.error
+}
+
 function filas_tabla_solicitud_mantenimiento() {
 	return `<tr>
 		<td>Clave de solicitud</td>
@@ -504,14 +537,12 @@ async function llenar_material_zona(route,body) {
 					);
 			break;
 			case "confirmar":
-				if ($('#mano_obra_fc').val() != ''){
-					$('#confirmar_cotizacion').modal('show');
-					generar_cotizacion('/pendientes/cobranza_material/confirmar',{
-						costo:costo_material,
-						mano_obra:$('#mano_obra_fc').val(),
-						solicitud:seleccion}			
-						);
-				}
+				$('#confirmar_cotizacion').modal('show');
+				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
+					costo:costo_material,
+					mano_obra:$('#mano_obra_fc').val(),
+					solicitud:seleccion}			
+					);
 			break;
 			case "close_cancelar_cotizacion":
 				$('#confirmar_cotizacion').modal('hide');
