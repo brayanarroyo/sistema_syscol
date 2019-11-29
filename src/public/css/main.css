@@ -6,6 +6,20 @@
 	box-sizing: border-box;
 }
 
+#tabla_monitoreo {
+	height: 200px;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+	overflow-y: scroll;
+}
+
+#tablas {
+	height: 400px;
+	border: 1px solid #ddd;
+	background: #f1f1f1;
+	overflow-y: scroll;
+}
+
 .item{
     font-size: 24px;
 }

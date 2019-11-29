@@ -35,30 +35,50 @@
                             <div class="ui form"> 
                                 <h4 class="ui dividing header">Solicitud para nuevo cliente</h4>      
                                 <div class="ui vertically divided grid">
-                                    <div class="two column row">
+                                    <div class="four column row">
                                         <div class="column">   
-                                            <label>Nombre completo</label>
+                                            <label>Nombre</label>
                                             <input id="nombre_fc" type="text" placeholder="Nombre completo" autocomplete="off" required>   
                                         </div>
-                                        <div class="column">
-                                            <label>Domicilio</label>
-                                            <input id="domicilio_fc" type="text" placeholder="Domicilio" autocomplete="off" required>
+                                        <div class="column">   
+                                            <label>Apellido paterno</label>
+                                            <input id="ape_p_fc" type="text" placeholder="Nombre completo" autocomplete="off" required>   
+                                        </div>
+                                        <div class="column">   
+                                            <label>Apellido materno</label>
+                                            <input id="ape_m_fc" type="text" placeholder="Nombre completo" autocomplete="off" required>   
+                                        </div>
+                                        <div class="four wide column">   
+                                            <label>Teléfono</label>
+                                            <input id="telefono_fc" type="number" placeholder="Teléfono" autocomplete="off" required>   
                                         </div>
                                     </div>
                                 </div> 
                                 <div class="ui vertically divided grid">
                                     <div class="four column row">
-                                        <div class="four wide column">   
-                                            <label>Teléfono</label>
-                                            <input id="telefono_fc" type="number" placeholder="Teléfono" autocomplete="off" required>   
+                                        <div class="four wide column">
+                                            <label>Calle</label>
+                                            <input id="calle_fc" type="text" placeholder="Calle" autocomplete="off" required>
+                                        </div>
+                                        <div class="two wide column">
+                                            <label>Número</label>
+                                            <input id="num_fc" type="number" placeholder="Número" autocomplete="off" required>
                                         </div>
                                         <div class="four wide column">
-                                                <label>Servicio</label>
-                                                <select type="text" class="ui fluid compact selection cliente dropdown" id="servicio_fc" required>
-                                                        <option value="">Servicio</option>
-                                                        <option value="Instalacion">Instalacion</option>
-                                                </select>
+                                            <label>Colinia</label>
+                                            <input id="colonia_fc" type="text" placeholder="Colonia" autocomplete="off" required>
                                         </div>
+                                        <div class="four wide column">
+                                            <label>Servicio</label>
+                                            <select type="text" class="ui fluid compact selection cliente dropdown" id="servicio_fc" required>
+                                                    <option value="">Servicio</option>
+                                                    <option value="Instalacion">Instalacion</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui vertically divided grid">
+                                    <div class="two column row">
                                         <div class="four wide column">
                                             <label>Fecha de visita</label>
                                             <div class="ui calendar" id="standard_calendar">
@@ -80,7 +100,7 @@
                                             <br/>
                                         </div> 
                                     </div>
-                                </div>      
+                                </div>     
                                 <br>
                                 <button class="ui red button ">Cancelar</button>
                                 <button id="registrar_nuevo" name="registrar_nuevo" class="ui blue submit button ">Registrar</button>    

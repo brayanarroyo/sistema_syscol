@@ -58,12 +58,19 @@ router.post('/login/validar', async (req, res) => {
           message: err.message
         })
       } else {
-        console.log(rows);
-        res.json({
-          error: false,
-          message: 'OK',
-          data: rows
-        })
+        if (Array.isArray(rows) && rows.length === 0){
+          res.json({
+            error: "vacio",
+            message: 'OK',
+            data: rows
+          })
+        }else{
+          res.json({
+            error: "novacio",
+            message: 'OK',
+            data: rows
+          })
+        } 
       }
     })
   } catch (error) {
@@ -78,7 +85,7 @@ router.post('/login/validar', async (req, res) => {
 //Rutas de los métodos de la base de datos
 router.post('/solicitudes/agregar_solicitud/nuevo_cliente', async (req, res) => {
   try {
-    let { nombre_fc, domicilio_fc, telefono_fc, servicio_fc, fecha_fc, hora_fc } = req.body;
+    let { nombre_fc, ape_p_fc, ape_m_fc, calle_fc, num_fc, colonia_fc, telefono_fc, servicio_fc, fecha_fc, hora_fc } = req.body;
     let tipo_solicitud = "Nuevo cliente";
     fecha_fc = fecha_fc.replace("/", "-");
     fecha_fc = fecha_fc.replace("/", "-");
@@ -91,7 +98,11 @@ router.post('/solicitudes/agregar_solicitud/nuevo_cliente', async (req, res) => 
       '${tipo_solicitud}',
       '${servicio_fc}',
       '${nombre_fc}',
-      '${domicilio_fc}',
+      '${ape_p_fc}',
+      '${ape_m_fc}',
+      '${calle_fc}',
+      '${num_fc}',
+      '${colonia_fc}',
       '${telefono_fc}'
     )`
 
@@ -374,8 +385,43 @@ router.get('/pendientes/cobranza_material', async(req, res) => {
 
 router.post('/pendientes/cobranza_material/seleccion', async(req, res) => {
   try {
-    let { nombre } = req.body;
-    query = `SELECT codigo_dis,nombre,precio_venta from material where nombre =  '${nombre}'`;
+    let { solicitud, nombre } = req.body;
+    query = `SELECT m.codigo_dis,m.nombre,COUNT(m.nombre) as cantidad,(COUNT(m.nombre) * precio_venta ) as total
+    from material m INNER JOIN cotizacion_material cm
+    on m.codigo_dis = cm.clave_material INNER JOIN cotizacion c
+    on c.id_cotizacion = cm.clave_cotizacion INNER JOIN orden_trabajo ot
+    on c.clave_orden = ot.id_orden
+    where ot.clave_solicitud = '${solicitud}'
+    GROUP BY m.nombre`;
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
+router.post('/pendientes/cobranza_material/llenar/total', async(req, res) => {
+  try {
+    let { solicitud, nombre } = req.body;
+    query = `SELECT SUM(precio_venta) as total
+    from material m INNER JOIN cotizacion_material cm
+    on m.codigo_dis = cm.clave_material INNER JOIN cotizacion c
+    on c.id_cotizacion = cm.clave_cotizacion INNER JOIN orden_trabajo ot
+    on c.clave_orden = ot.id_orden
+    where ot.clave_solicitud ='${solicitud}'`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -398,20 +444,37 @@ router.post('/pendientes/cobranza_material/seleccion', async(req, res) => {
 
 router.post('/pendientes/cobranza_material/detalle', async (req, res) => {
   try {
-    let { solicitud, nombre } = req.body;
+    let { solicitud, nombre, cantidad } = req.body;
     let query =`CALL sp_agregar_cotizacion_material(
       '${nombre}',
-      '${solicitud}'
+      '${solicitud}',
+      '${cantidad}'
     )`
     console.log(query);
     let resultado = await pool.query(query);
-    res.end()
     return resultado;
   } catch (error) {
     throw error;
   }
-  
+
 });
+
+router.post('/pendientes/cobranza_material/borrar', async (req, res) => {
+  try {
+    let { solicitud, material } = req.body;
+    let query =`CALL sp_borrar_cotizacion_material(
+      '${solicitud}',
+      '${material}'
+    )`
+    console.log(query);
+    let resultado = await pool.query(query);
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+
+});
+
 
 router.post('/pendientes/cobranza/generar', async (req, res) => {
   try {

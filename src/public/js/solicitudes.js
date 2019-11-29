@@ -79,11 +79,15 @@ $(document).ready(function(){
 	$('button').click(function(){
 		switch($(this).attr('id')){
 			case "registrar_nuevo":
-				if ($('#solicitud option:selected').text() != '' && $('#nombre_fc').val() != '' && $('#domicilio_fc').val() != '' && $('#telefono_fc').val() !='' && $('#servicio_fc option:selected').text() != '' && $('#fecha_fc').val() != '' && $('#hora_fc').val() != ''){
+				if ($('#solicitud option:selected').text() != '' && $('#nombre_fc').val() != ''  && $('#ape_p_fc').val() != ''  && $('#ape_m_fc').val() != '' && $('#calle_fc').val() != '' && $('#num_fc').val() != '' && $('#colonia_fc').val() != '' && $('#telefono_fc').val() !='' && $('#servicio_fc option:selected').text() != '' && $('#fecha_fc').val() != '' && $('#hora_fc').val() != ''){
 					solicitudes('/solicitudes/agregar_solicitud/nuevo_cliente',{
 						solicitud:  $('#solicitud option:selected').text(),
 						nombre_fc: $('#nombre_fc').val(),
-						domicilio_fc: $('#domicilio_fc').val(),
+						ape_p_fc: $('#ape_p_fc').val(),
+						ape_m_fc: $('#ape_m_fc').val(),
+						calle_fc: $('#calle_fc').val(),
+						num_fc: $('#num_fc').val(),
+						colonia_fc: $('#colonia_fc').val(),
 						telefono_fc: $('#telefono_fc').val(),
 						servicio_fc: $('#servicio_fc option:selected').text(),
 						fecha_fc: $('#fecha_fc').val(),

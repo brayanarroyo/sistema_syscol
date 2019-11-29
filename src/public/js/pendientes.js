@@ -1,5 +1,6 @@
 var seleccion = "";
 var costo_material = 0.0;
+var material = "";
 $(document).ready(function(){
 
 	function filas_detalle_pendientes(id_cliente,nombre,domicilio,telefono,fecha,hora_visita,estatus,tipo_servicio) {
@@ -248,10 +249,11 @@ async function llenar_material(route) {
 	return result.error
 }
 
-function filas_tabla_material_seleccionados(id_material,nombre, precio) {
+function filas_tabla_material_seleccionados(id_material,nombre, cantidad, precio) {
 	costo_material = parseFloat(costo_material + precio);
 	return `<tr id="${id_material}">
 			<td>${nombre}</td>
+			<td>${cantidad}</td>
 			<td>${precio}</td>
 	</tr>`
 }
@@ -270,7 +272,33 @@ async function llenar_tabla_material_seleccionados(route,body) {
 	console.log(result);
 	let tbody = $('#tbody_material') 
 	$.each(result.data, (i,row) => {
-		$(filas_tabla_material_seleccionados(row.codigo_dis,row.nombre,row.precio_venta)).appendTo(tbody)
+		$(filas_tabla_material_seleccionados(row.codigo_dis,row.nombre,row.cantidad,row.total)).appendTo(tbody)
+	}) 
+	return result.error
+}
+
+function filas_tabla_total_cotizacion(total) {
+	return `<tr>
+	<td>Total</td>
+	<td>${total}</td>
+	</tr>`
+}
+
+async function llenar_total_cotización(route,body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	console.log(response);
+	const result = await response.json()
+	console.log(result);
+	let tbody = $('#tbody_material_total') 
+	$.each(result.data, (i,row) => {
+		$(filas_tabla_total_cotizacion(row.total)).appendTo(tbody)
 	}) 
 	return result.error
 }
@@ -453,12 +481,26 @@ async function llenar_material_zona(route,body) {
 				llenar_tipo_inmueble('/pendientes/tipo_inmueble');
 			break;
 			case "btn_añadir_material":
-					llenar_tabla_material_seleccionados('/pendientes/cobranza_material/seleccion',{
-					nombre:$('#material').val()}			
-					);
+				if ($('#cantidad').val() != ''){
 					cotizacion_material('/pendientes/cobranza_material/detalle',{
+						solicitud:seleccion,
+						nombre:$('#material').val(),
+						cantidad:$('#cantidad').val()}			
+						);
+					$('#tbody_material') .empty(); 
+					llenar_tabla_material_seleccionados('/pendientes/cobranza_material/seleccion',{
+						solicitud:seleccion}			
+						);
+					$('#tbody_material_total') .empty(); 
+					llenar_total_cotización('/pendientes/cobranza_material/llenar/total',{
+						solicitud:seleccion}			
+						);
+				}
+			break;
+			case "btn_eliminar_material":
+					finalizar_ciz('/pendientes/cobranza_material/borrar',{
 					solicitud:seleccion,
-					nombre:$('#material').val()}			
+					material:material}			
 					);
 			break;
 			case "confirmar":
@@ -642,6 +684,18 @@ async function llenar_material_zona(route,body) {
 		$('tr.active').removeClass('active');
 		$(this).addClass('active');
 		seleccion = $(this).attr('id');
+		console.log(seleccion);
+		//
+		// var tableData = $(this).children("td").map(function() {
+		// 	return tableData;
+		// }).get();
+	});
+
+	$('#tbl_cotizar_instalacion tbody').on('click', 'tr', function() {
+		//get row contents into an array
+		$('tr.active').removeClass('active');
+		$(this).addClass('active');
+		material = $(this).attr('id');
 		console.log(seleccion);
 		//
 		// var tableData = $(this).children("td").map(function() {

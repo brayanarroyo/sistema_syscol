@@ -32,7 +32,7 @@
                         </div>  
                         <div class="ui celled grid">  
                             <div class="row">
-                                <div class="twelve wide column">                          
+                                <div id="tablas"class="twelve wide column">                          
                                     <table id="tabla_pendientes" name="tbl_tipo_solicitud" class="ui selectable celled table">
                                         <thead>
                                             <tr>
@@ -92,7 +92,7 @@
                                         <div class="twelve wide column">
                                             <div class="ui vertically divided grid">
                                                 <div class="two column row">
-                                                    <div class="six wide column">
+                                                    <div class="seven wide column">
                                                         <label>Material</label>
                                                         <div class="ui fluid search selection dropdown" id="dropdown_material_select" name="dropdown_material_select">  
                                                             <input type="hidden" id="material" name="material" autocomplete="off">
@@ -104,8 +104,8 @@
                                                         </div>
                                                     </div> 
                                                     <div class="four wide column">
-                                                        <label>Mano de obra</label>
-                                                        <input name="mano_obra_fc" id="mano_obra_fc" type="text" placeholder="$0.0" autocomplete="off" required>
+                                                        <label>Cantidad</label>
+                                                        <input name="cantidad" id="cantidad" type="number" placeholder="0" autocomplete="off" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,20 +116,34 @@
                                                     <i class="large angle double right icon"></i>
                                                     Añadir
                                                 </button>
+                                                <button name="btn_eliminar_material" id="btn_eliminar_material" class="ui button">
+                                                    <i class="large trash icon"></i>
+                                                    Eliminar
+                                                </button>
                                             </div>
                                         </div>       
                                     </div>
                                 </div>   
-                                <div class="ui celled grid">
+                                <div id="tabla_monitoreo" class="ui celled grid">
                                     <div class="column">
-                                        <table name="tbl_cotizar_instalacion" class="ui celled table">
+                                        <table id="tbl_cotizar_instalacion" name="tbl_cotizar_instalacion" class="ui selectable celled table">
                                             <thead>
                                                 <tr>
                                                     <th>Material</th>
+                                                    <th>Cantidad</th>
                                                     <th>Costo</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody_material">
+
+                                            </tbody>
+                                        </table>
+                                    </div>       
+                                </div> 
+                                <div class="ui celled grid">
+                                    <div class="four wide column">
+                                        <table id="tbl_total" name="tbl_total" class="ui celled table">
+                                            <tbody id="tbody_material_total">
 
                                             </tbody>
                                         </table>
@@ -142,22 +156,26 @@
                         </article>
                     </form>
                     <!--Modal paara mostrar detalles de una orden de trabajo-->
-                    <article>
-                        <div class="formulario">
-                            <div class="ui mini modal" id="confirmar_cotizacion">
-                                <div class="header">
-                                    Detalles de la orden de trabajo
-                                </div>
-                                <div class="content">
-                                    <h4>¿Aceptar cotización?</h4>
-                                </div>
-                                <div class="actions">
-                                    <button id="close_cancelar_cotizacion" class="ui red button">Cancelar</button> 
-                                    <button id="close_aceptar_cotizacion" class="ui blue button">Aceptar</button> 
+                    <form action="javascript:void(0);">
+                        <article>
+                            <div class="formulario">
+                                <div class="ui mini modal" id="confirmar_cotizacion">
+                                    <div class="header">
+                                        Confirmación de cotización
+                                    </div>
+                                    <div class="content">
+                                        <label>Cantidad</label>
+                                        <input name="mano_obra_fc" id="mano_obra_fc" type="number" placeholder="$0.0" autocomplete="off" required>
+                                        <h4>¿Aceptar cotización?</h4>
+                                    </div>
+                                    <div class="actions">
+                                        <button id="close_cancelar_cotizacion" class="ui red button">Cancelar</button> 
+                                        <button id="close_aceptar_cotizacion" class="ui blue button">Aceptar</button> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
+                    </form>
 <!----------------------------------------------------------Mantenimiento------------------------------------------------------------->
                     <!--Sección para atender una orden de mantenimiento-->
                     <article name="atender_mante" id="atender_mante">
@@ -324,7 +342,7 @@
                                     </div>
                                 </div> 
                                 <div class="ui celled grid">
-                                    <div class="column">
+                                    <div id="tablas" class="column">
                                         <table name="tbl_cotizar_instalacion" class="ui celled table">
                                             <thead>
                                                 <tr>
