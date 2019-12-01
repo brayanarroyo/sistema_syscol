@@ -1282,4 +1282,50 @@ router.post('/cobranza/mantenimiento', async (req, res) => {
   }
   
 });
+//**********************************************************************************************************************
+//***************************************************Materiales***************************************************
+//**********************************************************************************************************************
+
+router.post('/materiales/registrar', async (req, res) => {
+  try {
+    let { nombre, precio_c, precio_v } = req.body;
+
+    let query =`CALL sp_agregar_material(
+      '${nombre}',
+      '${precio_c}',
+      '${precio_v}'
+    )`
+
+    console.log(query);
+    let resultado = await pool.query(query);
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+  
+});
+
+router.get('/materiales/mostrar', (req, res) => {
+  try {
+    let query = 'SELECT * FROM view_materiales';
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
 module.exports = router;

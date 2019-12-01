@@ -1,47 +1,24 @@
 $(document).ready(function(){
 
-	//Elementos de los dropdown
-	function elementos_nombre_cliente(nombre_cliente) {
-		return `<div class="item" data-value="${nombre_cliente}">${nombre_cliente}</div>`
+	function filas_tabla_cobranza(clave_material,nombre,precio_c,precio_v) {
+		return `<tr id="${clave_material}">
+				<td>${nombre}</td>
+				<td>${precio_c}</td>
+				<td>${precio_v}</td>
+		</tr>`
 	}
 		
-	async function llenar_nombre_cliente(route) {
+	async function llenar_tabla_material(route) {
 		const response = await fetch(route)
 		console.log(response);
 		const result = await response.json()
 		console.log(result);
-		let dropdown1 = $('#dropdown_inmueble')
-		let dropdown2 = $('#dropdown_servicio')
+		let tbody = $('#tbody_costo_material') 
 		$.each(result.data, (i,row) => {
-			$(elementos_nombre_cliente(row.nombre)).appendTo(dropdown1)
-			$(elementos_nombre_cliente(row.nombre)).appendTo(dropdown2)
+			$(filas_tabla_cobranza(row.codigo_dis,row.nombre,row.precio_compra,row.precio_venta)).appendTo(tbody)
 		}) 
 		return result.error
 	}
-
-		//Elementos de los dropdown
-		function elementos_domicilio_cliente(domicilio) {
-			return `<div class="item" data-value="${domicilio}">${domicilio}</div>`
-		}
-
-		async function llenar_domicilio_cliente(route,body) {
-			const response = await fetch(route, {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(body)
-			})
-			console.log(response);
-			const result = await response.json()
-			console.log(result);
-			let dropdown = $('#dropdown_domicilio')
-			$.each(result.data, (i,row) => {
-				$(elementos_domicilio_cliente(row.domicilio)).appendTo(dropdown)
-			}) 
-			return result.error
-		}
 		
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
@@ -60,7 +37,7 @@ $(document).ready(function(){
 		
 	});
 
-	async function solicitudes(route,body) {
+	async function registro(route,body) {
 		const response = await fetch(route, {
 			method: 'POST',
 			headers: {
@@ -83,8 +60,8 @@ $(document).ready(function(){
                 $('#form_materiales').show();
             break;
             case "btn_confirmar":
-                if ($('#nom_m').text() != '' && $('#pcm').text() != '' && $('#pvm').text() != ''){
-                    $('#confirmar_,material').modal('show');
+                if ($('#nom_m').val() != '' && $('#pcm').val() != '' && $('#pvm').val() != ''){
+                    $('#confirmar_material').modal('show');
                 }
             break;
             case "close_aceptar_registro":
@@ -93,7 +70,7 @@ $(document).ready(function(){
                     precio_c: $('#pcm').val(),
                     precio_v: $('#pvm').val()
                 });
-                $('#confirmar_,material').modal('hide');
+                $('#confirmar_material').modal('hide');
                 $('.secciones article').hide();
                 $('.secciones article:first').show();
             break;
@@ -115,13 +92,8 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#dropdown_nombre_fs_select').change(function(){
-		$('#dropdown_domicilio').empty();
-		llenar_domicilio_cliente('/solicitudes/cliente_domicilio',{
-			cliente:$('#nombre_fs').val()}			
-			);
-	});
-
+    llenar_tabla_material('/materiales/mostrar');
+    
 	//Funcionalidad de los campos de fecha
 	$('.ui.calendar').calendar({
 		type: 'date',
