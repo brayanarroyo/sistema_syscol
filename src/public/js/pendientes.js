@@ -554,17 +554,17 @@ async function llenar_material_zona(route,body) {
 			break
 			case "confirmar":
 				$('#confirmar_cotizacion').modal('show');
-				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
-					costo:costo_material,
-					mano_obra:$('#mano_obra_fc').val(),
-					solicitud:seleccion}			
-					);
 			break;
 			case "close_cancelar_cotizacion":
 				$('#confirmar_cotizacion').modal('hide');
 			break;
 			case "close_aceptar_cotizacion":
 				$('#confirmar_cotizacion').modal('hide');
+				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
+					costo:costo_material,
+					mano_obra:$('#mano_obra_fc').val(),
+					solicitud:seleccion}			
+					);
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_cliente_inmueble_ciz":
