@@ -12,22 +12,22 @@ $(document).ready(function(){
     }
 
     function colocar_menu_gerente(){
-        return `<!-- Menú colocado en la parte izquierda -->
-        <div class="ui large left fixed blue inverted vertical menu">
-          <div class="item">
-            <!-- Logo de Syscol -->
-            <a href="/inicio?permiso=${permiso}&valor=${valor}"> <img class="ui image" src="/img/logo.jpg"></a>
-          </div>
-          <a href="/solicitudes?permiso=${permiso}&valor=${valor}" class="item">Solicitudes</a>
-          <a href="/orden_trabajo?permiso=${permiso}&valor=${valor}" class="item">Orden de trabajo</a>
-          <br><br>
-          <a href="/pendientes?permiso=${permiso}&valor=${valor}" class="item">Pendientes</a>
-          <a href="/monitoreo?permiso=${permiso}&valor=${valor}" class="item">Monitoreo</a>
-          <a href="/cobranza?permiso=${permiso}&valor=${valor}" class="item">Cobranza</a>
-          <br><br>
-          <a href="/reportes?permiso=${permiso}&valor=${valor}" class="item">Reportes</a>
-        </div>`
-    }
+      return `<!-- Menú colocado en la parte izquierda -->
+      <div class="ui large left fixed blue inverted vertical menu">
+        <div class="item">
+          <!-- Logo de Syscol -->
+          <a href="/inicio?permiso=${permiso}&valor=${valor}"> <img class="ui image" src="/img/logo.jpg"></a>
+        </div>
+        <a href="/solicitudes?permiso=${permiso}&valor=${valor}" class="item">Solicitudes</a>
+        <a href="/orden_trabajo?permiso=${permiso}&valor=${valor}" class="item">Orden de trabajo</a>
+        <a href="/pendientes?permiso=${permiso}&valor=${valor}" class="item">Pendientes</a>
+        <a href="/monitoreo?permiso=${permiso}&valor=${valor}" class="item">Monitoreo</a>
+    <a href="/cobranza?permiso=${permiso}&valor=${valor}" class="item">Cobranza</a>
+    <a href="/materiales?permiso=${permiso}&valor=${valor}" class="item">Materiales</a>
+        <br><br>
+        <a href="/reportes?permiso=${permiso}&valor=${valor}" class="item">Reportes</a>
+      </div>`
+  }
     function menu_gerente(){
         let tbody = $('#menu_navegacion')
         $(colocar_menu_gerente()).appendTo(tbody)

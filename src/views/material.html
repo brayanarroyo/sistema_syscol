@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1">
+        <!-- Partial que contiene el código del css -->
+        <% include partials/head.html %>
+        <title>Página principal</title>
+    </head>
+
+    <body>
+        <!-- Menú colocado en la parte izquierda -->
+        <div id="menu_navegacion"></div>
+
+        <!--Menú de trabajo-->
+        <div class="centrado">
+            <br><br><br>
+            <div class="wrap">
+                <!--Secciones que se van a desplegar-->
+                <div class="secciones">
+                    <article name="mostrar_materiales" id="mostrar_materiales"> 
+                        <div class="ui celled grid">
+                            <div class="row">
+                                <div id="tablas" class="twelve wide column">
+                                    <table name="tbl_materiales" id="tbl_materiales" class="ui selectable celled table">
+                                        <thead>
+                                            <tr>
+                                                <th>Material</th>
+                                                <th>Venta</th>
+                                                <th>Compra</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody_costo_material">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--Botones de navegacion-->
+                                <div class="two wide column">
+                                    <div class="ui vertical labeled icon buttons">
+                                        <button class="ui button" id="material_proceder" href="#form_pagos">
+                                            <i class="large angle double right icon"></i>
+                                            Registrar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </article>
+                    <form action="javascript:void(0);">
+                        <article id="form_pagos" name="form_materiales">
+                            <div class="ui form"> 
+                                <h4 class="ui dividing header">Materiales</h4>  
+                                <div class="six wide field">
+                                    <h4>Material</h4> 
+                                    <input type="text" id="nom_m" name="nom_m" placeholder="Nombre" autocomplete="off" required>
+                                </div>    
+                                <div class="three wide field">
+                                    <h4>Precio de compra</h4> 
+                                    <input type="number" id="pcm" name="pcm" placeholder="$0.0" autocomplete="off" required>
+                                </div>  
+                                <div class="three wide field">
+                                    <h4>Precio de venta</h4> 
+                                    <input type="number" id="pvm" name="pvm" placeholder="$0.0" autocomplete="off" required>
+                                </div>                                                  
+                                <br>
+                                <button id="btn_cancelar" class="ui red button ">Cancelar</button> 
+                                <button id="btn_confirmar" class="ui blue submit button ">Aceptar</button> 
+                            </div>
+                        </article>
+                    </form>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_,material">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>Material registrado</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_cancelar_registro" class="ui red button">No</button>
+                                    <button id="close_aceptar_registro" class="ui blue submit button">Sí</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <!-- Scripts de JavaScript--> -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" 
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="/semantic/dist/semantic.min.js"></script>
+        <!-- Es el código de JavaScript utilizado en esta página -->
+        <script src="/js/material.js"></script>
+        <!-- Codigo para el funcionamiento del calendario-->
+        <script src="/js/calendario.js"></script>
+    </body>
+</html>

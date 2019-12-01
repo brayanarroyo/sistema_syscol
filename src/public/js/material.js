@@ -1,81 +1,48 @@
-var clave_inmueble = ""
-var monitoreo = 0;
 $(document).ready(function(){
 
-	function filas_tabla_cobranza(clave_inm,calle,numero_exterior,colonia) {
-		return `<tr id="${clave_inm}">
-				<td>${clave_inm}</td>
-				<td>${calle}</td>
-				<td>${numero_exterior}</td>
-				<td>${colonia}</td>
-		</tr>`
+	//Elementos de los dropdown
+	function elementos_nombre_cliente(nombre_cliente) {
+		return `<div class="item" data-value="${nombre_cliente}">${nombre_cliente}</div>`
 	}
 		
-	async function llenar_tabla_cobranza(route) {
+	async function llenar_nombre_cliente(route) {
 		const response = await fetch(route)
 		console.log(response);
 		const result = await response.json()
 		console.log(result);
-		let tbody = $('#tbody_cobranza') 
+		let dropdown1 = $('#dropdown_inmueble')
+		let dropdown2 = $('#dropdown_servicio')
 		$.each(result.data, (i,row) => {
-			$(filas_tabla_cobranza(row.clave_inm, row.calle, row.numero_exterior, row.colonia)).appendTo(tbody)
+			$(elementos_nombre_cliente(row.nombre)).appendTo(dropdown1)
+			$(elementos_nombre_cliente(row.nombre)).appendTo(dropdown2)
 		}) 
 		return result.error
 	}
 
-	function elementos_clientes(nombre) {
-		return `<div class="item" data-value="${nombre}">${nombre}</div>`
-	}
+		//Elementos de los dropdown
+		function elementos_domicilio_cliente(domicilio) {
+			return `<div class="item" data-value="${domicilio}">${domicilio}</div>`
+		}
+
+		async function llenar_domicilio_cliente(route,body) {
+			const response = await fetch(route, {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(body)
+			})
+			console.log(response);
+			const result = await response.json()
+			console.log(result);
+			let dropdown = $('#dropdown_domicilio')
+			$.each(result.data, (i,row) => {
+				$(elementos_domicilio_cliente(row.domicilio)).appendTo(dropdown)
+			}) 
+			return result.error
+		}
 		
-	async function llenar_tabla_nombre(route,body) {
-		const response = await fetch(route, {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(body)
-		})
-		console.log(response);
-		const result = await response.json()
-		console.log(result);
-		let tbody = $('#dropdown_cobranza_nombre') 
-		$.each(result.data, (i,row) => {
-			$(elementos_clientes(row.nombre)).appendTo(tbody)
-		}) 
-		return result.error
-	}
-
-	async function agregar(route,body) {
-		const response = await fetch(route, {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(body)
-		})
-		console.log(response);
-		const result = await response.json()
-		console.log(result);
-		return result.error
-	}
-
-	//Métodos para el llenado de las tablas
-	function filas_tabla_solicitud_mantenimiento() {
-		return `<tr>
-			<td>Número de cliente</td>
-			<td>${clave_inmueble}</td>
-		</tr>`
-	}
-		
-	async function mostrar_solicitud() {
-		let tbody = $('#tbody_solicitud_mantenimiento') 
-		$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
-	}
-
-	llenar_tabla_cobranza('/cobranza/inmuebles')
-
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
 	$('.secciones article').hide();
@@ -90,85 +57,76 @@ $(document).ready(function(){
 		var activeTab = $(this).attr('href');
 		$(activeTab).show();
 		return false;
-
+		
 	});
+
+	async function solicitudes(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		return result.error
+	}
 
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
 		switch($(this).attr('id')){
-			case "cobranza_proceder":		 
-				llenar_tabla_nombre('/cobranza/cliente',{
-					inmueble:clave_inmueble}			
-					);
-				$('#confirmar_mantenimiento_cobranza').modal('show');
-			break;
-			case "close_cancelar_registro":
-				$('#confirmar_mantenimiento_cobranza').modal('hide');
-				$('#mostrar_pagos').hide();
-				$('#form_pagos').show();
-			break;
-			case "close_aceptar_registro":
-				$('#confirmar_mantenimiento_cobranza').modal('hide');
-				$('#mostrar_pagos').hide();
-				mostrar_solicitud();
-				$('#atender_mante').show();
-			break;
-			case "Btn_aceptarMante":
-				monitoreo = 1;
-				$('#atender_mante').hide();
-				$('#form_pagos').show();
-			break;
-			case "detalle_cobranza":
-				$('#mostrar_pagos_clientes').hide();
-				$('#detalle').show();
-				sigueinte = "#mostrar_pagos_clientes"
-			break;
-			case "btn_confirmar_pago":
-				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_firma').val() != ''){
-					agregar('/cobranza/pago',{
-						nombre:$('#cobranza_nombre').val(),
-						monto:$('#cobranza_monto').val(),
-						firma_elecronica:$('#cobranza_firma').val()}			
-						);
-						$('#confirmar').modal('show');
-				}
-				if (monitoreo == 1){
-					if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_firma').val() != ''){
-						agregar('/cobranza/mantenimiento',{
-							nombre:$('#cobranza_nombre').val(),
-						monto:$('#cobranza_monto').val(),
-						firma_elecronica:$('#cobranza_firma').val(),
-						observaciones_mantenimiento:$('#observaciones_mantenimiento').val()}			
-						);
-						$('#confirmar').modal('show');
-					}
-				}
-				monitoreo = 0;
-			break;
-			case "close_aceptar_pago":
-				$('#confirmar').modal('hide');
-				window.open(`/cobranza?permiso=${permiso}&valor=${valor}`, '_self'); 
-			break;
-			case "close_cancelar_pago":
-				$('#confirmar').modal('hide');
-			break;
+			case "cobranza_proceder":
+                $('.secciones article').hide();
+                $('#form_materiales').show();
+            break;
+            case "btn_confirmar":
+                if ($('#nom_m').text() != '' && $('#pcm').text() != '' && $('#pvm').text() != ''){
+                    $('#confirmar_,material').modal('show');
+                }
+            break;
+            case "close_aceptar_registro":
+                registro('/materiales/registrar',{
+                    nombre: $('#nom_m').val(),
+                    precio_c: $('#pcm').val(),
+                    precio_v: $('#pvm').val()
+                });
+                $('#confirmar_,material').modal('hide');
+                $('.secciones article').hide();
+                $('.secciones article:first').show();
+            break;
+            case "close_aceptar_registro":
+                $('#confirmar_,material').modal('hide');
+            break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
-					location.reload();
+					$('.secciones article').hide();
+					$('.secciones article:first').show();
+					$('#solicitud').val('0');
 				}else{
-					$('#tipo').val('por defecto')
 					$('.secciones article').hide();
 					var activeBut = $(this).attr('href');
 					$(activeBut).show();
 				}
 				return false;
-			}
+			break;
+		}
+	});
+
+	$('#dropdown_nombre_fs_select').change(function(){
+		$('#dropdown_domicilio').empty();
+		llenar_domicilio_cliente('/solicitudes/cliente_domicilio',{
+			cliente:$('#nombre_fs').val()}			
+			);
 	});
 
 	//Funcionalidad de los campos de fecha
 	$('.ui.calendar').calendar({
 		type: 'date',
 		monthFirst: false,
+		minDate: new Date(),
 		formatter: {
 			date: function (date, settings) {
 				if (!date) return '';
@@ -179,22 +137,21 @@ $(document).ready(function(){
 			}
 		}
 	});
+	var timestamp = new Date().setHours(10, 0, 0, 0);
+	var fechaInicial = new Date(timestamp);
 
-	//Funcionalidad de los campos de fecha
+	var timestamp = new Date().setHours(19, 0, 0, 0);
+	var fechaFinal = new Date(timestamp);
+
+	//Funcionalidad de los campos de tiempo
 	$('.ui.calendar.time').calendar({
 		ampm: false,
-		type: 'time'
+		type: 'time',
+		minDate: fechaInicial,
+		maxDate: fechaFinal,
 	});
-
 	//Funcionalidad del dropdown
 	$('.ui.dropdown').dropdown();
-
-	$('#tbl_pagos_pendientes tbody').on('click', 'tr', function() {
-		//get row contents into an array
-		$('tr.active').removeClass('active');
-		$(this).addClass('active');
-		clave_inmueble = $(this).attr('id');
-	});
 
     function obtenerValorParametro(sParametroNombre) {
         var sPaginaURL = window.location.search.substring(1);

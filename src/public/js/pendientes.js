@@ -774,10 +774,10 @@ async function llenar_material_zona(route,body) {
           </div>
           <a href="/solicitudes?permiso=${permiso}&valor=${valor}" class="item">Solicitudes</a>
           <a href="/orden_trabajo?permiso=${permiso}&valor=${valor}" class="item">Orden de trabajo</a>
-          <br><br>
           <a href="/pendientes?permiso=${permiso}&valor=${valor}" class="item">Pendientes</a>
           <a href="/monitoreo?permiso=${permiso}&valor=${valor}" class="item">Monitoreo</a>
-          <a href="/cobranza?permiso=${permiso}&valor=${valor}" class="item">Cobranza</a>
+		  <a href="/cobranza?permiso=${permiso}&valor=${valor}" class="item">Cobranza</a>
+		  <a href="/materiales?permiso=${permiso}&valor=${valor}" class="item">Materiales</a>
           <br><br>
           <a href="/reportes?permiso=${permiso}&valor=${valor}" class="item">Reportes</a>
         </div>`

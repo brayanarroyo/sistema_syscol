@@ -8,6 +8,10 @@ router.get('/', (req, res) => {
   res.render('login.html', { title: 'pendiente' });
 });
 
+router.get('/materiales', (req, res) => {
+  res.render('material.html', { title: 'pendiente' });
+});
+
 router.get('/login', (req, res) => {
   res.render('login.html', { title: 'pendiente' });
 });
