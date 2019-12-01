@@ -520,6 +520,29 @@ async function llenar_material_zona(route,body) {
 						nombre:$('#material').val(),
 						cantidad:$('#cantidad').val()}			
 						);
+				}
+				$('#confirmar_material').modal('show');
+			break;
+			case "close_aceptar_material":
+				$('#confirmar_material').modal('hide');
+				$('#tbody_material') .empty(); 
+				llenar_tabla_material_seleccionados('/pendientes/cobranza_material/seleccion',{
+					solicitud:seleccion}			
+					);
+				$('#tbody_material_total') .empty(); 
+				llenar_total_cotización('/pendientes/cobranza_material/llenar/total',{
+					solicitud:seleccion}			
+					);
+			break;
+			case "btn_eliminar_material":
+					finalizar_ciz('/pendientes/cobranza_material/borrar',{
+					solicitud:seleccion,
+					material:material}			
+					);
+					$('#confirmar_borrar_material').modal('show');
+			break;
+			case "close_borrar_material":
+					$('#confirmar_borrar_material').modal('hide');
 					$('#tbody_material') .empty(); 
 					llenar_tabla_material_seleccionados('/pendientes/cobranza_material/seleccion',{
 						solicitud:seleccion}			
@@ -528,14 +551,7 @@ async function llenar_material_zona(route,body) {
 					llenar_total_cotización('/pendientes/cobranza_material/llenar/total',{
 						solicitud:seleccion}			
 						);
-				}
-			break;
-			case "btn_eliminar_material":
-					finalizar_ciz('/pendientes/cobranza_material/borrar',{
-					solicitud:seleccion,
-					material:material}			
-					);
-			break;
+			break
 			case "confirmar":
 				$('#confirmar_cotizacion').modal('show');
 				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
