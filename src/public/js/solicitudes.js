@@ -125,6 +125,16 @@ $(document).ready(function(){
 				$('#confirmar_solicitud').modal('hide');
 				window.open(`/solicitudes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
+			case "cerrar_sesion":
+				$('#confirmar_cerrar_sesion').modal('show');
+			break;
+			case "close_cancelar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+			break;
+			case "close_aceptar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+				window.open(`/`, '_self'); 
+			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
 					$('.secciones article').hide();

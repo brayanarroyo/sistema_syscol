@@ -13,6 +13,10 @@
         
         <!--Menú de trabajo-->
         <div class="centrado">
+            <button id="cerrar_sesion" class="circular ui right floated button">
+                    <i class="user circle icon"></i>
+                    Cerrar sesión
+            </button>
             <br><br><br>
             <div class="wrap">
                 <!--Secciones que se van a desplegar-->
@@ -118,6 +122,22 @@
                                 </div>
                             </div>
                         </div>    
+                    </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_cerrar_sesion">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>¿Quiere cerrar sesión?</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_cancelar_sesión" class="ui red button">Cancelar</button>
+                                    <button id="close_aceptar_sesión" class="ui blue submit button">Aceptar</button> 
+                                </div>
+                            </div>
+                        </div>
                     </article>
                 </div>
             </div>

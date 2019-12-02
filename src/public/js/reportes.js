@@ -19,7 +19,19 @@ $(document).ready(function(){
 
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
-        if ($(this).text() === "Regresar" ) {
+    switch($(this).attr('id')){
+			case "cerrar_sesion":
+				$('#confirmar_cerrar_sesion').modal('show');
+			break;
+			case "close_cancelar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+			break;
+			case "close_aceptar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+				window.open(`/`, '_self'); 
+			break;
+      default:
+          if ($(this).text() === "Regresar" ) {
             $('.secciones article').hide();
             $('.secciones article:first').show();
             $('#solicitud').val('0');
@@ -30,6 +42,7 @@ $(document).ready(function(){
             $(activeBut).show();
         }
         return false;
+    }
     });
     
     //Cambiar de sección dependiendo de la opción seleccionada de un listbox

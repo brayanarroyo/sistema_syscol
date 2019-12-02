@@ -1,4 +1,32 @@
 $(document).ready(function(){
+
+  $('button').click(function(){
+    switch($(this).attr('id')){
+			case "cerrar_sesion":
+				$('#confirmar_cerrar_sesion').modal('show');
+			break;
+			case "close_cancelar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+			break;
+			case "close_aceptar_sesión":
+				$('#confirmar_cerrar_sesion').modal('hide');
+				window.open(`/`, '_self'); 
+			break;
+      default:
+          if ($(this).text() === "Regresar" ) {
+            $('.secciones article').hide();
+            $('.secciones article:first').show();
+            $('#solicitud').val('0');
+            $('#solicitud_pendiente').val('0');
+        }else{
+            $('.secciones article').hide();
+            var activeBut = $(this).attr('href');
+            $(activeBut).show();
+        }
+        return false;
+    }
+    });
+
     function obtenerValorParametro(sParametroNombre) {
         var sPaginaURL = window.location.search.substring(1);
          var sURLVariables = sPaginaURL.split('&');

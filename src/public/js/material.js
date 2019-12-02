@@ -75,7 +75,17 @@ $(document).ready(function(){
                 $('.secciones article:first').show();
             break;
             case "close_aceptar_registro":
-                $('#confirmar_,material').modal('hide');
+                $('#confirmar_material').modal('hide');
+            break;
+            case "cerrar_sesion":
+                $('#confirmar_cerrar_sesion').modal('show');
+            break;
+            case "close_cancelar_sesión":
+                $('#confirmar_cerrar_sesion').modal('hide');
+            break;
+            case "close_aceptar_sesión":
+                $('#confirmar_cerrar_sesion').modal('hide');
+                window.open(`/`, '_self'); 
             break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {

@@ -14,11 +14,16 @@
 
         <!--Menú de trabajo-->
         <div class="centrado">
+            <button id="cerrar_sesion" class="circular ui right floated button">
+                    <i class="user circle icon"></i>
+                    Cerrar sesión
+            </button>
             <br><br><br>
             <div class="wrap">
                 <!--Secciones que se van a desplegar-->
                 <div class="secciones">
                     <article name="mostrar_materiales" id="mostrar_materiales"> 
+                        <h4 class="ui dividing header">Materiales</h4> 
                         <div class="ui celled grid">
                             <div class="row">
                                 <div id="tablas" class="twelve wide column">
@@ -80,6 +85,22 @@
                                 <div class="actions"> 
                                     <button id="close_cancelar_registro" class="ui red button">Cancelar</button>
                                     <button id="close_aceptar_registro" class="ui blue submit button">Aceptar</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_cerrar_sesion">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>¿Quiere cerrar sesión?</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_cancelar_sesión" class="ui red button">Cancelar</button>
+                                    <button id="close_aceptar_sesión" class="ui blue submit button">Aceptar</button> 
                                 </div>
                             </div>
                         </div>
