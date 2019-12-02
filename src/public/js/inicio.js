@@ -39,6 +39,29 @@ $(document).ready(function(){
         return null;
     }
 
+    function colocar_nombre_titulo(nombre){
+      return `<h1 class="ui center aligned header">Bienvenido ${nombre}</h1>`
+    }
+    async function colocar_nombre(route,body) {
+      console.log(valor)
+      const response = await fetch(route, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+      console.log(response);
+      const result = await response.json()
+      console.log(result);
+      let tbody = $('#titulo')
+      $.each(result.data, (i,row) => {
+        $(colocar_nombre_titulo(row.nombre)).appendTo(tbody)
+      }) 
+      return result.error
+    }
+
     function colocar_menu_gerente(){
       return `<!-- Menú colocado en la parte izquierda -->
       <div class="ui large left fixed blue inverted vertical menu">
@@ -98,6 +121,9 @@ $(document).ready(function(){
 
     var permiso = obtenerValorParametro('permiso');
     var valor = obtenerValorParametro('valor');
+    colocar_nombre('/index/titulo',{
+      id:valor}			
+      );
     switch(permiso){
         case "1":
             menu_gerente();
