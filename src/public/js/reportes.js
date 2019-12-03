@@ -15,7 +15,51 @@ $(document).ready(function(){
 		$(activeTab).show();
 		return false;
 		
-	});
+  });
+  
+  function filas_tabla_clientes(cliente,nombre, direccion, correo, telefono) {
+    return `<tr id="${cliente}">
+        <td>${cliente}</td>
+				<td>${nombre}</td>
+				<td>${direccion}</td>
+				<td>${correo}</td>
+				<td>${telefono}</td>
+		</tr>`
+  }
+  
+  async function llenar_clientes(route) {
+		const response = await fetch(route)
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		let tabla = $('#tabla_clientes')
+		$.each(result.data, (i,row) => {
+			$(filas_tabla_clientes(row.cliente,row.nombre,row.direccion,row.correo,row.telefono)).appendTo(tabla)
+		}) 
+		return result.error
+  }
+  
+  function filas_tabla_cobros(cliente,nombre, direccion, fecha, monto) {
+    return `<tr id="${cliente}">
+        <td>${cliente}</td>
+				<td>${nombre}</td>
+				<td>${direccion}</td>
+				<td>${fecha}</td>
+				<td>${monto}</td>
+		</tr>`
+  }
+  
+  async function llenar_cobros(route) {
+		const response = await fetch(route)
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		let tabla = $('#tabla_cobros')
+		$.each(result.data, (i,row) => {
+			$(filas_tabla_clientes(row.cliente,row.nombre,row.direccion,row.fecha_cobro,row.monto)).appendTo(tabla)
+		}) 
+		return result.error
+	}
 
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
@@ -51,20 +95,17 @@ $(document).ready(function(){
 	function(){
 		switch($(this).val()) {
 			case "cliente":
-                $('.secciones article').hide();
-                $('.secciones article:first').show();
-                $('#reporte_cliente').show();
+        $('.secciones article').hide();
+        $('.secciones article:first').show();
+        llenar_clientes('/reportes/clientes');
+        $('#reporte_cliente').show();
+      break;
+      case "Cobros":
+        $('.secciones article').hide();
+        $('.secciones article:first').show();
+        llenar_cobros('/reportes/cobros');
+        $('#reporte_cobros').show();
 			break;
-			case "inmueble":         
-                $('.secciones article').hide();
-                $('.secciones article:first').show();
-                $('#reporte_inmueble').show();
-            break;
-            case "orden_trabajo":
-                $('.secciones article').hide();
-                $('.secciones article:first').show();
-                $('#reporte_orden_trabajo').show();
-            break;
 		  }
 		return false;
 	});

@@ -27,8 +27,7 @@
                             <select id="reporte" name="reporte">
                                 <option value="0" selected="true" disabled="disabled">Elija una opción</option>
                                 <option value="cliente">Clientes</option>
-                                <option value="inmueble">Inmuebles</option>
-                                <option value="orden_trabajo">Orden de trabajo</option>
+                                <option value="Cobros">Cobros</option>
                             </select>
                         </div> 
                     </article>
@@ -36,87 +35,40 @@
                         <h4 class="ui dividing header">Clientes</h4>
                         <div class="ui celled grid">  
                             <div class="row">
-                                <div class="column">
+                                <div id="tabla_reportes" class="column">
                                     <table name="tbl_cliente" class="ui celled table">
                                         <thead>
                                             <tr>
-                                                <th>Nombre completo</th>
+                                                <th>Número de cliente</th>
+                                                <th>Cliente</th>
+                                                <th>Dirección</th>
                                                 <th>Correo electrónico</th>
                                                 <th>Teléfono</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Nombre completo</td>
-                                                <td>Correo electrónico</td>
-                                                <td>Teléfono</td>
-                                            </tr>
+                                        <tbody id="tabla_clientes">
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>    
                     </article>
-                    <article id="reporte_inmueble" name="reporte_inmueble">
-                        <h4 class="ui dividing header">Clientes</h4>
+                    <article id="reporte_cobros" name="reporte_cobros">
+                        <h4 class="ui dividing header">Cobros</h4>
                         <div class="ui celled grid">  
                             <div class="row">
-                                <div class="column">
-                                    <table name="tbl_inmueble" class="ui celled table">
+                                <div id="tabla_reportes" class="column">
+                                    <table name="tbl_cobros" class="ui celled table">
                                         <thead>
                                             <tr>
-                                                <th>Nombre del cliente</th>
-                                                <th>Calle</th>
-                                                <th>Número</th>
-                                                <th>Colonia </th>
-                                                <th>Código postal</th>
-                                                <th>Estado</th>
-                                                <th>Municipio</th>
+                                                <th>Número de cliente</th>
+                                                <th>Cliente</th>
+                                                <th>Dirección</th>
+                                                <th>Fecha de cobro</th>
+                                                <th>Monto</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Folio ejemplo</td>
-                                                <td>No. cliente ejemplo</td>
-                                                <td>Fecha ejemplo</td>
-                                                <td>Hora ejemplo</td>
-                                                <td>Sin asignar</td>
-                                                <td>No. cliente ejemplo</td>
-                                                <td>Fecha ejemplo</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>    
-                    </article>
-                    <article id="reporte_orden_trabajo" name="reporte_orden_trabajo">
-                        <h4 class="ui dividing header">Clientes</h4>
-                        <div class="ui celled grid">  
-                            <div class="row">
-                                <div class="column">
-                                    <table name="tbl_orden_trabajo" class="ui celled table">
-                                        <thead>
-                                            <tr>
-                                                <th>Folio</th>
-                                                <th>Fecha de visita</th>
-                                                <th>Hora de visita</th>
-                                                <th>Hora de visita</th>
-                                                <th>Observaciones</th>
-                                                <th>Estatus</th>
-                                                <th>Empleado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Folio ejemplo</td>
-                                                <td>No. cliente ejemplo</td>
-                                                <td>Fecha ejemplo</td>
-                                                <td>Hora ejemplo</td>
-                                                <td>Sin asignar</td>
-                                                <td>Hora ejemplo</td>
-                                                <td>Sin asignar</td>
-                                            </tr>
+                                        <tbody id="tabla_cobros">
                                         </tbody>
                                     </table>
                                 </div>

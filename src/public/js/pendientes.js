@@ -642,7 +642,17 @@ async function llenar_material_zona(route,body) {
 				}
 			break;
 			case "btn_finalizar_monitoreo":
-				$('#confirmar_registro').modal('show');
+				$('#confirmar_registro_monitoreo').modal('show');
+			break;
+			case "close_aceptar_registro_monitoreo":
+				$('#confirmar_registro_monitoreo').modal('hide');
+				agregar_ciz('/pendientes/monitoreo/modificar/solicitud',{
+					solicitud:seleccion}			
+					);
+				agregar_ciz('/pendientes/monitoreo/acivar',{
+					solicitud:seleccion}			
+					);
+				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_detalles":
 				$('#modal_detalle').empty();

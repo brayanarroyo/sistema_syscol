@@ -764,6 +764,22 @@ router.post('/pendientes/monitoreo/modificar/solicitud', async (req, res) => {
   }
   
 });
+
+router.post('/pendientes/monitoreo/acivar', async (req, res) => {
+  try {
+    let { solicitud } = req.body;
+    let query =`CALL sp_activar_monitoreo(
+      '${solicitud}'
+    )`
+    console.log(query);
+    let resultado = await pool.query(query);
+    res.end()
+    return resultado;
+  } catch (error) {
+    throw error;
+  }
+  
+});
 //*********************************************************************************************************************
 //***************************************************Mantenimiento********************************************************
 //*********************************************************************************************************************
@@ -901,7 +917,7 @@ router.post('/monitoreo/buscar_senal', async (req, res) => {
 
 router.get('/monitoreo/inmueble', (req, res) => {
   try {
-    let query = 'SELECT clave_inm FROM inmueble';
+    let query = 'SELECT clave_inm FROM inmueble WHERE monitoreo = "si"';
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1173,7 +1189,7 @@ router.post('/orden_trabajo/detalle', async (req, res) => {
   try {
     let { id_solicitud } = req.body;
 
-    let query =`(SELECT s.id_solicitud,"Pendiente" as clave_inm ,sp.nombre_completo as nombre,sp.domicilio,
+    let query =`(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(sp.nombre_completo," ",sp.apellido_p, " ", sp.apellido_m) as nombre,CONCAT(sp.calle," ",sp.numero, " ",sp.colonia) as domicilio,
     date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_pendiente sp
@@ -1224,7 +1240,7 @@ date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
 //*********************************************************************************************************************
 router.get('/cobranza/inmuebles', (req, res) => {
   try {
-    let query = 'SELECT * FROM view_cobranza_inmueble';
+    let query = 'SELECT * FROM view_cobranza';
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1249,9 +1265,10 @@ router.post('/cobranza/cliente', (req, res) => {
   try {
     let { inmueble} = req.body;
     console.log(inmueble)
-    let query = `(SELECT CONCAT(u.nombre," ",u.apellido_p," ",u.apellido_m) as nombre FROM usuario u WHERE u.id_mueble = '${inmueble}')
-    UNION
-    (SELECT CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre FROM cliente c INNER JOIN inmueble i WHERE i.clave_inm = '${inmueble}')`;
+    let query = `SELECT CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre 
+    FROM cliente c INNER JOIN inmueble i 
+    on c.id_cliente = i.clave_cliente
+    WHERE i.clave_inm = '${inmueble}'`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1336,6 +1353,55 @@ router.post('/materiales/registrar', async (req, res) => {
 router.get('/materiales/mostrar', (req, res) => {
   try {
     let query = 'SELECT * FROM view_materiales';
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
+//*********************************************************************************************************************
+//***************************************************Reportes********************************************************
+//*********************************************************************************************************************
+router.get('/reportes/clientes', (req, res) => {
+  try {
+    let query = 'SELECT * FROM view_clientes';
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
+router.get('/reportes/cobros', (req, res) => {
+  try {
+    let query = 'SELECT * FROM view_cobros';
     pool.query(query, function (err,rows) {
       if(err){
         res.json({

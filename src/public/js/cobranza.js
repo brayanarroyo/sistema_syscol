@@ -2,12 +2,12 @@ var clave_inmueble = ""
 var monitoreo = 0;
 $(document).ready(function(){
 
-	function filas_tabla_cobranza(clave_inm,calle,numero_exterior,colonia) {
-		return `<tr id="${clave_inm}">
-				<td>${clave_inm}</td>
-				<td>${calle}</td>
-				<td>${numero_exterior}</td>
-				<td>${colonia}</td>
+	function filas_tabla_cobranza(ciente,nombre,direccion,fecha_cobro) {
+		return `<tr id="${ciente}">
+				<td>${ciente}</td>
+				<td>${nombre}</td>
+				<td>${direccion}</td>
+				<td>${fecha_cobro}</td>
 		</tr>`
 	}
 		
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		console.log(result);
 		let tbody = $('#tbody_cobranza') 
 		$.each(result.data, (i,row) => {
-			$(filas_tabla_cobranza(row.clave_inm, row.calle, row.numero_exterior, row.colonia)).appendTo(tbody)
+			$(filas_tabla_cobranza(row.cliente, row.nombre, row.direccion, row.fecha_cobro)).appendTo(tbody)
 		}) 
 		return result.error
 	}
