@@ -247,8 +247,8 @@ $(document).ready(function(){
 			case "btn_señal_rutina":
 				señal('/monitoreo/registrar/rutina',{
 					num_cliente_rutina:$('#num_cliente_rutina').val(),
-					evento_rutina:$('#evento_rutina').val(),
-					usuario_rutina:$('#usuario_rutina').val()}			
+					evento_rutina:$('#evento_rutina_evento').val(),
+					usuario_rutina:$('#usuario_rutina_usuario').val()}			
 					);
 				$('#confirmar_señal').modal('show');
 			break;
@@ -266,7 +266,7 @@ $(document).ready(function(){
 			case "btn_señal_sistema":
 				señal('/monitoreo/registrar/sistema',{
 					num_cliente_sistema:$('#num_cliente_sistema').val(),
-					evento_sistema:$('#evento_sistema').val()}			
+					evento_sistema:$('#evento_sistema_input').val()}			
 					);
 				$('#confirmar_señal').modal('show');
 			break;

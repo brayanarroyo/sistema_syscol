@@ -820,13 +820,13 @@ router.post('/monitoreo/registrar/senal_robo', async (req, res) => {
 
 router.post('/monitoreo/registrar/rutina', async (req, res) => {
   try {
-    let { num_cliente_rutina,usuario_evento_rutina,evento_rutina } = req.body;
+    let { num_cliente_rutina,usuario_rutina,evento_rutina } = req.body;
 
     let tipo_evento = "rutina";
     let query =`CALL sp_agregar_señal_rutina(
       '${num_cliente_rutina}',
       '${tipo_evento}',
-      '${usuario_evento_rutina}',
+      '${usuario_rutina}',
       '${evento_rutina}'
     )`
     console.log(query);
