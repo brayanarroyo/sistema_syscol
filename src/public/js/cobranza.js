@@ -10,13 +10,20 @@ $(document).ready(function(){
 				<td>${fecha_cobro}</td>
 		</tr>`
 	}
-		
-	async function llenar_tabla_cobranza(route) {
-		const response = await fetch(route)
+
+	async function llenar_tabla_cobranza(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
 		console.log(response);
 		const result = await response.json()
 		console.log(result);
-		let tbody = $('#tbody_cobranza') 
+		let tbody = $('#tbody_cobranza')  
 		$.each(result.data, (i,row) => {
 			$(filas_tabla_cobranza(row.cliente, row.nombre, row.direccion, row.fecha_cobro)).appendTo(tbody)
 		}) 
@@ -73,8 +80,6 @@ $(document).ready(function(){
 		let tbody = $('#tbody_solicitud_mantenimiento') 
 		$(filas_tabla_solicitud_mantenimiento()).appendTo(tbody)
 	}
-
-	llenar_tabla_cobranza('/cobranza/inmuebles')
 
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
@@ -162,6 +167,11 @@ $(document).ready(function(){
 				$('#confirmar_cerrar_sesion').modal('hide');
 				window.open(`/`, '_self'); 
 			break;
+			case "btn_buscar_cobro":
+				llenar_tabla_cobranza('/cobranza/inmuebles',{
+					fecha:$(fecha_cobro).val()}			
+					);
+			break;
 			default:
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
 					location.reload();
@@ -177,7 +187,7 @@ $(document).ready(function(){
 
 	//Funcionalidad de los campos de fecha
 	$('.ui.calendar').calendar({
-		type: 'date',
+		type: 'month',
 		monthFirst: false,
 		formatter: {
 			date: function (date, settings) {

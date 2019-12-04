@@ -369,6 +369,10 @@ $(document).ready(function(){
 	$('.ui.calendar').calendar({
 		type: 'date',
 		monthFirst: false,
+		text :{
+			months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],    
+		  },
 		formatter: {
 			date: function (date, settings) {
 				if (!date) return '';

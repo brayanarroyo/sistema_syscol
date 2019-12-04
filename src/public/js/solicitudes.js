@@ -192,6 +192,10 @@ $(document).ready(function(){
 		type: 'date',
 		monthFirst: false,
 		minDate: new Date(),
+		text :{
+			months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],    
+		  },
 		formatter: {
 			date: function (date, settings) {
 				if (!date) return '';

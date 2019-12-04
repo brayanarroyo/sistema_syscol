@@ -45,22 +45,28 @@ $(document).ready(function(){
 				<td>${nombre}</td>
 				<td>${direccion}</td>
 				<td>${fecha}</td>
-				<td>${monto}</td>
+				<td>$${monto}</td>
 		</tr>`
   }
   
-  async function llenar_cobros(route) {
-		const response = await fetch(route)
+  async function llenar_cobros(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
 		console.log(response);
 		const result = await response.json()
 		console.log(result);
-		let tabla = $('#tabla_cobros')
+		let tabla = $('#tabla_cobros') 
 		$.each(result.data, (i,row) => {
-			$(filas_tabla_clientes(row.cliente,row.nombre,row.direccion,row.fecha_cobro,row.monto)).appendTo(tabla)
+			$(filas_tabla_cobros(row.cliente,row.nombre,row.direccion,row.fecha_cobro,row.monto)).appendTo(tabla)
 		}) 
 		return result.error
 	}
-
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
     switch($(this).attr('id')){
@@ -73,7 +79,12 @@ $(document).ready(function(){
 			case "close_aceptar_sesión":
 				$('#confirmar_cerrar_sesion').modal('hide');
 				window.open(`/`, '_self'); 
-			break;
+      break;
+      case "btn_buscar_cobro":
+          llenar_cobros('/reportes/cobros',{
+            fecha:$(fecha_cobro).val()}			
+            );
+      break;
       default:
           if ($(this).text() === "Regresar" ) {
             $('.secciones article').hide();
@@ -103,7 +114,6 @@ $(document).ready(function(){
       case "Cobros":
         $('.secciones article').hide();
         $('.secciones article:first').show();
-        llenar_cobros('/reportes/cobros');
         $('#reporte_cobros').show();
 			break;
 		  }
@@ -112,9 +122,13 @@ $(document).ready(function(){
 
 	//Funcionalidad de los campos de fecha
 	$('.ui.calendar').calendar({
-		type: 'date',
-		monthFirst: false,
-		formatter: {
+		type: 'month',
+    monthFirst: false,
+    text :{
+      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],    
+    },
+    formatter: {
 			date: function (date, settings) {
 				if (!date) return '';
 				var day = date.getDate();

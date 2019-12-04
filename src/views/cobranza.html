@@ -23,6 +23,18 @@
                 <div class="secciones">
                     <!--Menu para mostrar los pagos pendientes-->
                     <article name="mostrar_pagos" id="mostrar_pagos"> 
+                        <div class="four wide field">
+                            <h4>Fecha de cobranza</h4>
+                            <div class="ui action input">
+                                <div class="ui calendar">
+                                    <div class="ui input left icon">
+                                        <i class="calendar icon"></i>
+                                        <input id="fecha_cobro" name="fecha_cobro" type="text" placeholder="Fecha" autocomplete="off">
+                                    </div>
+                                </div>
+                                <button id="btn_buscar_cobro" name="btn_buscar_cobro" class="ui blue submit button ">Aceptar</button>
+                            </div>
+                        </div>
                         <div class="ui celled grid">
                             <div class="row">
                                 <div id="tablas" class="twelve wide column">

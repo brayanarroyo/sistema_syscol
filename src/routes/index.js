@@ -1212,7 +1212,7 @@ date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     on si.id_solicitud_inmueble = s.id_solicitud INNER JOIN cliente c 
 		on si.clave_cliente = c.id_cliente INNER JOIN inmueble i 
 		on c.id_cliente = i.clave_cliente
-    WHERE ot.id_orden = '${id_solicitud}') `
+    WHERE ot.id_orden = '${id_solicitud}')`
 
     pool.query(query, function (err,rows) {
       if(err){
@@ -1238,9 +1238,21 @@ date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
 //*********************************************************************************************************************
 //***************************************************Cobranza********************************************************
 //*********************************************************************************************************************
-router.get('/cobranza/inmuebles', (req, res) => {
+router.post('/cobranza/inmuebles', (req, res) => {
   try {
-    let query = 'SELECT * FROM view_cobranza';
+    let { fecha } = req.body;
+    let f = new Date(fecha)
+    let day = f.getDate()
+    let month = f.getMonth() + 1
+    let year = f.getFullYear()
+    if (month < 9){
+      month = '0' + month
+    }
+    if (day < 12){
+      day = '0' + day
+    }
+    let query = `SELECT * FROM view_cobranza WHERE fecha_cobro = '${day}/${month}/${year}'`;
+    console.log(query)
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1399,9 +1411,21 @@ router.get('/reportes/clientes', (req, res) => {
   }
 });
 
-router.get('/reportes/cobros', (req, res) => {
+router.post('/reportes/cobros', (req, res) => {
   try {
-    let query = 'SELECT * FROM view_cobros';
+    let { fecha } = req.body;
+    let f = new Date(fecha)
+    let day = f.getDate()
+    let month = f.getMonth() + 1
+    let year = f.getFullYear()
+    if (month < 9){
+      month = '0' + month
+    }
+    if (day < 12){
+      day = '0' + day
+    }
+    let query = `SELECT * FROM view_cobros WHERE fecha_cobro = '${year}-${day}-${month}'`;
+    console.log(query)
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
