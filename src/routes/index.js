@@ -569,7 +569,7 @@ router.post('/pendientes/cobranza_material/confirmar', async (req, res) => {
 
 router.post('/pendientes/ciz/cliente_inmueble', async (req, res) => {
   try {
-    let { nombre_fc_ciz, apellido_p_fc_ciz, apellido_m_fc_ciz, correo_fc_ciz, telefono_fc_ciz, firma_fc_ciz,calle_fi_ciz,
+    let { nombre_fc_ciz, apellido_p_fc_ciz, apellido_m_fc_ciz, correo_fc_ciz, telefono_fc_ciz,calle_fi_ciz,
     num_ext_fi_ciz, colonia_fi_ciz, codigo_fi_ciz, tipo_inmueble_ciz, estado_fi_ciz, municipio_fi_ciz,
     id_solicitud,clave_fc_ciz} = req.body;
     let query =`CALL sp_agregar_ciz(
@@ -578,7 +578,6 @@ router.post('/pendientes/ciz/cliente_inmueble', async (req, res) => {
       '${apellido_m_fc_ciz}',
       '${correo_fc_ciz}',
       '${telefono_fc_ciz}',
-      '${firma_fc_ciz}',
       '${calle_fi_ciz}',
       '${num_ext_fi_ciz}',
       '${colonia_fi_ciz}',
@@ -1303,12 +1302,12 @@ router.post('/cobranza/cliente', (req, res) => {
 
 router.post('/cobranza/pago', async (req, res) => {
   try {
-    let { nombre, monto, firma_elecronica} = req.body;
+    let { nombre, monto, empleado} = req.body;
 
     let query =`CALL sp_agregar_cobranza(
       '${nombre}',
       '${monto}',
-      '${firma_elecronica}'
+      '${empleado}'
     )`
 
     console.log(query);

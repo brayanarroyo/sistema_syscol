@@ -275,20 +275,16 @@
                                     </div>
                                 </div> 
                                 <div class="ui vertically divided grid">
-                                    <div class="four column row">
-                                        <div class="four wide column">   
+                                    <div class="three column row">
+                                        <div class="column">   
                                             <label>Correo electronico</label>
                                             <input name="correo_fc_ciz" id="correo_fc_ciz" type="email" placeholder="correo@correo.com" autocomplete="off" required>   
                                         </div>
-                                        <div class="four wide column">
+                                        <div class="column">
                                             <label>Teléfono</label>
-                                            <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
+                                            <input name="telefono_fc_ciz" id="telefono_fc_ciz" type="number" placeholder="Número" autocomplete="off" required min= "10" max="10">
                                         </div>
-                                        <div class="four wide column">
-                                            <label>Firma</label>
-                                            <input name="firma_fc_ciz" id="firma_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
-                                        </div>
-                                        <div class="four wide column">
+                                        <div class="column">
                                             <label>Número de cliente</label>
                                             <input name="clave_fc_ciz" id="clave_fc_ciz" type="number" placeholder="Número" autocomplete="off" required>
                                         </div>
@@ -317,7 +313,7 @@
                                     <div class="four column row">
                                         <div class="four wide column">
                                             <label>Código postal</label>
-                                            <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="number" placeholder="#####" autocomplete="off" required>
+                                            <input name="codigo_fi_ciz" id="codigo_fi_ciz" type="number" placeholder="#####" autocomplete="off" required min= "5" max="5">
                                         </div>
                                         <div class="four wide column">   
                                             <label>Estado de la republica</label>
@@ -414,6 +410,21 @@
                             </div>
                         </article>
                     </form>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="confirmar_material_zona">
+                                <div class="header">
+                                    Confirmación
+                                </div>
+                                <div class="content">
+                                    <h4>Zona asignada correctamente</h4>
+                                </div>
+                                <div class="actions"> 
+                                    <button id="close_aceptar_confirmar_material_zona" class="ui blue button">Aceptar</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                     <!--Modal para confirmar registro-->
                     <article>
                         <div class="formulario">
@@ -447,7 +458,7 @@
                             <div class="ui form"> 
                                 <h4 class="ui dividing header">Agregar un nuevo usuario</h4>      
                                 <div class="ui vertically divided grid">
-                                    <div class="three column row">
+                                    <div class="four column row">
                                         <div class="column">   
                                             <label>No. de usuario</label>
                                             <input name="no_usu" id="no_usu" type="number" placeholder="Nombre" autocomplete="off" required>   
@@ -465,8 +476,6 @@
                                             <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido" autocomplete="off" required>
                                         </div>
                                     </div>
-                                </div> 
-                                <div class="ui vertically divided grid">
                                     <div class="two column row">
                                         <div class="four wide column">   
                                             <label>Relación</label>
@@ -474,10 +483,10 @@
                                         </div>
                                         <div class="four wide column">
                                             <label>Teléfono</label>
-                                            <input name="telefono_usu" id="telefono_usu" type="number" placeholder="Número" autocomplete="off" required>
+                                            <input name="telefono_usu" id="telefono_usu" type="number" placeholder="Número" autocomplete="off" required min= "10" max="10">
                                         </div>
                                     </div>
-                                </div>      
+                                </div>       
                                 <br>
                                 <button class="ui red button ">Cancelar</button>
                                 <button name="btn_registrar_usuario" id="btn_registrar_usuario" class="ui blue submit button ">Registrar</button>   
@@ -495,7 +504,7 @@
                                             <label>Número de contacto</label>
                                             <input name="num_cont" id="num_cont" type="number" placeholder="Número" autocomplete="off" required>
                                         </div>
-                                        <div class="ten wide column">
+                                        <div class="eight wide column">
                                             <label>Nombre completo</label>
                                             <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo" autocomplete="off" required>
                                         </div>
@@ -505,9 +514,9 @@
                                             <label>Relación</label>
                                             <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off" required>
                                         </div>
-                                        <div class="ten wide column">
+                                        <div class="four wide column">
                                             <label>Teléfono</label>
-                                            <input name="telefono_contacto" id="telefono_contacto" type="number" placeholder="Teléfono" autocomplete="off" required>
+                                            <input name="telefono_contacto" id="telefono_contacto" type="number" placeholder="Teléfono" autocomplete="off" required min= "10" max="10">
                                         </div>
                                     </div>
                                 </div>
@@ -517,6 +526,36 @@
                                 <button name="btn_finalizar_monitoreo" id="btn_finalizar_monitoreo" class="ui right floated blue button">Finalizar</button>
                             </div> 
                         </article>
+                        <article>
+                            <div class="formulario">
+                                <div class="ui mini modal" id="confirmar_registro_monitoreo_usuarios">
+                                    <div class="header">
+                                        Confirmación
+                                    </div>
+                                    <div class="content">
+                                        <h4>Contacto registrado</h4>
+                                    </div>
+                                    <div class="actions"> 
+                                        <button id="close_aceptar_registro_monitoreo_usuarios" class="ui blue button">Aceptar</button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                                <div class="formulario">
+                                    <div class="ui mini modal" id="confirmar_registro_monitoreo_contactos">
+                                        <div class="header">
+                                            Confirmación
+                                        </div>
+                                        <div class="content">
+                                            <h4>Usuario registrado</h4>
+                                        </div>
+                                        <div class="actions"> 
+                                            <button id="close_aceptar_registro_monitoreo_contactos" class="ui blue button">Aceptar</button> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
                         <article>
                             <div class="formulario">
                                 <div class="ui mini modal" id="confirmar_registro_monitoreo">

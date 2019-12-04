@@ -2,6 +2,8 @@ var clave_inmueble = ""
 var monitoreo = 0;
 $(document).ready(function(){
 
+	var valor = obtenerValorParametro('valor');
+
 	function filas_tabla_cobranza(ciente,nombre,direccion,fecha_cobro) {
 		return `<tr id="${ciente}">
 				<td>${ciente}</td>
@@ -129,11 +131,11 @@ $(document).ready(function(){
 				sigueinte = "#mostrar_pagos_clientes"
 			break;
 			case "btn_confirmar_pago":
-				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_firma').val() != ''){
+				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != ''){
 					agregar('/cobranza/pago',{
 						nombre:$('#cobranza_nombre').val(),
 						monto:$('#cobranza_monto').val(),
-						firma_elecronica:$('#cobranza_firma').val()}			
+						empleado:valor}			
 						);
 						$('#confirmar').modal('show');
 				}
@@ -189,6 +191,10 @@ $(document).ready(function(){
 	$('.ui.calendar').calendar({
 		type: 'month',
 		monthFirst: false,
+		text :{
+			months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],    
+		},
 		formatter: {
 			date: function (date, settings) {
 				if (!date) return '';
@@ -286,7 +292,6 @@ $(document).ready(function(){
     }
 
     var permiso = obtenerValorParametro('permiso');
-    var valor = obtenerValorParametro('valor');
     switch(permiso){
         case "1":
             menu_gerente();
