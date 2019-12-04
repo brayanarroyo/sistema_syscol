@@ -6,11 +6,7 @@ $(document).ready(function(){
               rules: [
                 {
                   type   : 'empty',
-                  prompt : 'Ingrese un correo electronico'
-                },
-                {
-                  type   : 'email',
-                  prompt : 'Ingrese un correo electronico valido'
+                  prompt : 'Ingrese un nombre de usuario'
                 }
               ]
             },
