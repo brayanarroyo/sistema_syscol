@@ -608,6 +608,10 @@ async function llenar_material_zona(route,body) {
 				materiales_registrados('/pendientes/materiales/registrados',{
 					solicitud:seleccion}			
 					);
+				$('#dropdown_material_zona_ciz').empty();
+				llenar_material_zona('/pendientes/llenado/material_zona',{
+					solicitud:seleccion}			
+					);
 				$('#confirmar_material_zona').modal('hide');
 			break;
 			case "btn_finalizar_ciz":
