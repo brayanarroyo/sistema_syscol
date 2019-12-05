@@ -1,4 +1,6 @@
 var clave_solicitud = "";
+var fecha = "";
+var hora = "";
 $(document).ready(function(){
 		
 	async function llenar_tabla_orden_trabajo(route) {
@@ -17,9 +19,16 @@ $(document).ready(function(){
 	function elementos_empleados(empleado) {
 		return `<div class="item" data-value="${empleado}">${empleado}</div>`
 	}
-		
-	async function llenar_empleados(route) {
-		const response = await fetch(route)
+
+	async function llenar_empleados(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
 		console.log(response);
 		const result = await response.json()
 		console.log(result);
@@ -111,6 +120,14 @@ $(document).ready(function(){
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
         switch($(this).attr('id')){
+			case "btn_asignar":
+				llenar_empleados('/orden_trabajo/empleados',{
+					fecha_p:fecha,
+					hora_p:hora}			
+					);
+				$('.secciones article').hide();
+				$('#form_asignar').show();
+			break;
 			case "btn_confirmar_asignar":
 				añadir_solicitud('/orden_trabajo/asignar',{
 					id_orden:clave_solicitud,
@@ -161,8 +178,6 @@ $(document).ready(function(){
 
 	llenar_tabla_orden_trabajo('/orden_trabajo/pendientes')
 
-	llenar_empleados('/orden_trabajo/empleados')
-
 	//Funcionalidad de los campos de fecha
 	$('.ui.calendar').calendar({
 		type: 'date',
@@ -191,6 +206,8 @@ $(document).ready(function(){
 		//get row contents into an array
 		$('tr.active').removeClass('active');
 		$(this).addClass('active');
+		fecha = $(this).find("td").eq(2).text();
+		hora = $(this).find("td").eq(3).text();
 		clave_solicitud = $(this).attr('id');
 	});
 

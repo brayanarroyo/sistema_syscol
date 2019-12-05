@@ -1142,9 +1142,20 @@ router.get('/orden_trabajo/pendientes', (req, res) => {
   }
 });
 
-router.get('/orden_trabajo/empleados', (req, res) => {
+router.post('/orden_trabajo/empleados', (req, res) => {
   try {
-    let query = 'SELECT * FROM view_orden_empleados';
+    let { fecha_p, hora_p } = req.body;
+    fecha_p = fecha_p.replace("/", "-");
+    fecha_p = fecha_p.replace("/", "-");
+    fecha_p = fecha_p.split("-").reverse().join("-");
+    let query = `SELECT id_empleado, CONCAT(nombre," ",apellido_p," ",apellido_m) as nombre 
+    FROM empleado
+    where (id_empleado = 3 or id_empleado = 7 or id_empleado = 8) and id_empleado NOT IN (SELECT id_empleado
+    FROM empleado e INNER JOIN orden_trabajo ot
+    on e.id_empleado = ot.clave_empleado INNER JOIN solicitud s
+    on ot.clave_solicitud = s.id_solicitud
+    where s.hora = '${hora_p}' and fecha_visita = '${fecha_p}')`;
+    console.log(query)
     pool.query(query, function (err,rows) {
       if(err){
         res.json({

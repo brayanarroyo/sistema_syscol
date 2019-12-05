@@ -566,6 +566,7 @@ async function llenar_material_zona(route,body) {
 					solicitud:seleccion}			
 					);
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
+				Location.reload();
 			break;
 			case "btn_cliente_inmueble_ciz":
 				if ($('#nombre_fc_ciz').val() != '' && $('#apellido_p_fc_ciz').val() != '' && $('#apellido_m_fc_ciz').val() != '' && $('#correo_fc_ciz').val() != '' && $('#telefono_fc_ciz').val() != '' && $('#firma_fc_ciz').val() != '' && $('#calle_fi_ciz').val() != '' && $('#num_ext_fi_ciz').val() != '' && $('#colonia_fi_ciz').val() != '' && $('#codigo_fi_ciz').val() != '' && $('#tipo_inmueble_ciz').val() != '' && $('#estado_fi_ciz').val() != '' && $('#municipio_fi_ciz').val() != '' && $('#clave_fc_ciz').val() != ''){
@@ -674,6 +675,7 @@ async function llenar_material_zona(route,body) {
 					solicitud:seleccion}			
 					);
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
+				location.reload();
 			break;
 			case "btn_detalles":
 				$('#modal_detalle').empty();
@@ -707,8 +709,7 @@ async function llenar_material_zona(route,body) {
 				if ($(this).text() === "Cancelar" || $(this).text() === "Regresar" ) {
 					$('.secciones article').hide();
 					$('.secciones article:first').show();
-					$('#solicitud').val('0');
-					$('#solicitud_pendiente').val('0');
+					location.reload();
 				}else{
 					$('.secciones article').hide();
 					var activeBut = $(this).attr('href');
