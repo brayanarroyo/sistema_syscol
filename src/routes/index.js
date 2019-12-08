@@ -418,7 +418,7 @@ router.get('/pendientes/cobranza_material', async(req, res) => {
 router.post('/pendientes/cobranza_material/seleccion', async(req, res) => {
   try {
     let { solicitud, nombre } = req.body;
-    query = `SELECT m.codigo_dis,m.nombre,COUNT(m.nombre) as cantidad,(COUNT(m.nombre) * precio_venta ) as total
+    query = `SELECT m.codigo_dis,m.nombre,COUNT(m.nombre) as cantidad, m.precio_venta,(COUNT(m.nombre) * precio_venta ) as total
     from material m INNER JOIN cotizacion_material cm
     on m.codigo_dis = cm.clave_material INNER JOIN cotizacion c
     on c.id_cotizacion = cm.clave_cotizacion INNER JOIN orden_trabajo ot
@@ -723,6 +723,66 @@ router.post('/pendientes/agregar/usuarios', async (req, res) => {
     throw error;
   }
   
+});
+
+router.post ('/pendientes/mostrar/usuarios', (req, res) => {
+  try {
+    let { solicitud } = req.body;
+    let query = `SELECT u.num_usuario,u.nombre,u.apellido_p,u.apellido_m,u.telefono,u.relacion
+    FROM solicitud_cliente sc INNER JOIN cliente c
+    on sc.clave_cliente = c.id_cliente INNER JOIN inmueble i
+    on c.id_cliente = i.clave_cliente INNER JOIN usuario u
+    on i.clave_inm = u.id_mueble
+    WHERE sc.id_solicitud_cliente = '${solicitud}'`;
+    console.log(query)
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
+
+router.post ('/pendientes/mostrar/contactos', (req, res) => {
+  try {
+    let { solicitud } = req.body;
+    let query = `SELECT u.num_contacto,u.nombre_completo,u.telefono,u.relacion
+    FROM solicitud_cliente sc INNER JOIN cliente c
+    on sc.clave_cliente = c.id_cliente INNER JOIN inmueble i
+    on c.id_cliente = i.clave_cliente INNER JOIN contacto u
+    on i.clave_inm = u.id_inmueble
+    WHERE sc.id_solicitud_cliente = '${solicitud}'`;
+    console.log(query)
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
 });
 
 router.post('/pendientes/agregar/contactos', async (req, res) => {

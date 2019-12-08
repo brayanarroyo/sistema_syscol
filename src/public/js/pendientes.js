@@ -1,6 +1,8 @@
 var seleccion = "";
 var costo_material = 0.0;
 var material = "";
+var contacto = 1;
+var usuario = 1;
 $(document).ready(function(){
 
 	function filas_detalle_pendientes(id_cliente,nombre,domicilio,telefono,fecha,hora_visita,estatus,tipo_servicio) {
@@ -282,11 +284,12 @@ async function llenar_material(route) {
 	return result.error
 }
 
-function filas_tabla_material_seleccionados(id_material,nombre, cantidad, precio) {
+function filas_tabla_material_seleccionados(id_material,nombre, cantidad,precio_vento, precio) {
 	costo_material = parseFloat(costo_material + precio);
 	return `<tr id="${id_material}">
 			<td>${nombre}</td>
 			<td>${cantidad}</td>
+			<td>${precio_vento}</td>
 			<td>${precio}</td>
 	</tr>`
 }
@@ -305,7 +308,7 @@ async function llenar_tabla_material_seleccionados(route,body) {
 	console.log(result);
 	let tbody = $('#tbody_material') 
 	$.each(result.data, (i,row) => {
-		$(filas_tabla_material_seleccionados(row.codigo_dis,row.nombre,row.cantidad,row.total)).appendTo(tbody)
+		$(filas_tabla_material_seleccionados(row.codigo_dis,row.nombre,row.cantidad,row.precio_venta,row.total)).appendTo(tbody)
 	}) 
 	return result.error
 }
@@ -483,6 +486,64 @@ async function llenar_material_zona(route,body) {
 	return result.error
 }
 
+function filas_tabla_usuarios_registrados(num, nombre, ape_p, ape_m,tel,rel) {
+	return `<tr>
+			<td>${num}</td>
+			<td>${nombre}</td>
+			<td>${ape_p}</td>
+			<td>${ape_m}</td>
+			<td>${tel}</td>
+			<td>${rel}</td>
+	</tr>`
+}
+
+async function mostrar_usuarios_registrados(route,body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	console.log(response);
+	const result = await response.json()
+	console.log(result);
+	let tabla = $('#tbody_usuarios') 
+	$.each(result.data, (i,row) => {
+		$(filas_tabla_usuarios_registrados(row.num_usuario,row.nombre,row.apellido_p,row.apellido_m,row.telefono,row.relacion)).appendTo(tabla)
+	}) 
+	return result.error
+}
+
+function filas_tabla_contacto_registrados(num, nombre,tel,rel) {
+	return `<tr>
+			<td>${num}</td>
+			<td>${nombre}</td>
+			<td>${tel}</td>
+			<td>${rel}</td>
+	</tr>`
+}
+
+async function mostrar_contactos_registrados(route,body) {
+	const response = await fetch(route, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	})
+	console.log(response);
+	const result = await response.json()
+	console.log(result);
+	let tabla = $('#tbody_contacto') 
+	$.each(result.data, (i,row) => {
+		$(filas_tabla_contacto_registrados(row.num_contacto,row.nombre_completo,row.telefono,row.relacion)).appendTo(tabla)
+	}) 
+	return result.error
+}
+
 	//Mostrar únicamente la primera sección de la navegación de pestañas
 	$('ul.tabs li a:first').addClass('active');
     $('.secciones article').hide();
@@ -502,6 +563,23 @@ async function llenar_material_zona(route,body) {
 		
 	});
 
+	function hacer_click_close_aceptar_material(){
+		$('#close_aceptar_material').click();
+	}
+
+	function hacer_click_close_aceptar_confirmar_material_zona(){
+		$('#close_aceptar_confirmar_material_zona').click();
+	}
+
+	function hacer_click_close_aceptar_registro_monitoreo_usuarios(){
+		$('#close_aceptar_registro_monitoreo_usuarios').click();
+	}
+
+	function hacer_click_close_aceptar_registro_monitoreo_contactos(){
+		$('#close_aceptar_registro_monitoreo_contactos').click();
+	}
+	
+
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
         switch($(this).attr('id')){
@@ -520,8 +598,10 @@ async function llenar_material_zona(route,body) {
 						nombre:$('#material').val(),
 						cantidad:$('#cantidad').val()}			
 						);
+					$('#confirmar_material').modal('show');
+					setTimeout(hacer_click_close_aceptar_material,700);
 				}
-				$('#confirmar_material').modal('show');
+
 			break;
 			case "close_aceptar_material":
 				$('#confirmar_material').modal('hide');
@@ -566,7 +646,7 @@ async function llenar_material_zona(route,body) {
 					solicitud:seleccion}			
 					);
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
-				Location.reload();
+				location.reload();
 			break;
 			case "btn_cliente_inmueble_ciz":
 				if ($('#nombre_fc_ciz').val() != '' && $('#apellido_p_fc_ciz').val() != '' && $('#apellido_m_fc_ciz').val() != '' && $('#correo_fc_ciz').val() != '' && $('#telefono_fc_ciz').val() != '' && $('#firma_fc_ciz').val() != '' && $('#calle_fi_ciz').val() != '' && $('#num_ext_fi_ciz').val() != '' && $('#colonia_fi_ciz').val() != '' && $('#codigo_fi_ciz').val() != '' && $('#tipo_inmueble_ciz').val() != '' && $('#estado_fi_ciz').val() != '' && $('#municipio_fi_ciz').val() != '' && $('#clave_fc_ciz').val() != ''){
@@ -601,6 +681,7 @@ async function llenar_material_zona(route,body) {
 						solicitud:seleccion}			
 						);
 					$('#confirmar_material_zona').modal('show');
+					setTimeout(hacer_click_close_aceptar_confirmar_material_zona,700);
 				}
 			break;
 			case "close_aceptar_confirmar_material_zona":
@@ -626,19 +707,25 @@ async function llenar_material_zona(route,body) {
 				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
 			break;
 			case "btn_registrar_usuario":
-				if ($('#no_usu').val() != '' && $('#nom_usu').val() != '' && $('#apellido_p_usu').val() != '' && $('#apellido_m_usu').val() != '' && $('#relacion_usu').val() != '' && $('#telefono_usu').val() != ''){
+				if ($('#nom_usu').val() != '' && $('#apellido_p_usu').val() != '' && $('#apellido_m_usu').val() != '' && $('#relacion_usu').val() != '' && $('#telefono_usu').val() != ''){
+					agregar_ciz('/pendientes/agregar/usuarios',{
+						solicitud:seleccion,
+						no_usu:usuario,
+						nom_usu:$('#nom_usu').val(),
+						apellido_p_usu:$('#apellido_p_usu').val(),
+						apellido_m_usu:$('#apellido_m_usu').val(),
+						relacion_usu:$('#relacion_usu').val(),
+						telefono_usu:$('#telefono_usu').val()
+					});
 					$('#confirmar_registro_monitoreo_usuarios').modal('show');
+					setTimeout(hacer_click_close_aceptar_registro_monitoreo_usuarios,700);
 				}
+				usuario = usuario +1;
 			break;
 			case "close_aceptar_registro_monitoreo_usuarios":
-				agregar_ciz('/pendientes/agregar/usuarios',{
-					solicitud:seleccion,
-					no_usu:$('#no_usu').val(),
-					nom_usu:$('#nom_usu').val(),
-					apellido_p_usu:$('#apellido_p_usu').val(),
-					apellido_m_usu:$('#apellido_m_usu').val(),
-					relacion_usu:$('#relacion_usu').val(),
-					telefono_usu:$('#telefono_usu').val()
+				$('#tbody_usuarios').empty();
+				mostrar_usuarios_registrados('/pendientes/mostrar/usuarios',{
+					solicitud:seleccion
 				});
 				$('#no_usu').val('');
 				$('#nom_usu').val('');
@@ -649,17 +736,23 @@ async function llenar_material_zona(route,body) {
 				$('#confirmar_registro_monitoreo_usuarios').modal('hide');
 			break;
 			case "btn_registrar_contacto":
-				if ($('#num_cont').val() != '' && $('#nom_contacto').val() != '' && $('#ralacion_cont').val() != '' && $('#telefono_contacto').val() != '' ){
+				if ($('#nom_contacto').val() != '' && $('#ralacion_cont').val() != '' && $('#telefono_contacto').val() != '' ){
+					agregar_ciz('/pendientes/agregar/contactos',{
+						solicitud:seleccion,
+						num_cont:contacto,
+						nom_contacto:$('#nom_contacto').val(),
+						ralacion_cont:$('#ralacion_cont').val(),
+						telefono_contacto:$('#telefono_contacto').val()
+					});
 					$('#confirmar_registro_monitoreo_contactos').modal('show');	
+					setTimeout(hacer_click_close_aceptar_registro_monitoreo_contactos,700);
 				}
+				contacto = contacto + 1;
 			break;
 			case "close_aceptar_registro_monitoreo_contactos":
-				agregar_ciz('/pendientes/agregar/contactos',{
-					solicitud:seleccion,
-					num_cont:$('#num_cont').val(),
-					nom_contacto:$('#nom_contacto').val(),
-					ralacion_cont:$('#ralacion_cont').val(),
-					telefono_contacto:$('#telefono_contacto').val()
+				$('#tbody_contacto') .empty();
+				mostrar_contactos_registrados('/pendientes/mostrar/contactos',{
+					solicitud:seleccion
 				});
 				$('#num_cont').val('');
 				$('#nom_contacto').val('');

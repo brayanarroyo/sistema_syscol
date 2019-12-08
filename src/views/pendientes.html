@@ -135,6 +135,7 @@
                                                 <tr>
                                                     <th>Material</th>
                                                     <th>Cantidad</th>
+                                                    <th>Precio unitario</th>
                                                     <th>Costo</th>
                                                 </tr>
                                             </thead>
@@ -197,10 +198,10 @@
                             <div class="formulario">
                                 <div class="ui mini modal" id="confirmar_cotizacion">
                                     <div class="header">
-                                        Confirmación de cotización
+                                        Cotización
                                     </div>
                                     <div class="content">
-                                        <label>Cantidad</label>
+                                        <label>Costo de mano de obra</label>
                                         <input name="mano_obra_fc" id="mano_obra_fc" type="tel" pattern="[0-9]{4}" placeholder="$0.0" autocomplete="off" required>
                                         <h4>¿Aceptar cotización?</h4>
                                     </div>
@@ -390,7 +391,7 @@
                                     </div>
                                 </div> 
                                 <div class="ui celled grid">
-                                    <div id="tablas" class="column">
+                                    <div id="tabla_monitoreo" class="column">
                                         <table name="tbl_cotizar_instalacion" class="ui celled table">
                                             <thead>
                                                 <tr>
@@ -458,11 +459,7 @@
                             <div class="ui form"> 
                                 <h4 class="ui dividing header">Agregar un nuevo usuario</h4>      
                                 <div class="ui vertically divided grid">
-                                    <div class="four column row">
-                                        <div class="column">   
-                                            <label>No. de usuario</label>
-                                            <input name="no_usu" id="no_usu" type="tel" pattern="[0-9]{4}" placeholder="Nombre" autocomplete="off" required>   
-                                        </div>
+                                    <div class="five column row">
                                         <div class="column">   
                                             <label>Nombre</label>
                                             <input name="nom_usu" id="nom_usu" type="text" placeholder="Nombre" autocomplete="off" required>   
@@ -475,18 +472,35 @@
                                             <label>Apellido materno</label>
                                             <input name="apellido_m_usu" id="apellido_m_usu" type="text" placeholder="Apellido" autocomplete="off" required>
                                         </div>
-                                    </div>
-                                    <div class="two column row">
-                                        <div class="four wide column">   
-                                            <label>Relación</label>
-                                            <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza" autocomplete="off" required>   
-                                        </div>
-                                        <div class="four wide column">
+                                        <div class="column">
                                             <label>Teléfono</label>
                                             <input name="telefono_usu" id="telefono_usu" type="tel" pattern="[0-9]{10}" placeholder="Número" autocomplete="off" required>
                                         </div>
+                                        <div class="    column">   
+                                            <label>Relación</label>
+                                            <input name="relacion_usu" id="relacion_usu" type="text" placeholder="Herman@/Limpieza" autocomplete="off" required>   
+                                        </div>
                                     </div>
-                                </div>       
+                                </div>  
+                                <div class="ui celled grid">
+                                    <div id="tabla_monitoreo" class="column">
+                                        <table name="tbl_cotizar_instalacion" class="ui celled table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Número de usuario</th>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido paterno</th>
+                                                    <th>Apellido materno</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Relación</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_usuarios">
+
+                                            </tbody>
+                                        </table>
+                                    </div>       
+                                </div>      
                                 <br>
                                 <button class="ui red button ">Cancelar</button>
                                 <button name="btn_registrar_usuario" id="btn_registrar_usuario" class="ui blue submit button ">Registrar</button>   
@@ -499,27 +513,38 @@
                             <div class="ui form"> 
                                 <h4 class="ui dividing header">Agregar un nuevo contacto</h4>      
                                 <div class="ui vertically divided grid">
-                                    <div class="two column row">
-                                        <div class="four wide column">
-                                            <label>Número de contacto</label>
-                                            <input name="num_cont" id="num_cont" type="tel" pattern="[0-9]{4}" placeholder="Número" autocomplete="off" required>
-                                        </div>
-                                        <div class="eight wide column">
+                                    <div class="four column row">
+                                        <div class="six wide column">
                                             <label>Nombre completo</label>
                                             <input name="nom_contacto" id="nom_contacto" type="text" placeholder="Nombre completo" autocomplete="off" required>
-                                        </div>
-                                    </div>
-                                    <div class="two column row">
-                                        <div class="four wide column">
-                                            <label>Relación</label>
-                                            <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off" required>
                                         </div>
                                         <div class="four wide column">
                                             <label>Teléfono</label>
                                             <input name="telefono_contacto" id="telefono_contacto" type="tel" pattern="[0-9]{10}" placeholder="Teléfono" autocomplete="off" required>
                                         </div>
+                                        <div class="four wide column">
+                                            <label>Relación</label>
+                                            <input name="ralacion_cont" id="ralacion_cont" type="text" placeholder="Vecino/amigo" autocomplete="off" required>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="ui celled grid">
+                                    <div id="tabla_monitoreo" class="column">
+                                        <table name="tbl_cotizar_instalacion" class="ui celled table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Número de contacto</th>
+                                                    <th>Nombre completo</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Relación</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_contacto">
+
+                                            </tbody>
+                                        </table>
+                                    </div>       
+                                </div>  
                                 <br>
                                 <button class="ui red button ">Cancelar</button>
                                 <button name="btn_registrar_contacto" id="btn_registrar_contacto" class="ui blue submit button ">Registrar</button> 
