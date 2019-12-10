@@ -258,7 +258,7 @@ router.post('/solicitudes/cliente_domicilio', (req, res) => {
 router.post('/pendientes/nuevo_cliente', (req, res) => {
   try {
     let { empleado } = req.body;
-    let query = `SELECT * FROM view_solicitud_nuevo WHERE clave_empleado =${empleado}`;
+    let query = `SELECT * FROM view_solicitud_nuevo WHERE clave_empleado =${empleado} and estatus!= "finalizada"`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -282,7 +282,7 @@ router.post('/pendientes/nuevo_cliente', (req, res) => {
 router.post('/pendientes/nuevo_inmueble', (req, res) => {
   try {
     let { empleado } = req.body;
-    let query = `SELECT * FROM view_solicitud_inmueble WHERE clave_empleado =${empleado}`;
+    let query = `SELECT * FROM view_solicitud_inmueble WHERE clave_empleado =${empleado} and estatus!= "finalizada"`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -306,7 +306,7 @@ router.post('/pendientes/nuevo_inmueble', (req, res) => {
 router.post('/pendientes/nuevo_servicio', (req, res) => {
   try {
     let { empleado } = req.body;
-    let query = `SELECT * FROM view_solicitud_cliente WHERE clave_empleado =${empleado}`;
+    let query = `SELECT * FROM view_solicitud_cliente WHERE clave_empleado =${empleado} and estatus!= "finalizada"`;
     pool.query(query, function (err,rows) {
       if(err){
         res.json({
@@ -1176,6 +1176,33 @@ router.post('/monitoreo/contactar/contactos', (req, res) => {
   }
 });
 
+router.post('/monitoreo/contactar/usuarios', (req, res) => {
+  try {
+    let { id_cliente } = req.body;
+    console.log(id_cliente);
+    let query = `SELECT c.num_usuario, CONCAT(c.nombre," ",c.apellido_p," ",apellido_m) as nombre_completo, c.telefono
+    FROM usuario c INNER JOIN inmueble i
+    on c.id_mueble = i.clave_inm
+    WHERE i.clave_inm = '${id_cliente}'`;
+    pool.query(query, function (err,rows) {
+      if(err){
+        res.json({
+          error: true,
+          message: err.message
+        })
+      } else {
+        console.log(rows);
+        res.json({
+          error: false,
+          message: 'OK',
+          data: rows
+        })
+      }
+    })
+  } catch (error) {
+    throw error;
+  }
+});
 //*********************************************************************************************************************
 //***************************************************Orden de trabajo********************************************************
 //*********************************************************************************************************************
@@ -1266,7 +1293,7 @@ router.post('/orden_trabajo/detalle', async (req, res) => {
     on sp.id_solicitud_pendiente = s.id_solicitud 
     WHERE ot.id_orden= '${id_solicitud}')
 UNION
-(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
+(SELECT s.id_solicitud,i.clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
 date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_cliente sc
@@ -1275,7 +1302,7 @@ date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
 		on c.id_cliente = i.clave_cliente
     WHERE ot.id_orden = '${id_solicitud}')
 UNION
-(SELECT s.id_solicitud,"Pendiente" as clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
+(SELECT s.id_solicitud,i.clave_inm ,CONCAT(c.nombre," ",c.apellido_p," ",c.apellido_m) as nombre,CONCAT(i.calle," ",i.numero_exterior," ",i.colonia),
 date_format(s.fecha_visita,'%d/%m/%Y') AS fecha_visita,s.hora,ot.observaciones
     FROM orden_trabajo ot INNER JOIN solicitud s
     on ot.clave_solicitud = s.id_solicitud INNER JOIN solicitud_inmueble si

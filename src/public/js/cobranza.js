@@ -103,11 +103,16 @@ $(document).ready(function(){
 	//Funcionalidad de los botones en general
 	$('button').click(function(){
 		switch($(this).attr('id')){
-			case "cobranza_proceder":		 
+			case "cobranza_proceder":	
+			if (clave_inmueble != ""){
 				llenar_tabla_nombre('/cobranza/cliente',{
 					inmueble:clave_inmueble}			
 					);
 				$('#confirmar_mantenimiento_cobranza').modal('show');
+			}else{
+				$('#no_procedio').modal('show');
+				setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+			}
 			break;
 			case "close_cancelar_registro":
 				$('#confirmar_mantenimiento_cobranza').modal('hide');
@@ -131,7 +136,7 @@ $(document).ready(function(){
 				sigueinte = "#mostrar_pagos_clientes"
 			break;
 			case "btn_confirmar_pago":
-				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != ''){
+				if ($('#cobranza_nombre').val() != '' && $('#cobranza_monto').val() != '' && $('#cobranza_monto').val() > 0){
 					agregar('/cobranza/pago',{
 						nombre:$('#cobranza_nombre').val(),
 						monto:$('#cobranza_monto').val(),
@@ -170,6 +175,7 @@ $(document).ready(function(){
 				window.open(`/`, '_self'); 
 			break;
 			case "btn_buscar_cobro":
+				$('#tbody_cobranza').empty();
 				llenar_tabla_cobranza('/cobranza/inmuebles',{
 					fecha:$(fecha_cobro).val()}			
 					);
@@ -191,6 +197,7 @@ $(document).ready(function(){
 	$('.ui.calendar').calendar({
 		type: 'month',
 		monthFirst: false,
+		minDate: new Date(),
 		text :{
 			months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],    

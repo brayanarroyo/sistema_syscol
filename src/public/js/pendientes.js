@@ -584,15 +584,20 @@ async function mostrar_contactos_registrados(route,body) {
 	$('button').click(function(){
         switch($(this).attr('id')){
 			case "btn_proceder":
-				proceder_elemento_seleccionado('/pendientes/elemento_seleccionado',{
-					id_elemento: seleccion,
-					tipo_solicitud: $('#solicitud option:selected').text()
-				});
-				llenar_material('/pendientes/cobranza_material');
-				llenar_tipo_inmueble('/pendientes/tipo_inmueble');
+				if (seleccion !=""){
+					proceder_elemento_seleccionado('/pendientes/elemento_seleccionado',{
+						id_elemento: seleccion,
+						tipo_solicitud: $('#solicitud option:selected').text()
+					});
+					llenar_material('/pendientes/cobranza_material');
+					llenar_tipo_inmueble('/pendientes/tipo_inmueble');
+				}else{
+					$('#no_procedio').modal('show');
+					setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+				}
 			break;
 			case "btn_añadir_material":
-				if ($('#cantidad').val() != ''){
+				if ($('#cantidad').val() != '' && $('#cantidad').val() > 0){
 					cotizacion_material('/pendientes/cobranza_material/detalle',{
 						solicitud:seleccion,
 						nombre:$('#material').val(),
@@ -601,7 +606,6 @@ async function mostrar_contactos_registrados(route,body) {
 					$('#confirmar_material').modal('show');
 					setTimeout(hacer_click_close_aceptar_material,700);
 				}
-
 			break;
 			case "close_aceptar_material":
 				$('#confirmar_material').modal('hide');
@@ -639,14 +643,16 @@ async function mostrar_contactos_registrados(route,body) {
 				$('#confirmar_cotizacion').modal('hide');
 			break;
 			case "close_aceptar_cotizacion":
-				$('#confirmar_cotizacion').modal('hide');
-				generar_cotizacion('/pendientes/cobranza_material/confirmar',{
-					costo:costo_material,
-					mano_obra:$('#mano_obra_fc').val(),
-					solicitud:seleccion}			
-					);
-				window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
-				location.reload();
+				if ($('#mano_obra_fc').val() != ''  && $('#mano_obra_fc').val() > 0){
+					$('#confirmar_cotizacion').modal('hide');
+					generar_cotizacion('/pendientes/cobranza_material/confirmar',{
+						costo:costo_material,
+						mano_obra:$('#mano_obra_fc').val(),
+						solicitud:seleccion}			
+						);
+					window.open(`/pendientes?permiso=${permiso}&valor=${valor}`, '_self'); 
+					location.reload();
+				}
 			break;
 			case "btn_cliente_inmueble_ciz":
 				if ($('#nombre_fc_ciz').val() != '' && $('#apellido_p_fc_ciz').val() != '' && $('#apellido_m_fc_ciz').val() != '' && $('#correo_fc_ciz').val() != '' && $('#telefono_fc_ciz').val() != '' && $('#firma_fc_ciz').val() != '' && $('#calle_fi_ciz').val() != '' && $('#num_ext_fi_ciz').val() != '' && $('#colonia_fi_ciz').val() != '' && $('#codigo_fi_ciz').val() != '' && $('#tipo_inmueble_ciz').val() != '' && $('#estado_fi_ciz').val() != '' && $('#municipio_fi_ciz').val() != '' && $('#clave_fc_ciz').val() != ''){
@@ -686,6 +692,8 @@ async function mostrar_contactos_registrados(route,body) {
 			break;
 			case "close_aceptar_confirmar_material_zona":
 				$('#tbody_material_zona').empty(); 
+				$('#zona_zona_ciz').val('')
+				$('#material_zona_ciz').val('')
 				materiales_registrados('/pendientes/materiales/registrados',{
 					solicitud:seleccion}			
 					);
@@ -775,12 +783,17 @@ async function mostrar_contactos_registrados(route,body) {
 				location.reload();
 			break;
 			case "btn_detalles":
-				$('#modal_detalle').empty();
-				modal_detalle_pendientes('/pendientes/detalles/solicitudes',{
-					tipo_solicitud: $('#solicitud option:selected').text(),
-					solicitud:seleccion
-				});
-				$('#modal_mostrar_detalle_pendientes').modal('show');
+				if(seleccion !=""){
+					$('#modal_detalle').empty();
+					modal_detalle_pendientes('/pendientes/detalles/solicitudes',{
+						tipo_solicitud: $('#solicitud option:selected').text(),
+						solicitud:seleccion
+					});
+					$('#modal_mostrar_detalle_pendientes').modal('show');
+				}else{
+					$('#no_procedio').modal('show');
+					setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+				}
 			break;
 			case "close_modal_detalle":
 				$('#modal_mostrar_detalle_pendientes').modal('hide');

@@ -85,6 +85,18 @@
                             </div>
                         </div>
                     </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="no_procedio">
+                                <div class="header">
+                                    Notificación
+                                </div>
+                                <div class="content">
+                                    <h4>No se selecciono ningún registro</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
 <!----------------------------------------------------------Cotizar------------------------------------------------------------->
                     <!--Menú para comenzar a cotizar las solicitudes de instalacion-->
                     <form action="javascript:void(0);">
@@ -109,18 +121,18 @@
                                                     </div> 
                                                     <div class="four wide column">
                                                         <label>Cantidad</label>
-                                                        <input name="cantidad" id="cantidad" type="tel" pattern="[0-9]{4}"type="number" placeholder="0" autocomplete="off" required>
+                                                        <input name="cantidad" id="cantidad" type="number" placeholder="0" autocomplete="off" required min="1" pattern="^[0-9]+">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div> 
                                         <div class="two wide column">
                                             <div class="ui vertical labeled icon buttons">
-                                                <button name="btn_añadir_material" id="btn_añadir_material" class="ui button">
+                                                <button name="btn_añadir_material" id="btn_añadir_material" class="ui submit button">
                                                     <i class="large angle double right icon"></i>
                                                     Añadir
                                                 </button>
-                                                <button name="btn_eliminar_material" id="btn_eliminar_material" class="ui button">
+                                                <button name="btn_eliminar_material" id="btn_eliminar_material" class="ui submit button">
                                                     <i class="large trash icon"></i>
                                                     Eliminar
                                                 </button>
@@ -135,8 +147,8 @@
                                                 <tr>
                                                     <th>Material</th>
                                                     <th>Cantidad</th>
-                                                    <th>Precio unitario</th>
-                                                    <th>Costo</th>
+                                                    <th>Costo unitario</th>
+                                                    <th>Precio</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody_material">
@@ -202,12 +214,12 @@
                                     </div>
                                     <div class="content">
                                         <label>Costo de mano de obra</label>
-                                        <input name="mano_obra_fc" id="mano_obra_fc" type="tel" pattern="[0-9]{4}" placeholder="$0.0" autocomplete="off" required>
+                                        <input name="mano_obra_fc" id="mano_obra_fc" type="number" placeholder="$" autocomplete="off" required min="1" pattern="^[0-9]+">
                                         <h4>¿Aceptar cotización?</h4>
                                     </div>
                                     <div class="actions">
                                         <button id="close_cancelar_cotizacion" class="ui red button">Cancelar</button> 
-                                        <button id="close_aceptar_cotizacion" class="ui blue button">Aceptar</button> 
+                                        <button id="close_aceptar_cotizacion" class="ui blue submit button">Aceptar</button> 
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +290,7 @@
                                 <div class="ui vertically divided grid">
                                     <div class="three column row">
                                         <div class="column">   
-                                            <label>Correo electronico</label>
+                                            <label>Correo electrónico</label>
                                             <input name="correo_fc_ciz" id="correo_fc_ciz" type="email" placeholder="correo@correo.com" autocomplete="off" required>   
                                         </div>
                                         <div class="column">
@@ -339,7 +351,7 @@
                                     </div>
                                 </div>    
                                 <br>
-                                <button  name="btn_cliente_inmueble_ciz" id="btn_cliente_inmueble_ciz" class="ui blue submit button ">Guardar</button>    
+                                <button  name="btn_cliente_inmueble_ciz" id="btn_cliente_inmueble_ciz" class="ui blue submit button ">Aceptar</button>    
                             </div>
                         </article>
                     </form>
@@ -415,7 +427,7 @@
                         <div class="formulario">
                             <div class="ui mini modal" id="confirmar_material_zona">
                                 <div class="header">
-                                    Confirmación
+                                    Notificación
                                 </div>
                                 <div class="content">
                                     <h4>Zona asignada correctamente</h4>
@@ -431,10 +443,10 @@
                         <div class="formulario">
                             <div class="ui mini modal" id="confirmar_registro">
                                 <div class="header">
-                                    Confirmación
+                                    Notificación
                                 </div>
                                 <div class="content">
-                                    <h4>Datos registrados satisfactoriamente</h4>
+                                    <h4>Datos registrados correctamente</h4>
                                 </div>
                                 <div class="actions"> 
                                     <button id="close_aceptar_registro" class="ui blue button">Aceptar</button> 

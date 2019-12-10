@@ -27,6 +27,33 @@ $(document).ready(function(){
 		}) 
 		return result.error
 	}
+	
+	function filas_datos_usuarios( contacto, nombre, telefono) {
+		return `<tr id="${contacto}">
+				<td>${contacto}</td>
+				<td>${nombre}</td>
+				<td>${telefono}</td>
+		</tr>`
+	}
+
+	async function llenar_datos_usuarios(route,body) {
+		const response = await fetch(route, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
+		console.log(response);
+		const result = await response.json()
+		console.log(result);
+		let tbody = $('#tbody_datos_usuarios')
+		$.each(result.data, (i,row) => {
+			$(filas_datos_usuarios(row.num_usuario, row.nombre_completo, row.telefono)).appendTo(tbody)
+		}) 
+		return result.error
+	}
 
 	function filas_datos_contacto( contacto, nombre, telefono) {
 		return `<tr id="${contacto}">
@@ -281,14 +308,24 @@ $(document).ready(function(){
 					);
 			break;
 			case "btn_contactar":
+			if (cliente !=""){
 				$('#tbody_datos_cliente').empty();
+				$('#tbody_datos_contacto').empty();
+				$('#tbody_datos_usuarios').empty();
 				llenar_datos_cliente('/monitoreo/contactar/cliente',{
+					id_cliente:cliente}			
+					);
+				llenar_datos_usuarios('/monitoreo/contactar/usuarios',{
 					id_cliente:cliente}			
 					);
 				llenar_datos_contacto('/monitoreo/contactar/contactos',{
 					id_cliente:cliente}			
 					);
 				$('#modal_detalle_contactos').modal('show');
+			}else{
+				$('#no_procedio').modal('show');
+				setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+			}
 			break;
 			case "close_modal_detalle":
 				$('#modal_detalle_contactos').modal('hide');

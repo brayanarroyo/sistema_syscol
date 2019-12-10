@@ -81,6 +81,7 @@ $(document).ready(function(){
 				window.open(`/`, '_self'); 
       break;
       case "btn_buscar_cobro":
+          $('#tabla_cobros').empty()
           llenar_cobros('/reportes/cobros',{
             fecha:$(fecha_cobro).val()}			
             );
@@ -108,6 +109,7 @@ $(document).ready(function(){
 			case "cliente":
         $('.secciones article').hide();
         $('.secciones article:first').show();
+        $('#tabla_clientes').empty()
         llenar_clientes('/reportes/clientes');
         $('#reporte_cliente').show();
       break;

@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="two wide column">
                                             <label>Número</label>
-                                            <input id="num_fc" type="number" placeholder="Número" autocomplete="off" required>
+                                            <input id="num_fc" type="number" placeholder="0" autocomplete="off" required min="1" pattern="^[0-9]+">
                                         </div>
                                         <div class="four wide column">
                                             <label>Colinia</label>
@@ -246,13 +246,12 @@
                     <!--Modal para cuando se registra una solicitud-->
                     <article>
                         <div class="formulario">
-                            <div class="ui small modal" id="confirmar_solicitud">
+                            <div class="ui mini modal" id="confirmar_solicitud">
                                 <div class="header">
-                                    Confirmación
+                                    Notificación
                                 </div>
                                 <div class="content">
                                     <h4>La solicitud fue almacenada satisfactoriamente</h4>
-                                    <h4>Para continuar con el proceso de la solicitud diríjase a la sección de pendientes</h4>
                                 </div>
                                 <div class="actions">
                                     <button id="aceptar_solicitud" class="ui blue submit button">Aceptar</button> 

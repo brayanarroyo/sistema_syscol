@@ -32,7 +32,7 @@
                                         <input id="fecha_cobro" name="fecha_cobro" type="text" placeholder="Fecha" autocomplete="off">
                                     </div>
                                 </div>
-                                <button id="btn_buscar_cobro" name="btn_buscar_cobro" class="ui blue submit button ">Aceptar</button>
+                                <button id="btn_buscar_cobro" name="btn_buscar_cobro" class="ui blue submit button ">Buscar</button>
                             </div>
                         </div>
                         <div class="ui celled grid">
@@ -80,7 +80,7 @@
                                 </div> 
                                 <div class="two wide field">
                                     <h4>Monto</h4> 
-                                    <input type="number" id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad" autocomplete="off" required>
+                                    <input type="number" id="cobranza_monto" name="cobranza_monto" placeholder="Cantidad" autocomplete="off" required min="1" pattern="^[0-9]+">
                                 </div>                                                 
                                 <br>
                                 <button id="btn_cancelar_pago" class="ui red button ">Cancelar</button> 
@@ -116,6 +116,18 @@
                                 <div class="actions"> 
                                     <button id="close_cancelar_registro" class="ui red button">No</button>
                                     <button id="close_aceptar_registro" class="ui blue submit button">Sí</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="formulario">
+                            <div class="ui mini modal" id="no_procedio">
+                                <div class="header">
+                                    Notificación
+                                </div>
+                                <div class="content">
+                                    <h4>No se selecciono ningún registro</h4>
                                 </div>
                             </div>
                         </div>

@@ -121,12 +121,17 @@ $(document).ready(function(){
 	$('button').click(function(){
         switch($(this).attr('id')){
 			case "btn_asignar":
-				llenar_empleados('/orden_trabajo/empleados',{
-					fecha_p:fecha,
-					hora_p:hora}			
-					);
-				$('.secciones article').hide();
-				$('#form_asignar').show();
+				if(clave_solicitud != ""){
+					llenar_empleados('/orden_trabajo/empleados',{
+						fecha_p:fecha,
+						hora_p:hora}			
+						);
+					$('.secciones article').hide();
+					$('#form_asignar').show();
+				}else{
+					$('#no_procedio').modal('show');
+					setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+				}
 			break;
 			case "btn_confirmar_asignar":
 				añadir_solicitud('/orden_trabajo/asignar',{
@@ -137,10 +142,15 @@ $(document).ready(function(){
 				$('#modal_confirmar_asignar').modal('show');
 			break;
 			case "btn_detalle":
-				llenar_detalle_tabla_orden_trabajo('/orden_trabajo/detalle',{
-					id_solicitud:clave_solicitud}			
-					);
-				$('#modal_detalle_orden').modal('show');
+				if(clave_solicitud != ""){
+					llenar_detalle_tabla_orden_trabajo('/orden_trabajo/detalle',{
+						id_solicitud:clave_solicitud}			
+						);
+					$('#modal_detalle_orden').modal('show');
+				}else{
+					$('#no_procedio').modal('show');
+					setTimeout(() => { $('#no_procedio').modal('hide'); }, 700);
+				}
             break;
             case "close_modal_detalle":
 				$('#modal_detalle_orden').modal('hide');

@@ -60,7 +60,7 @@ $(document).ready(function(){
                 $('#form_materiales').show();
             break;
             case "btn_confirmar":
-                if ($('#nom_m').val() != '' && $('#pcm').val() != '' && $('#pvm').val() != ''){
+                if ($('#nom_m').val() != '' && $('#pcm').val() != '' && $('#pvm').val() != ''&& $('#pcm').val() > 0 && $('#pvm').val() > 0 ){
                     $('#confirmar_material').modal('show');
                 }
             break;
