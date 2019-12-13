@@ -11,7 +11,7 @@
  Target Server Version : 100408
  File Encoding         : 65001
 
- Date: 03/12/2019 21:43:13
+ Date: 12/12/2019 18:33:41
 */
 
 SET NAMES utf8mb4;
@@ -44,7 +44,16 @@ CREATE TABLE `cliente`  (
   `correo` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_cliente`) USING BTREE,
   INDEX `fk_clavetelefono`(`telefono`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cliente
+-- ----------------------------
+INSERT INTO `cliente` VALUES (47, 'Acevedo', 'Mejía', 'María', '3125629830', 'María@hotmail.com');
+INSERT INTO `cliente` VALUES (48, 'Romero', 'Saez', 'Daniel', '3129013234', 'daniel@hotmail.com');
+INSERT INTO `cliente` VALUES (49, 'Fernández', 'Moreno', 'Jesus', '3125472752', 'Jesus@hotmail.com');
+INSERT INTO `cliente` VALUES (50, 'Romero', 'Saez', 'Daniel', '3129013234', 'Daniel@hotmail.com');
+INSERT INTO `cliente` VALUES (51, 'Arroyo', 'Chávez', 'Brayan Alberto', '3121438840', '@');
 
 -- ----------------------------
 -- Table structure for cobranza
@@ -61,7 +70,12 @@ CREATE TABLE `cobranza`  (
   INDEX `fk_clave_empleado_cobranza`(`clave_empleado`) USING BTREE,
   CONSTRAINT `fk_clave_empleado_cobranza` FOREIGN KEY (`clave_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_inmueble_cobranza` FOREIGN KEY (`clave_inmueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cobranza
+-- ----------------------------
+INSERT INTO `cobranza` VALUES (22, 1, '2020-01-01', 1, 3);
 
 -- ----------------------------
 -- Table structure for cobranza_mantenimiento
@@ -91,7 +105,12 @@ CREATE TABLE `contacto`  (
   INDEX `fk_idinmueble`(`id_inmueble`) USING BTREE,
   INDEX `fk_clavetelefono`(`telefono`) USING BTREE,
   CONSTRAINT `fk_idinmueble_contacto` FOREIGN KEY (`id_inmueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of contacto
+-- ----------------------------
+INSERT INTO `contacto` VALUES (10, 1, 'María Jesus Collado Ramírez ', 'Vecino', 1, '3126509213');
 
 -- ----------------------------
 -- Table structure for cotizacion
@@ -108,7 +127,15 @@ CREATE TABLE `cotizacion`  (
   UNIQUE INDEX `clave_orden`(`clave_orden`) USING BTREE,
   INDEX `FK_clave_solicitud_cotizacion`(`clave_orden`) USING BTREE,
   CONSTRAINT `fk_clave_orden_trabajo_cotizacion` FOREIGN KEY (`clave_orden`) REFERENCES `orden_trabajo` (`id_orden`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 180 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 250 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cotizacion
+-- ----------------------------
+INSERT INTO `cotizacion` VALUES (233, '2019-12-09', 698, 100, 798, 98);
+INSERT INTO `cotizacion` VALUES (234, '2019-12-09', 2427, -1, 2426, 99);
+INSERT INTO `cotizacion` VALUES (246, '2019-12-09', 2596, 300, 2896, 101);
+INSERT INTO `cotizacion` VALUES (247, '2019-12-09', 1470, 100, 1570, 103);
 
 -- ----------------------------
 -- Table structure for cotizacion_material
@@ -122,6 +149,19 @@ CREATE TABLE `cotizacion_material`  (
   CONSTRAINT `fk_clave_cotizacion_cotizacion_material` FOREIGN KEY (`clave_cotizacion`) REFERENCES `cotizacion` (`id_cotizacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_material_cotizacion_material` FOREIGN KEY (`clave_material`) REFERENCES `material` (`codigo_dis`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cotizacion_material
+-- ----------------------------
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 246);
+INSERT INTO `cotizacion_material` VALUES (2, 247);
+INSERT INTO `cotizacion_material` VALUES (3, 247);
 
 -- ----------------------------
 -- Table structure for empleado
@@ -186,6 +226,14 @@ CREATE TABLE `inmueble`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of inmueble
+-- ----------------------------
+INSERT INTO `inmueble` VALUES (1, 'Colima', 'Colima', '28000', 'Centro', 'Lerdo de Tejada', '449', 'si', 1, 47);
+INSERT INTO `inmueble` VALUES (2, 'Colima', 'Colima', '28000', 'Fovisste', 'Camino Real', '203', 'no', 1, 49);
+INSERT INTO `inmueble` VALUES (3, 'Colima', 'Colima', '28000', 'Centro', '27 de septiembre', '300', 'no', 1, 50);
+INSERT INTO `inmueble` VALUES (5, 'colima', 'colima', '12345', 'Villas de oro', 'Del bronce', '1', 'no', 1, 51);
+
+-- ----------------------------
 -- Table structure for inmueble_zona
 -- ----------------------------
 DROP TABLE IF EXISTS `inmueble_zona`;
@@ -202,6 +250,21 @@ CREATE TABLE `inmueble_zona`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of inmueble_zona
+-- ----------------------------
+INSERT INTO `inmueble_zona` VALUES (58, 1, 32);
+INSERT INTO `inmueble_zona` VALUES (59, 1, 33);
+INSERT INTO `inmueble_zona` VALUES (60, 3, 33);
+INSERT INTO `inmueble_zona` VALUES (61, 7, 33);
+INSERT INTO `inmueble_zona` VALUES (62, 7, 33);
+INSERT INTO `inmueble_zona` VALUES (63, 1, 34);
+INSERT INTO `inmueble_zona` VALUES (64, 1, 34);
+INSERT INTO `inmueble_zona` VALUES (65, 2, 34);
+INSERT INTO `inmueble_zona` VALUES (66, 2, 34);
+INSERT INTO `inmueble_zona` VALUES (67, 2, 34);
+INSERT INTO `inmueble_zona` VALUES (68, 8, 35);
+
+-- ----------------------------
 -- Table structure for instalacion
 -- ----------------------------
 DROP TABLE IF EXISTS `instalacion`;
@@ -215,7 +278,15 @@ CREATE TABLE `instalacion`  (
   INDEX `fk_clave_inmueble_instalacion`(`clave_inmueble`) USING BTREE,
   CONSTRAINT `fk_clave_cotizacion_instalacion` FOREIGN KEY (`clave_cotizacion`) REFERENCES `cotizacion` (`id_cotizacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_inmueble_instalacion` FOREIGN KEY (`clave_inmueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of instalacion
+-- ----------------------------
+INSERT INTO `instalacion` VALUES (32, '2019-12-09', 233, 1);
+INSERT INTO `instalacion` VALUES (33, '2019-12-09', 234, 2);
+INSERT INTO `instalacion` VALUES (34, '2019-12-09', 246, 3);
+INSERT INTO `instalacion` VALUES (35, '2019-12-10', 247, 5);
 
 -- ----------------------------
 -- Table structure for login
@@ -258,7 +329,7 @@ CREATE TABLE `mantenimiento`  (
   INDEX `FK_clave_orden_mantenimiento`(`clave_orden`) USING BTREE,
   CONSTRAINT `FK_clave_instalacion_mantenimiento` FOREIGN KEY (`clave_instalacion`) REFERENCES `instalacion` (`id_instalacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_clave_orden_mantenimiento` FOREIGN KEY (`clave_orden`) REFERENCES `orden_trabajo` (`id_orden`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for material
@@ -270,7 +341,7 @@ CREATE TABLE `material`  (
   `precio_compra` float NOT NULL,
   `precio_venta` float NOT NULL,
   PRIMARY KEY (`codigo_dis`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of material
@@ -281,6 +352,7 @@ INSERT INTO `material` VALUES (3, 'Sensor de movimiento', 130, 210);
 INSERT INTO `material` VALUES (6, 'Sensor de impacto', 60, 130);
 INSERT INTO `material` VALUES (7, 'Sensor infrarrojo', 270, 480);
 INSERT INTO `material` VALUES (8, 'Sensor magnético', 100, 230);
+INSERT INTO `material` VALUES (9, 'pruenba', 1, 2);
 
 -- ----------------------------
 -- Table structure for orden_trabajo
@@ -298,7 +370,17 @@ CREATE TABLE `orden_trabajo`  (
   INDEX `fk_clave_empleado_orden_trabajo`(`clave_empleado`) USING BTREE,
   CONSTRAINT `fk_clave_empleado_orden_trabajo` FOREIGN KEY (`clave_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_solicitud_orden_trabajo` FOREIGN KEY (`clave_solicitud`) REFERENCES `solicitud` (`id_solicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orden_trabajo
+-- ----------------------------
+INSERT INTO `orden_trabajo` VALUES (98, '', 'pendiente', 176, 3);
+INSERT INTO `orden_trabajo` VALUES (99, '', 'pendiente', 177, 3);
+INSERT INTO `orden_trabajo` VALUES (100, '', 'pendiente', 178, 7);
+INSERT INTO `orden_trabajo` VALUES (101, '', 'pendiente', 179, 3);
+INSERT INTO `orden_trabajo` VALUES (102, '', 'pendiente', 180, 3);
+INSERT INTO `orden_trabajo` VALUES (103, '', 'pendiente', 181, 3);
 
 -- ----------------------------
 -- Table structure for permiso
@@ -334,7 +416,14 @@ CREATE TABLE `señal`  (
   INDEX `fk_clave_tipo_evento_señal`(`clave_tipo_evento`) USING BTREE,
   CONSTRAINT `fk_clave_inmueble_señal` FOREIGN KEY (`clave_inmueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_tipo_evento_señal` FOREIGN KEY (`clave_tipo_evento`) REFERENCES `tipo_evento` (`clave_tipp`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of señal
+-- ----------------------------
+INSERT INTO `señal` VALUES (59, '2019-12-09', '13:36:17', 1, 2);
+INSERT INTO `señal` VALUES (60, '2019-12-09', '13:37:03', 1, 2);
+INSERT INTO `señal` VALUES (61, '2019-12-09', '13:37:16', 1, 1);
 
 -- ----------------------------
 -- Table structure for señal_robo
@@ -354,6 +443,11 @@ CREATE TABLE `señal_robo`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of señal_robo
+-- ----------------------------
+INSERT INTO `señal_robo` VALUES (61, 58, 2);
+
+-- ----------------------------
 -- Table structure for señal_rutinaria
 -- ----------------------------
 DROP TABLE IF EXISTS `señal_rutinaria`;
@@ -369,6 +463,12 @@ CREATE TABLE `señal_rutinaria`  (
   CONSTRAINT `FK_clave_usuario_señal_rutinaria` FOREIGN KEY (`clave_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clave_tipo_señal_rutinaria` FOREIGN KEY (`clave_tipo`) REFERENCES `tipo_señal_rutina` (`id_señal_rutina`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of señal_rutinaria
+-- ----------------------------
+INSERT INTO `señal_rutinaria` VALUES (59, 12, 1);
+INSERT INTO `señal_rutinaria` VALUES (60, 12, 2);
 
 -- ----------------------------
 -- Table structure for señal_sistema
@@ -420,7 +520,25 @@ CREATE TABLE `solicitud`  (
   INDEX `fk_tipo_servicio_solicitud`(`tipo_servicio`) USING BTREE,
   CONSTRAINT `fk_tipo_servicio_solicitud` FOREIGN KEY (`tipo_servicio`) REFERENCES `tipo_servicio` (`id_tipo_servicio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tipo_solicitud_solicitud` FOREIGN KEY (`tipo_solicitud`) REFERENCES `tipo_solicitud` (`clave_solicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 162 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 182 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of solicitud
+-- ----------------------------
+INSERT INTO `solicitud` VALUES (168, '2019-12-05', '2019-12-24', '13:00:00', 'finalizada', 3, 1);
+INSERT INTO `solicitud` VALUES (169, '2019-12-05', '2019-12-24', '13:00:00', 'sin cotizar', 3, 1);
+INSERT INTO `solicitud` VALUES (170, '2019-12-05', '2019-12-25', '13:20:00', 'finalizada', 5, 2);
+INSERT INTO `solicitud` VALUES (171, '2019-12-06', '2019-12-06', '10:00:00', 'finalizada', 3, 1);
+INSERT INTO `solicitud` VALUES (172, '2019-12-06', '2019-12-06', '18:00:00', 'finalizada', 5, 3);
+INSERT INTO `solicitud` VALUES (173, '2019-12-06', '2019-12-06', '10:00:00', 'sin cotizar', 3, 1);
+INSERT INTO `solicitud` VALUES (174, '2019-12-06', '2019-12-06', '14:00:00', 'cotizado', 3, 1);
+INSERT INTO `solicitud` VALUES (175, '2019-12-06', '2019-12-19', '10:00:00', 'finalizada', 5, 2);
+INSERT INTO `solicitud` VALUES (176, '2019-12-09', '2019-12-09', '14:00:00', 'finalizada', 3, 1);
+INSERT INTO `solicitud` VALUES (177, '2019-12-09', '2019-12-09', '16:00:00', 'finalizada', 3, 1);
+INSERT INTO `solicitud` VALUES (178, '2019-12-09', '2019-12-09', '16:00:00', 'sin cotizar', 3, 1);
+INSERT INTO `solicitud` VALUES (179, '2019-12-09', '2019-12-09', '18:00:00', 'finalizada', 3, 1);
+INSERT INTO `solicitud` VALUES (180, '2019-12-09', '2019-12-24', '14:00:00', 'finalizada', 5, 2);
+INSERT INTO `solicitud` VALUES (181, '2019-12-09', '2019-12-17', '17:00:00', 'finalizada', 3, 1);
 
 -- ----------------------------
 -- Table structure for solicitud_cliente
@@ -437,6 +555,11 @@ CREATE TABLE `solicitud_cliente`  (
   CONSTRAINT `fk_clave_inmueble_solicitud_cliente` FOREIGN KEY (`clave_inmueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_solicitud_cliente_solicitud_cliente` FOREIGN KEY (`id_solicitud_cliente`) REFERENCES `solicitud` (`id_solicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of solicitud_cliente
+-- ----------------------------
+INSERT INTO `solicitud_cliente` VALUES (180, 47, 1);
 
 -- ----------------------------
 -- Table structure for solicitud_inmueble
@@ -468,6 +591,15 @@ CREATE TABLE `solicitud_pendiente`  (
   PRIMARY KEY (`id_solicitud_pendiente`) USING BTREE,
   CONSTRAINT `fk_solicitud_pendiente_solicitud_pendiente` FOREIGN KEY (`id_solicitud_pendiente`) REFERENCES `solicitud` (`id_solicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of solicitud_pendiente
+-- ----------------------------
+INSERT INTO `solicitud_pendiente` VALUES (176, 'María', 'Acevedo', 'Mejía', 'Lerdo de Tejada', '449', 'Centro', '3125629830');
+INSERT INTO `solicitud_pendiente` VALUES (177, 'Jesus', 'Fernández', 'Moreno', 'Camino Real', '203', 'Fovisste', '3125472752');
+INSERT INTO `solicitud_pendiente` VALUES (178, 'Jesus', 'Fernández', 'Moreno', 'Camino Real', '203', 'Fovisste', '3125472752');
+INSERT INTO `solicitud_pendiente` VALUES (179, 'Daniel', 'Romero', 'Saez', '27 de septiembre', '300', 'Centro', '3129013234');
+INSERT INTO `solicitud_pendiente` VALUES (181, 'Brayan Alberto', 'Arroyo', 'Chávez', 'Del bronce', '1', 'Villas de oro', '3121438840');
 
 -- ----------------------------
 -- Table structure for tipo_evento
@@ -585,7 +717,12 @@ CREATE TABLE `usuario`  (
   PRIMARY KEY (`id_usuario`) USING BTREE,
   INDEX `fk_idmueble`(`id_mueble`) USING BTREE,
   CONSTRAINT `fk_idmueble_usuario` FOREIGN KEY (`id_mueble`) REFERENCES `inmueble` (`clave_inm`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of usuario
+-- ----------------------------
+INSERT INTO `usuario` VALUES (12, 1, 'Castillo', 'Cuenca', 'Elena', 'Primo', 1, '3128846721');
 
 -- ----------------------------
 -- Table structure for zona
@@ -595,7 +732,22 @@ CREATE TABLE `zona`  (
   `id_zona` tinyint(4) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_zona`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of zona
+-- ----------------------------
+INSERT INTO `zona` VALUES (58, 'Cocina');
+INSERT INTO `zona` VALUES (59, 'Cocina');
+INSERT INTO `zona` VALUES (60, 'Sala');
+INSERT INTO `zona` VALUES (61, 'Pasillo');
+INSERT INTO `zona` VALUES (62, 'Patio');
+INSERT INTO `zona` VALUES (63, 'Cuarto');
+INSERT INTO `zona` VALUES (64, 'Sala');
+INSERT INTO `zona` VALUES (65, 'Patio');
+INSERT INTO `zona` VALUES (66, 'Patio');
+INSERT INTO `zona` VALUES (67, 'Patio');
+INSERT INTO `zona` VALUES (68, 'Sala');
 
 -- ----------------------------
 -- View structure for view_clientes
@@ -899,7 +1051,7 @@ BEGIN
 	SET monto = monto, clave_empleado = empleado
 	WHERE clave_inmueble = @inm;
 	
-	INSERT INTO cobranza (monto,fecha_cobro,clave_inmueblemonto)
+	INSERT INTO cobranza (monto,fecha_cobro,clave_inmueble, monto)
 	VALUES (0,CONCAT(date_format(DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH),'%Y'),"-",date_format(DATE_ADD(			CURRENT_DATE(), INTERVAL 1 MONTH),'%m'),"-","01"),@inm);
 
 END
@@ -1430,6 +1582,15 @@ BEGIN
 	UPDATE solicitud
 	set estatus = "finalizada"
 	WHERE id_solicitud=solicitud;
+	
+	SELECT c.id_cotizacion INTO	@cot
+	FROM orden_trabajo ot INNER JOIN cotizacion c
+	on ot.id_orden = c.clave_orden
+	WHERE ot.clave_solicitud = solicitud;
+	
+	DELETE FROM cotizacion_material
+	WHERE clave_material = @cod and clave_cotizacion = @cot
+	LIMIT 1;
 
 END
 ;;
